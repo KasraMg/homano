@@ -1,0 +1,10 @@
+body {
+  margin: 0 auto;
+  background-color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Vazir Regular';
+}
+.leaflet-control-attribution {
+  display: none;
+}
