@@ -3,9 +3,9 @@ import Hero from "./partials/hero";
 import Categories from "./partials/categories/categories";
 import Products from "./partials/products/products";
 import ServicesSection from "../../../components/modules/services-section/services-section";
-import SaleBanner from "../../modules/sale-banner";
-import BlogSection from "../../../components/modules/blog-section/blog-section";
+import SaleBanner from "../../modules/sale-banner"; 
 import Container from "../../modules/container";
+import Blogs from "./partials/blogs";
 
 const HomeScreen = () => {
   return (
@@ -33,7 +33,7 @@ const HomeScreen = () => {
           }
           description="حالا بیش از هر زمان دیگری مقرون‌به‌صرفه است که به هر اتاق خانه‌تان ظاهری شیک و تازه بدهید."
         />
-        <BlogSection />
+        <Blogs />
       </div>
     </Container>
   );

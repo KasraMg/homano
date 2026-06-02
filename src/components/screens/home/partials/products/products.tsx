@@ -1,4 +1,4 @@
-import SectionHeader from "../../../../ui/section-header";
+import SectionTitle from "../../../../ui/section-header";
 import ButtonCard from "../../../../ui/button-card";
 import { GoArrowLeft } from "react-icons/go";
 import { Link } from "react-router-dom";
@@ -107,12 +107,10 @@ const Products = ({ products }: { products?: ProductCardProps[] }) => {
 
   return (
     <section className="w-full bg-white">
-      <SectionHeader
+      <SectionTitle
         title="محصولات جدید"
         linkText="سایر محصولات"
         to="/shop"
-        mbClass="mb-12"
-        mobileLayout="seprate"
       />
 
       <Carousel

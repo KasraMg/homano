@@ -23,7 +23,7 @@ const Topbar = ({ onClose, forceHide = false }: TopbarProps) => {
   return (
     <>
       {showBanner && (
-        <div className="relative flex items-center justify-center gap-4 w-full h-10 bg-main px-8 sm:px-0">
+        <div className="relative flex items-center justify-center gap-4 w-full h-10 bg-main px-3 sm:px-0">
           <div className="inline-flex items-center justify-center gap-3 relative">
             <img
               style={{ filter: "invert(1)" }}

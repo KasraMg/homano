@@ -29,7 +29,7 @@ const Categories: React.FC<CategoriesProps> = ({
         <img
           src={image}
           alt={title}
-          className={`relative object-contain mx-auto mix-blend-multiply  w-3/4 ${imageClass || ""}`}
+          className={`relative object-contain mx-auto mix-blend-multiply w-3/4 ${imageClass || ""}`}
         />
       </div>
     ) : (

@@ -4,41 +4,31 @@ import Badge from '../ui/badge';
 import CartSidebar from './cart-sidebar';
 import MobileMenu from './mobile-menu';
 import NavUser from './authoritarian/nav-user';
-import { HamburgerIcon, Menu, ShoppingCartIcon } from 'lucide-react';
-
-export enum Routes {
-  HOME = '/',
-  SHOP = '/Shop',
-  PRODUCT = '/Product',
-  CONTACT = '/contact-us',
-}
+import { Menu, ShoppingCartIcon } from 'lucide-react';
 
 type MenuItem = {
   name: string;
-  path: Routes;
+  path: string;
 };
 
 const Navbar = () => {
   const [menuItems] = useState<MenuItem[]>([
-    { name: 'خانه', path: Routes.HOME },
-    { name: 'فروشگاه', path: Routes.SHOP },
-    { name: 'محصول', path: Routes.PRODUCT },
-    { name: 'تماس با ما', path: Routes.CONTACT },
+    { name: 'خانه', path: '/' },
+    { name: 'فروشگاه', path: '/shop' },
+    { name: 'نقالات', path: '/blogs' },
+    { name: 'تماس با ما', path: '/contact-us' },
   ]);
   const [openCart, setOpenCart] = useState<boolean>(false);
   const [openMobileMenu, setOpenMobileMenu] = useState<boolean>(false);
   const location = useLocation();
+console.log(location);
 
-  const isActive = (path: Routes): boolean => {
-    if (!path) return false;
-    if (path === Routes.HOME) return location.pathname === Routes.HOME;
-    return location.pathname.startsWith(path);
-  };
+  const isActive = false
 
   return (
     <div>
       <nav className="relative flex w-full items-center justify-between bg-white">
-        <div className="flex items-center justify-center gap-1">
+        <div className="flex items-center justify-center gap-2">
           <Menu onClick={() => setOpenMobileMenu(true)} className="md:hidden" size={24} />
           <Link to={'/'}>
             <img className='h-9' src="/Images/logo.jpg" alt="" />
@@ -50,7 +40,7 @@ const Navbar = () => {
             <li className="group" key={menu.path}>
               <Link
                 to={menu.path}
-                className={`transition-all hover:text-black ${isActive(menu.path) ? 'text-neutral-07' : 'text-neutral-04'
+                className={`transition-all hover:text-black ${isActive ? 'text-neutral-07' : 'text-neutral-04'
                   }`}
               >
                 {menu.name}
@@ -72,7 +62,7 @@ const Navbar = () => {
             onClick={() => setOpenCart(true)}
             className="relative flex items-center cursor-pointer justify-center gap-2"
           >
-            <ShoppingCartIcon /> 
+            <ShoppingCartIcon />
             <Badge
               className="bg-red-600 absolute -top-2 -left-1 flex items-center justify-center rounded-full px-1.5 py-0.5 text-xs text-white"
               number={(2).toLocaleString('fa-IR')}
