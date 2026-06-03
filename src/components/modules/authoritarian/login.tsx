@@ -1,7 +1,6 @@
-import React from 'react';
 import { DialogDescription, DialogHeader, DialogTitle } from '../../ui/dialog';
-import { useLogin } from './hook';
 import { Button } from '../../ui/button';
+import { useLogin } from '../../../hooks/useLogin';
 
 const Login = ({ setStep }: { setStep: (val: string) => void }) => {
   const { register, errors, handleSubmit, onSubmit } = useLogin();
@@ -13,7 +12,7 @@ const Login = ({ setStep }: { setStep: (val: string) => void }) => {
           <img className='h-12 mx-auto' src="/Images/logo.jpg" alt="" />
         </DialogTitle>
         <DialogDescription className='text-gray-400 text-center w-full'>
-          برای استفاده از خدمات فلان، شماره موبایل خود را وارد کنید.
+          برای استفاده از خدمات ما، شماره موبایل خود را وارد کنید.
         </DialogDescription>
       </DialogHeader>
       <div className="pl-2">
@@ -22,10 +21,10 @@ const Login = ({ setStep }: { setStep: (val: string) => void }) => {
             <label className="block pb-2 text-sm">شماره موبایل</label>
             <input
               className="w-full rounded-xl border border-gray-200 p-2 outline-0"
-              {...register('mobile')}
+              {...register('phone')}
             />
             <p className="pt-1 text-xs text-red-600">
-              {errors.mobile?.message}
+              {errors.phone?.message}
             </p>
           </div>
 
@@ -50,7 +49,7 @@ const Login = ({ setStep }: { setStep: (val: string) => void }) => {
           </Button>
           <p
             onClick={() => setStep('register')}
-            className="text-main w-full cursor-pointer text-center text-sm"
+            className="text-main cursor-pointer text-center text-sm w-max mx-auto"
           >
             <span className='text-black'>حساب کاربری ندارید؟</span> ثبت نام کنید
           </p>

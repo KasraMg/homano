@@ -15,15 +15,12 @@ const Navbar = () => {
   const [menuItems] = useState<MenuItem[]>([
     { name: 'خانه', path: '/' },
     { name: 'فروشگاه', path: '/shop' },
-    { name: 'نقالات', path: '/blogs' },
+    { name: 'مقالات', path: '/blogs' },
     { name: 'تماس با ما', path: '/contact-us' },
   ]);
   const [openCart, setOpenCart] = useState<boolean>(false);
   const [openMobileMenu, setOpenMobileMenu] = useState<boolean>(false);
   const location = useLocation();
-console.log(location);
-
-  const isActive = false
 
   return (
     <div>
@@ -40,7 +37,7 @@ console.log(location);
             <li className="group" key={menu.path}>
               <Link
                 to={menu.path}
-                className={`transition-all hover:text-black ${isActive ? 'text-neutral-07' : 'text-neutral-04'
+                className={`transition-all hover:text-black ${location.pathname == menu.path ? 'text-neutral-07' : 'text-neutral-04'
                   }`}
               >
                 {menu.name}

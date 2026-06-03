@@ -1,5 +1,4 @@
-import React from 'react';
-import { useRegister } from './hook';
+import { useRegister } from '../../../hooks/useRegister';
 import { Button } from '../../ui/button';
 import { DialogDescription, DialogHeader, DialogTitle } from '../../ui/dialog';
 
@@ -23,20 +22,20 @@ const Register = ({ setStep }: { setStep: (val: string) => void }) => {
               <label className="block pb-2 text-sm">نام کاربری</label>
               <input
                 className="w-full rounded-xl border border-gray-200 p-2 outline-0"
-                {...register('username')}
+                {...register('name')}
               />
               <p className="pt-1 text-xs text-red-600">
-                {errors.username?.message}
+                {errors.name?.message}
               </p>
             </div>
             <div>
               <label className="block pb-2 text-sm">شماره موبایل</label>
               <input
                 className="w-full rounded-xl border border-gray-200 p-2 outline-0"
-                {...register('mobile')}
+                {...register('phone')}
               />
               <p className="pt-1 text-xs text-red-600">
-                {errors.mobile?.message}
+                {errors.phone?.message}
               </p>
             </div>
             <div>
@@ -72,7 +71,7 @@ const Register = ({ setStep }: { setStep: (val: string) => void }) => {
           </Button>
           <p
             onClick={() => setStep('login')}
-            className="text-main w-full cursor-pointer text-center text-sm"
+            className="text-main cursor-pointer text-center text-sm  w-max mx-auto"
           >
             <span className='text-black'>حساب کاربری دارید؟</span> وارد شوید
           </p>
