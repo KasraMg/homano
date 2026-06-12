@@ -1,8 +1,9 @@
 export type BlogItem = {
-    id: number;
-    image: string;
-    title: string;
-    fullTitle: string;
-    date: string;
-    showFull?: boolean;
+  body: string,
+  isActive: boolean;
+  name: string;
+  short_description: string;
+  slug: string;
+  createdAt: string;
+  image: string;
 };

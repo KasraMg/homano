@@ -1,7 +1,12 @@
 export type CategoriesProps = {
+  data: {
+    description: string;
     image: string;
-    title: string; 
-    isTop: boolean;
-    imageClass?: string;
-    hasInnerLeftBorder?: boolean;
-}
+    isActive: boolean;
+    name: string;
+    slug: string;
+  };
+  isTop: boolean;
+  imageClass?: string;
+  hasInnerLeftBorder?: boolean;
+};
