@@ -1,39 +1,41 @@
 import CategoryCard from "./categories-card";
 
-const Categories = () => (
-  <section className="w-full bg-white flex flex-nowrap flex-col md:flex-row gap-6">
-    <div className="md:w-1/2 md:!block hidden">
-      <CategoryCard
-        image="/Images/category-1.jpg"
-        title="اتاق نشیمن"
-        imageClass="!mix-blend-lighten"
-        isTop={true}
-      />
-    </div>
-
-    <div className="md:w-1/2 w-full flex flex-col gap-6">
-      <div className="md:!hidden block w-full">
+const Categories = ({ data }: {
+  data: {
+    description: string,
+    image: string,
+    isActive: boolean,
+    name: string,
+    slug: string
+  }[]
+}) => (
+  data?.length > 0 && data[0] ?
+    <section className="w-full bg-white flex flex-nowrap flex-col md:flex-row gap-6">
+      <div className="md:w-1/2 md:!block hidden">
         <CategoryCard
-          image="/Images/category-1.jpg"
-          title="اتاق نشیمن"
+          data={data[0]}
           imageClass="!mix-blend-lighten"
-          isTop={false}
+          isTop={true}
         />
       </div>
-      <CategoryCard
-        image="/Images/category-2.png"
-        title="اتاق خواب"
-        isTop={false}
-        hasInnerLeftBorder={true}
-      />
-      <CategoryCard
-        image="/Images/category-3.png"
-        title="آشپزخانه"
-        isTop={false}
-        hasInnerLeftBorder={false}
-      />
-    </div>
-  </section>
+      <div className="md:w-1/2 w-full flex flex-col gap-6">
+        <div className="md:!hidden block w-full">
+          <CategoryCard
+            data={data[0]}
+            imageClass="!mix-blend-lighten"
+            isTop={false}
+          />
+        </div>
+        {data.slice(1).map(ct => (
+          <CategoryCard
+            data={ct} 
+            isTop={false}
+            hasInnerLeftBorder={true}
+          />
+        ))}
+      </div>
+    </section>
+    : 'loadinng'
 );
 
 export default Categories;

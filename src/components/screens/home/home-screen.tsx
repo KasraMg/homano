@@ -1,28 +1,28 @@
-import Header from "../../modules/header";
 import Hero from "./partials/hero";
 import Categories from "./partials/categories/categories";
 import Products from "./partials/products/products";
 import ServicesSection from "../../../components/modules/services-section/services-section";
-import SaleBanner from "../../modules/sale-banner"; 
+import SaleBanner from "../../modules/sale-banner";
 import Container from "../../modules/container";
 import Blogs from "./partials/blogs";
+import useLanding from "../../../hooks/useLanding";
+import Banners from "../../modules/banners";
 
 const HomeScreen = () => {
+  const { data } = useLanding()
+  console.log(data);
+
   return (
     <Container>
-      <Header
-        images={[
-          "/Images/img-placeholder-1.png",
-          "/Images/img-placeholder-2.png",
-          "/Images/img-placeholder-3.png",
-        ]}
-        isSlidable={true}
-        withGradient={true}
+      <Banners
+        data={data?.banner}
       />
       <div className="space-y-20 pb-20">
-        <Hero />
-        <Categories />
-        <Products />
+        <h2 className="w-[57.5] pt-10 text-xl md:text-3xl xl:text-4xl text-right tracking-hero transition-all">
+          بهترین قیمت و تنوع لوازم خانگی در هومانو
+        </h2>
+        <Categories data={data?.categories} />
+        <Products data={data?.products} />
         <ServicesSection />
         <SaleBanner
           showSaleText
@@ -33,7 +33,7 @@ const HomeScreen = () => {
           }
           description="حالا بیش از هر زمان دیگری مقرون‌به‌صرفه است که به هر اتاق خانه‌تان ظاهری شیک و تازه بدهید."
         />
-        <Blogs />
+        <Blogs data={data?.articles} />
       </div>
     </Container>
   );
