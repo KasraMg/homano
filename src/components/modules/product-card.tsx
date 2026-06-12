@@ -40,10 +40,8 @@ const ProductCard = ({
         <Heart className="cursor-pointer transition-colors" size={17} />
       </div>
     </div>
-
-
-    <div className="py-3 px-2 transition-all group-hover:blur-xs group- ">
-      <h3 className="font-bold text-base text-neutral-07 pb-2">{name}</h3>
+    <div className="py-3 px-2 transition-all group-hover:blur-xs">
+      <h3 className="font-bold text-base text-neutral-07 pb-2 truncate">{name}</h3>
 
       {priceWithoutOff && (
         <div className="flex items-center justify-end gap-2 mt-1">

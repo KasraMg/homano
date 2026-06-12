@@ -4,13 +4,12 @@ import Products from "./partials/products/products";
 import ServicesSection from "../../../components/modules/services-section/services-section";
 import SaleBanner from "../../modules/sale-banner";
 import Container from "../../modules/container";
-import Blogs from "./partials/blogs";
+import Blogs from "./partials/blogs/blogs";
 import useLanding from "../../../hooks/useLanding";
-import Banners from "../../modules/banners";
+import Banners from "./partials/banners/banners";
 
 const HomeScreen = () => {
   const { data } = useLanding()
-  console.log(data);
 
   return (
     <Container>

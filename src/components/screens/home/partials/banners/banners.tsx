@@ -1,20 +1,17 @@
-import { useState, useEffect, ReactNode } from "react";
-import { PiArrowRight, PiArrowLeft } from "react-icons/pi";
+import { useState, useEffect } from "react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   type CarouselApi,
-} from "../ui/carousel";
-import { localAssetsUrl } from "../../constants";
+} from "../../../../ui/carousel";
+import { localAssetsUrl } from "../../../../../constants";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import BannersSkeleton from "./banners-skeleton";
 
 const Banners = ({ data, }: { data: { image: string }[] }) => {
   const [api, setApi] = useState<CarouselApi>();
   const [activeIndex, setActiveIndex] = useState(0);
-
-
-  console.log(data);
 
   useEffect(() => {
     if (!api) return;
@@ -39,7 +36,7 @@ const Banners = ({ data, }: { data: { image: string }[] }) => {
           {data.map(
             (s, i) => (
               <CarouselItem key={i} className="basis-full">
-                <img src={localAssetsUrl + s.image} className="h-[380px] object-cover rounded-md w-full" alt="" />
+                <img src={localAssetsUrl + s.image} className="md:!h-[280px] lg:!h-[380px] h-[200px] object-cover rounded-md w-full" alt="بنر" />
               </CarouselItem>
             ),
           )}
@@ -84,8 +81,8 @@ const Banners = ({ data, }: { data: { image: string }[] }) => {
           ))}
         </div>
       </Carousel>
+    ) : <BannersSkeleton />
 
-    ) : 'loading'
 
   );
 };

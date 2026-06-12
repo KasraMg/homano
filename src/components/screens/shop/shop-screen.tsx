@@ -1,4 +1,4 @@
-import Header from '../../modules/banners';
+import Header from '../home/partials/banners/banners';
 import Breadcrumb from '../../../components/modules/breadcrumb';
 import FilterAndSortpanel from '../../../components/ui/filter-and-sortpanel';
 import Container from '../../../components/modules/container';
