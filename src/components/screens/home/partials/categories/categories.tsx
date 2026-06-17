@@ -28,7 +28,7 @@ const Categories = ({ data }: {
               isTop={false}
             />
           </div>
-          {data.slice(1).map(ct => (
+          {data.slice(1, 3).map(ct => (
             <CategoryCard
               data={ct}
               isTop={false}

@@ -1,108 +1,37 @@
-import Header from '../home/partials/banners/banners';
 import Breadcrumb from '../../../components/modules/breadcrumb';
-import FilterAndSortpanel from '../../../components/ui/filter-and-sortpanel';
 import Container from '../../../components/modules/container';
-import ProductCard from '../../modules/product-card';
-import { ProductCardProps } from '../../../types/product.types';
+import Card from '../../modules/product-card';
+import { Product } from '../../../types/product.types';
+import useShop from '../../../hooks/useShop';
+import { useState } from 'react';
+import { ProductFilters } from './partials/product-filters';
+
 const ShopScreen = () => {
-  const defaultProducts: ProductCardProps[] = [
-    {
-      id: 'p1',
-      image: '/Images/product-1.png',
-      title: 'مبل دونفره',
-      price: '۳۱,۸۴۰,۰۰۰ تومان',
-      originalPrice: '۶۴,۰۰۰,۰۰۰ تومان',
-      isNew: true,
-      discount: '٪۵۰-',
-    },
-    {
-      id: 'p2',
-      image: '/Images/product-2.png',
-      title: 'چراغ رومیزی',
-      price: '۳,۹۹۸,۴۰۰ تومان',
-      isNew: true,
-    },
-    {
-      id: 'p3',
-      image: '/Images/product-3.png',
-      title: 'چراغ رومیزی بژ',
-      price: '۳,۹۹۸,۴۰۰ تومان',
-      isNew: true,
-    },
-    {
-      id: 'p4',
-      image: '/Images/product-4.png',
-      title: 'سبد بامبو',
-      price: '۳,۹۹۸,۴۰۰ تومان',
-      isNew: true,
-    },
-    {
-      id: 'p5',
-      image: '/Images/product-5.png',
-      title: 'صندلی غذاخوری',
-      price: '۱۴,۲۴۰,۰۰۰ تومان',
-      isNew: true,
-    },
-    {
-      id: 'p6',
-      image: '/Images/product-6.png',
-      title: 'مبل تک نفره',
-      price: '۳۹,۸۴۰,۰۰۰ تومان',
-      isNew: true,
-    },
-    {
-      id: 'p7',
-      image: '/Images/product-7.png',
-      title: 'مبل پارچه‌ای',
-      price: '۵۵,۸۴۰,۰۰۰ تومان',
-      isNew: true,
-    },
-    {
-      id: 'p8',
-      image: '/Images/product-8.png',
-      title: 'کتابخانه',
-      price: '۲۸,۶۴۰,۰۰۰ تومان',
-      isNew: true,
-    },
-    {
-      id: 'p9',
-      image: '/Images/product-9.png',
-      title: 'چراغ ایستاده',
-      price: '۹,۴۴۰,۰۰۰ تومان',
-      isNew: true,
-    },
-    {
-      id: 'p10',
-      image: '/Images/product-10.png',
-      title: 'میز قهوه‌خوری',
-      price: '۲۳,۸۴۰,۰۰۰ تومان',
-      isNew: true,
-    },
-    {
-      id: 'p11',
-      image: '/Images/product-11.png',
-      title: 'ست کوسن',
-      price: '۳,۱۹۸,۴۰۰ تومان',
-      isNew: true,
-    },
-    {
-      id: 'p12',
-      image: '/Images/product-12.png',
-      title: 'ست کوسن',
-      price: '۳,۱۹۸,۴۰۰ تومان',
-      isNew: true,
-    },
-  ];
+  const { data, isPending } = useShop()
+  console.log(data);
+
+  const [activeFilters, setActiveFilters] = useState(null);
+
+  const handleFilterChange = (filters: any) => {
+    setActiveFilters(filters);
+    console.log("فیلترهای فعال:", filters);
+  };
+
   return (
     <Container>
       <Breadcrumb className="pt-5" title="فروشگاه" />
+      <div className="flex md:!flex-row flex-col gap-4 pt-5 pb-10">
+        <ProductFilters
+          onFilterChange={handleFilterChange}
+          minPrice={0}
+          maxPrice={1000}
+        />
 
-      <FilterAndSortpanel mode="shop" />
-
-      <div className="grid grid-cols-4 gap-6 py-16">
-        {defaultProducts.map((pr) => (
-          <ProductCard {...pr} />
-        ))}
+        <div className="grid grid-cols-1 xs:grid-cols-2 lg:!grid-cols-3 gap-6">
+          {data?.products.map((pr: Product) => (
+            <Card {...pr} />
+          ))}
+        </div>
       </div>
     </Container>
   );
