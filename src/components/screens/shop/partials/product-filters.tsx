@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Filter, X } from "lucide-react";
 import { useMediaQuery } from "../../../../hooks/useMediaQuery";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../ui/select";
 import { Button } from "../../../ui/button";
 import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "../../../ui/drawer";
 import { Slider } from "../../../ui/slider";
+import { useQueryParams } from "../../../../hooks/useQueryParams";
+import { updateFilters } from "./filters";
+import SearchInput from "./search-input";
 
 export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }: {
     onFilterChange: (val: {}) => void;
@@ -13,35 +16,53 @@ export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }
 }) {
     const isDesktop = useMediaQuery("(min-width: 768px)");
     const [open, setOpen] = useState(false);
+    const { getParams, clearParams, setParams, removeParams } = useQueryParams();
 
     const [filters, setFilters] = useState({
         category: "all",
-        sortBy: "newest",
+        sortBy: "all",
         color: "all",
         priceRange: [minPrice, maxPrice],
         inStock: false,
     });
 
-    const updateFilters = (newFilters: {}) => {
-        const updated = { ...filters, ...newFilters };
-        setFilters(updated);
-        onFilterChange(updated);
-    };
+    useEffect(() => {
+        const urlParams = getParams();
+        const newFilters = { ...filters };
+
+        if (urlParams.category) newFilters.category = urlParams.category as string;
+        if (urlParams.sortBy) newFilters.sortBy = urlParams.sortBy as string;
+        if (urlParams.color) newFilters.color = urlParams.color as string;
+        if (urlParams.minPrice !== undefined && urlParams.maxPrice !== undefined) {
+            newFilters.priceRange = [
+                Number(urlParams.minPrice) || minPrice,
+                Number(urlParams.maxPrice) || maxPrice,
+            ];
+        }
+        if (urlParams.inStock !== undefined) {
+            newFilters.inStock = urlParams.inStock === "true";
+        }
+
+        setFilters(newFilters);
+        onFilterChange(newFilters);
+    }, []);
+
 
     const FilterContent = () => (
         <div className="flex flex-col gap-6 p-1">
             <div className="space-y-2">
+                <SearchInput />
                 <label>دسته‌بندی</label>
                 <Select
                     value={filters.category}
-                    onValueChange={(val) => updateFilters({ category: val })}
+                    onValueChange={(val) => updateFilters({ category: val }, filters, setFilters, onFilterChange, setParams)}
                 >
                     <SelectTrigger className="w-full mt-2">
                         <SelectValue placeholder="همه محصولات" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent dir="rtl">
                         <SelectItem value="all">همه</SelectItem>
-                        <SelectItem value="electronic">الکترونیک</SelectItem>
+                        <SelectItem value="couches">مبلمان</SelectItem>
                         <SelectItem value="clothing">پوشاک</SelectItem>
                         <SelectItem value="books">کتاب‌ها</SelectItem>
                     </SelectContent>
@@ -52,16 +73,18 @@ export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }
                 <label>مرتب‌سازی بر اساس</label>
                 <Select
                     value={filters.sortBy}
-                    onValueChange={(val) => updateFilters({ sortBy: val })}
+                    onValueChange={(val) => updateFilters({ sortBy: val }, filters, setFilters, onFilterChange, setParams)}
                 >
                     <SelectTrigger className="w-full mt-2">
                         <SelectValue placeholder="مرتب‌سازی" />
                     </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="newest">جدیدترین</SelectItem>
-                        <SelectItem value="price-asc">قیمت: کم به زیاد</SelectItem>
-                        <SelectItem value="price-desc">قیمت: زیاد به کم</SelectItem>
-                        <SelectItem value="popular">محبوب‌ترین</SelectItem>
+                    <SelectContent dir="rtl">
+                        <SelectItem value="all">همه</SelectItem>
+                        <SelectItem value="-star">محبوب‌ترین</SelectItem>
+                        <SelectItem value="-createdAt">جدیدترین</SelectItem>
+                        <SelectItem value="createdAt">قدیمی‌ترین</SelectItem>
+                        <SelectItem value="price">قیمت: کم به زیاد</SelectItem>
+                        <SelectItem value="-price">قیمت: زیاد به کم</SelectItem>
                     </SelectContent>
                 </Select>
             </div>
@@ -73,7 +96,7 @@ export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }
                     max={maxPrice}
                     step={10}
                     value={[Number(filters.priceRange[0]), Number(filters.priceRange[1])]}
-                    onValueChange={(val) => updateFilters({ priceRange: val })}
+                    onValueChange={(val) => updateFilters({ priceRange: val }, filters, setFilters, onFilterChange, setParams)}
                     className="py-2"
                 />
                 <div className="flex justify-between text-sm text-muted-foreground">
@@ -86,17 +109,17 @@ export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }
                 <label>رنگ</label>
                 <Select
                     value={filters.color}
-                    onValueChange={(val) => updateFilters({ color: val })}
+                    onValueChange={(val) => updateFilters({ color: val }, filters, setFilters, onFilterChange, setParams)}
                 >
                     <SelectTrigger className="w-full mt-2">
                         <SelectValue placeholder="همه رنگ‌ها" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent dir="rtl">
                         <SelectItem value="all">همه</SelectItem>
                         <SelectItem value="red">قرمز</SelectItem>
                         <SelectItem value="blue">آبی</SelectItem>
                         <SelectItem value="green">سبز</SelectItem>
-                        <SelectItem value="black">مشکی</SelectItem>
+                        <SelectItem value="مشکی">مشکی</SelectItem>
                     </SelectContent>
                 </Select>
             </div>
@@ -105,10 +128,6 @@ export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }
                 <input
                     type="checkbox"
                     id="inStock"
-                    checked={filters.inStock}
-                    onChange={(checked) =>
-                        updateFilters({ inStock: checked })
-                    }
                 />
                 <label htmlFor="inStock" className="text-sm pr-2 font-normal cursor-pointer">
                     فقط محصولات موجود
@@ -128,6 +147,7 @@ export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }
                     };
                     setFilters(resetFilters);
                     onFilterChange(resetFilters);
+                    clearParams()
                 }}
             >
                 <X className="ml-2 h-4 w-4" />
@@ -138,7 +158,7 @@ export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }
 
     if (isDesktop) {
         return (
-            <div className="w-[300px] bg-background p-4 border rounded-lg sticky top-4 h-fit">
+            <div className="lg:!min-w-[280px] min-w-[230px] bg-background p-4 border rounded-lg sticky top-4 h-fit">
                 <h3 className="font-bold text-lg mb-4">فیلتر محصولات</h3>
                 <FilterContent />
             </div>
@@ -158,7 +178,7 @@ export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }
                             val !== "newest" &&
                             val !== false
                     ) && (
-                            <span className="mr-auto bg-primary text-primary-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                            <span className="mr-auto bg-main text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                                 {Object.values(filters).filter(
                                     (val, index) =>
                                         index !== 3 &&

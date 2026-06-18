@@ -3,20 +3,22 @@ import Container from '../../../components/modules/container';
 import Card from '../../modules/product-card';
 import { Product } from '../../../types/product.types';
 import useShop from '../../../hooks/useShop';
-import { useState } from 'react';
+import {  useState } from 'react';
 import { ProductFilters } from './partials/product-filters';
+import ProductSkeleton from './partials/product-skeleton';
+import { Filters } from './partials/filters';
 
 const ShopScreen = () => {
-  const { data, isPending } = useShop()
-  console.log(data);
+  const [activeFilters, setActiveFilters] = useState<Filters | undefined>(undefined);
+  console.log('activeFilters', activeFilters);
 
-  const [activeFilters, setActiveFilters] = useState(null);
+  const { data, isPending } = useShop(activeFilters)
 
   const handleFilterChange = (filters: any) => {
     setActiveFilters(filters);
-    console.log("فیلترهای فعال:", filters);
-  };
 
+    console.log("فیلترهای فعال:", filters);
+  }; 
   return (
     <Container>
       <Breadcrumb className="pt-5" title="فروشگاه" />
@@ -27,11 +29,26 @@ const ShopScreen = () => {
           maxPrice={1000}
         />
 
-        <div className="grid grid-cols-1 xs:grid-cols-2 lg:!grid-cols-3 gap-6">
-          {data?.products.map((pr: Product) => (
-            <Card {...pr} />
-          ))}
-        </div>
+        {!isPending ? (
+          data?.products.length > 0 ?
+            <div className="grid grid-cols-1 xs:grid-cols-2 lg:!grid-cols-3 gap-6 w-full">
+              {data.products.map((pr: Product) => (
+                <Card {...pr} />
+              ))}
+            </div>
+
+            : <p className='text-center pt-20 w-full text-3xl'>کالایی یافت نشد</p>
+        ) : (
+          <div className="grid grid-cols-1 xs:grid-cols-2 lg:!grid-cols-3 gap-6 w-full">
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+          </div>
+        )}
+        { }
       </div>
     </Container>
   );
