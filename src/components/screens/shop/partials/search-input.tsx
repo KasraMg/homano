@@ -4,10 +4,12 @@ import { IoMdClose } from 'react-icons/io';
 import { useQueryParams } from '../../../../hooks/useQueryParams';
 
 type Props = {
+    className?:string
+    trashClassName?:string
     debounceMs?: number;
 };
 
-const SearchInput = ({ debounceMs = 600 }: Props) => {
+const SearchInput = ({ className, trashClassName, debounceMs = 600 }: Props) => {
     const { getParam, setParams } = useQueryParams();
 
     const [search, setSearch] = useState((getParam('name') as string) || '');
@@ -42,7 +44,7 @@ const SearchInput = ({ debounceMs = 600 }: Props) => {
     }, [])
 
     return (
-        <div className="relative z-10 mb-2 flex w-full items-center gap-2 rounded-2xl">
+        <div className={`${className} relative z-10 mb-2 flex w-full items-center gap-2 rounded-2xl`}>
             <input
                 value={search}
                 onChange={(e) => {
@@ -56,7 +58,7 @@ const SearchInput = ({ debounceMs = 600 }: Props) => {
 
             {search ? (
                 <IoMdClose
-                    className="absolute left-2 top-2.5 cursor-pointer"
+                    className={`${trashClassName} absolute left-2 top-2.5 cursor-pointer`}
                     onClick={() => {
                         setSearch('');
                     }}

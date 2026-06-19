@@ -8,7 +8,7 @@ import { ProductFilters } from './partials/product-filters';
 import ProductSkeleton from './partials/product-skeleton';
 import { Filters } from './partials/filters';
 import PaginationWrapper from '../../modules/pagination-wrapper';
-import { replace, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ShopScreen = () => {
   const [activeFilters, setActiveFilters] = useState<Filters | undefined>(undefined);
@@ -26,7 +26,6 @@ const ShopScreen = () => {
       }
     }
   }, [data])
-
  
 
   return (
