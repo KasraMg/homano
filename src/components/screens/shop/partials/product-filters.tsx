@@ -8,23 +8,38 @@ import { Slider } from "../../../ui/slider";
 import { useQueryParams } from "../../../../hooks/useQueryParams";
 import { updateFilters } from "./filters";
 import SearchInput from "./search-input";
+import { Skeleton } from "../../../modules/skeleton";
 
-export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }: {
+export function ProductFilters({ onFilterChange, filtersData }: {
     onFilterChange: (val: {}) => void;
-    minPrice: number;
-    maxPrice: number;
+    filtersData: {
+        categories: { _id: string, name: string, slug: string }[],
+        colors: string[],
+        maxPrice: number,
+        minPrice: number
+    }
 }) {
     const isDesktop = useMediaQuery("(min-width: 768px)");
     const [open, setOpen] = useState(false);
-    const { getParams, clearParams, setParams, removeParams } = useQueryParams();
+    const { getParams, clearParams, setParams } = useQueryParams();
+    console.log(filtersData);
 
     const [filters, setFilters] = useState({
         category: "all",
         sortBy: "all",
         color: "all",
-        priceRange: [minPrice, maxPrice],
+        priceRange: [filtersData?.minPrice ?? 0, filtersData?.maxPrice ?? 0],
         inStock: false,
     });
+    useEffect(() => {
+        if (filtersData) {
+            setFilters(prev => ({
+                ...prev,
+                priceRange: [filtersData?.minPrice, filtersData?.maxPrice]
+            }));
+        }
+    }, [filtersData]);
+
 
     useEffect(() => {
         const urlParams = getParams();
@@ -35,8 +50,8 @@ export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }
         if (urlParams.color) newFilters.color = urlParams.color as string;
         if (urlParams.minPrice !== undefined && urlParams.maxPrice !== undefined) {
             newFilters.priceRange = [
-                Number(urlParams.minPrice) || minPrice,
-                Number(urlParams.maxPrice) || maxPrice,
+                Number(urlParams.minPrice) || filtersData.minPrice,
+                Number(urlParams.maxPrice) || filtersData.maxPrice,
             ];
         }
         if (urlParams.inStock !== undefined) {
@@ -62,9 +77,12 @@ export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }
                     </SelectTrigger>
                     <SelectContent dir="rtl">
                         <SelectItem value="all">همه</SelectItem>
-                        <SelectItem value="couches">مبلمان</SelectItem>
-                        <SelectItem value="clothing">پوشاک</SelectItem>
-                        <SelectItem value="books">کتاب‌ها</SelectItem>
+                        {filtersData ? (
+                            filtersData.categories.map(ct => (
+                                <SelectItem value={ct.slug}>{ct.name}</SelectItem>
+
+                            ))
+                        ) : ""}
                     </SelectContent>
                 </Select>
             </div>
@@ -91,18 +109,22 @@ export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }
 
             <div className="space-y-3">
                 <label>محدوده قیمت</label>
-                <Slider
-                    min={minPrice}
-                    max={maxPrice}
-                    step={10}
-                    value={[Number(filters.priceRange[0]), Number(filters.priceRange[1])]}
-                    onValueChange={(val) => updateFilters({ priceRange: val }, filters, setFilters, onFilterChange, setParams)}
-                    className="py-2"
-                />
-                <div className="flex justify-between text-sm text-muted-foreground">
-                    <p>{filters.priceRange[1]?.toLocaleString()}</p>
-                    <p>{filters.priceRange[0]?.toLocaleString()}</p>
-                </div>
+                {filtersData?.minPrice && filtersData?.maxPrice ? (
+                    <>
+                        <Slider
+                            min={filtersData.minPrice}
+                            max={filtersData.maxPrice}
+                            step={10}
+                            value={[Number(filters.priceRange[0]), Number(filters.priceRange[1])]}
+                            onValueChange={(val) => updateFilters({ priceRange: val }, filters, setFilters, onFilterChange, setParams)}
+                            className="py-2"
+                        />
+                        <div className="flex justify-between text-sm text-muted-foreground">
+                            <p>{filters.priceRange[1]?.toLocaleString()}</p>
+                            <p>{filters.priceRange[0]?.toLocaleString()}</p>
+                        </div></>
+                ) : <Skeleton className="h-[40px] mt-3 rounded-lg" />}
+
             </div>
 
             <div className="space-y-2">
@@ -116,10 +138,12 @@ export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }
                     </SelectTrigger>
                     <SelectContent dir="rtl">
                         <SelectItem value="all">همه</SelectItem>
-                        <SelectItem value="red">قرمز</SelectItem>
-                        <SelectItem value="blue">آبی</SelectItem>
-                        <SelectItem value="green">سبز</SelectItem>
-                        <SelectItem value="مشکی">مشکی</SelectItem>
+                        {filtersData ? (
+                            filtersData.colors.map(color => (
+                                <SelectItem value={color}>{color}</SelectItem>
+
+                            ))
+                        ) : ""}
                     </SelectContent>
                 </Select>
             </div>
@@ -127,6 +151,7 @@ export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }
             <div className="flex items-center">
                 <input
                     type="checkbox"
+                    className="accent-main"
                     id="inStock"
                 />
                 <label htmlFor="inStock" className="text-sm pr-2 font-normal cursor-pointer">
@@ -142,7 +167,7 @@ export function ProductFilters({ onFilterChange, minPrice = 0, maxPrice = 1000 }
                         category: "all",
                         sortBy: "newest",
                         color: "all",
-                        priceRange: [minPrice, maxPrice],
+                        priceRange: [filtersData.minPrice, filtersData.maxPrice],
                         inStock: false,
                     };
                     setFilters(resetFilters);
