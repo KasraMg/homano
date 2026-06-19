@@ -14,18 +14,20 @@ const ProductCard = ({
   price,
   priceWithoutOff,
   star,
-  off
+  off,
+  code
 }: Product) => (
   <Link
-    to={""}
-    className="w-full block shadow rounded-xl relative group transition-all hover:shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+    key={code}
+    to={`/product/${code}`}
+    className="w-full h-max block shadow rounded-xl relative group transition-all hover:shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
   >
-    <div className="relative p-5 group-hover:blur-xs w-full bg-cover bg-center transition-all ">
+    <div className="relative group-hover:blur-xs w-full bg-cover bg-center transition-all ">
       <div className="absolute inset-0 rounded-t-xl bg-neutral-02 z-0"></div>
       <img
         src={localAssetsUrl + images[0]}
         alt={name}
-        className="w-full h-[180px] rounded-t-xl object-contain  mix-blend-multiply"
+        className="w-full h-[200px] rounded-t-xl object-cover  mix-blend-multiply"
       />
     </div>
     <div className="flex justify-end gap-2 pt-0 items-center absolute opacity-0 group-hover:opacity-100 top-1/2 left-1/2 -translate-x-1/2">

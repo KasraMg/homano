@@ -3,19 +3,30 @@ import Container from '../../../components/modules/container';
 import Card from '../../modules/product-card';
 import { Product } from '../../../types/product.types';
 import useShop from '../../../hooks/useShop';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductFilters } from './partials/product-filters';
+import ProductSkeleton from './partials/product-skeleton';
+import { Filters } from './partials/filters';
+import PaginationWrapper from '../../modules/pagination-wrapper';
+import { useNavigate } from 'react-router-dom';
 
 const ShopScreen = () => {
-  const { data, isPending } = useShop()
-  console.log(data);
+  const [activeFilters, setActiveFilters] = useState<Filters | undefined>(undefined);
 
-  const [activeFilters, setActiveFilters] = useState(null);
-
+  const { data, isPending, filtersData } = useShop(activeFilters)
   const handleFilterChange = (filters: any) => {
     setActiveFilters(filters);
-    console.log("فیلترهای فعال:", filters);
   };
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (data) {
+      if (data.totalPages < data.page) {
+        navigate('/shop', { replace: true });
+      }
+    }
+  }, [data])
+ 
 
   return (
     <Container>
@@ -23,15 +34,32 @@ const ShopScreen = () => {
       <div className="flex md:!flex-row flex-col gap-4 pt-5 pb-10">
         <ProductFilters
           onFilterChange={handleFilterChange}
-          minPrice={0}
-          maxPrice={1000}
+          filtersData={filtersData}
         />
 
-        <div className="grid grid-cols-1 xs:grid-cols-2 lg:!grid-cols-3 gap-6">
-          {data?.products.map((pr: Product) => (
-            <Card {...pr} />
-          ))}
-        </div>
+        {!isPending || data?.products.length == 0 ? (
+          data?.products.length > 0 ?
+            <div className='space-y-5'>
+              <div className="grid grid-cols-1 xs:grid-cols-2 lg:!grid-cols-3 gap-6 w-full">
+                {data.products.map((pr: Product) => (
+                  <Card {...pr} />
+                ))}
+              </div>
+              <PaginationWrapper limit={5} key={'shop'} page={data.page} totalItems={data.total} />
+            </div>
+
+            : <p className='text-center pt-20 w-full text-3xl'>کالایی یافت نشد</p>
+        ) : (
+          <div className="grid grid-cols-1 xs:grid-cols-2 lg:!grid-cols-3 gap-6 w-full">
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+          </div>
+        )}
+        { }
       </div>
     </Container>
   );

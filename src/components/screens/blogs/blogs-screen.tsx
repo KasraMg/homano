@@ -1,106 +1,79 @@
 import Container from '../../modules/container'
 import Breadcrumb from '../../modules/breadcrumb'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select'
-import { BlogItem } from '../../../types/blog.types'
 import BlogCard from '../../modules/blog-card'
+import useBlogs from '../../../hooks/useBlogs'
+import { BlogItem } from '../../../types/blog.types'
+import BlogsSkeleton from '../home/partials/blogs/blogs-skeleton'
+import { useQueryParams } from '../../../hooks/useQueryParams'
+import { useEffect, useState } from 'react'
+import SearchInput from '../shop/partials/search-input'
+import PaginationWrapper from '../../modules/pagination-wrapper'
+import { useNavigate } from 'react-router-dom'
 
 const BlogsScreen = () => {
-    const blogs: BlogItem[] = [
-        {
-            id: 1,
-            image: "/Images/blog-1.png",
-            title: "۷ روش برای دکور خانه",
-            fullTitle: "۷ روش برای دکوراسیون خانه مانند یک حرفه‌ای",
-            date: "۱۲ اکتبر ۲۰۲۳",
-        },
-        {
-            id: 2,
-            image: "/Images/blog-2.png",
-            title: "سازماندهی آشپزخانه",
-            fullTitle: "نگاهی به یک آشپزخانه زیبا و منظم",
-            date: "۱۴ اکتبر ۲۰۲۳",
-        },
-        {
-            id: 3,
-            image: "/Images/blog-3.png",
-            title: "دکور اتاق‌خواب",
-            fullTitle: "دکوراسیون اتاق‌خواب برای کودکان",
-            date: "۱۶ اکتبر ۲۰۲۳",
-        },
-        {
-            id: 4,
-            image: "/Images/blog-4.png",
-            title: "خانه مدرن تگزاسی",
-            fullTitle: "خانه مدرن تگزاسی زیبا و کاملاً مناسب کودکان است",
-            date: "۱۸ اکتبر ۲۰۲۳",
-        },
-        {
-            id: 5,
-            image: "/Images/blog-5.png",
-            title: "خانه مدرن تگزاسی",
-            fullTitle: "خانه مدرن تگزاسی زیبا و کاملاً مناسب کودکان است",
-            date: "۲۰ اکتبر ۲۰۲۳",
-        },
-        {
-            id: 6,
-            image: "/Images/blog-6.png",
-            title: "خانه مدرن تگزاسی",
-            fullTitle: "خانه مدرن تگزاسی زیبا و کاملاً مناسب کودکان است",
-            date: "۲۱ اکتبر ۲۰۲۳",
-        },
-        {
-            id: 7,
-            image: "/Images/blog-7.png",
-            title: "خانه مدرن تگزاسی",
-            fullTitle: "خانه مدرن تگزاسی زیبا و کاملاً مناسب کودکان است",
-            date: "۲۲ اکتبر ۲۰۲۳",
-        },
-        {
-            id: 8,
-            image: "/Images/blog-8.png",
-            title: "خانه مدرن تگزاسی",
-            fullTitle: "خانه مدرن تگزاسی زیبا و کاملاً مناسب کودکان است",
-            date: "۲۵ اکتبر ۲۰۲۳",
+    const { data, isPending } = useBlogs()
+    const { setParams } = useQueryParams();
+    const [sortBy, setSortBy] = useState('all')
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (data) {
+            console.log(data);
+            console.log(data.page);
+            if (data.totalPages < data.page) {
+                navigate('/blogs', { replace: true });
+            }
         }
-    ];
+    }, [data])
 
     return (
         <Container>
-            <div className='pt-5'>
+            <div className='pt-5 pb-20'>
                 <Breadcrumb title='مقالات' />
                 <div className='w-max mx-auto text-center sm:!px-0 px-3 pb-12 pt-10'>
                     <p className='text-2xl pb-5'>دنبال چه مقاله ای هستی؟</p>
-                    <input placeholder='بهترین برند...' className='shadow-m w-[290px] sm:!w-[400px] py-2 px-4 h-13 rounded-xl border border-gray-300' />
+                    <SearchInput trashClassName="top-4" className='shadow-m w-[290px] sm:!w-[400px] h-13 rounded-xl border border-gray-300 [&>*]:!border-0' />
                 </div>
-                <Select
-                // onValueChange={(value) => {
-                //     field.onChange(value)
-                //     setValue("city", "")
-                // }}
-                // value={field.value}
-                >
-                    <SelectTrigger
-                        className={"sm:!w-[300px] w-full sm:!mx-0 mx-auto mb-5 !h-11"}
+                <div className="space-y-2">
+                    <label className='pb-1 block'>مرتب‌سازی بر اساس</label>
+                    <Select
+                        value={sortBy}
+                        onValueChange={(val) => {
+                            setSortBy(val)
+                            setParams({ sortBy: val })
+                        }}
                     >
-                        <SelectValue placeholder="دسته بندی ها" />
-                    </SelectTrigger>
-                    <SelectContent dir='rtl'>
-                        <SelectItem
-                            value={'مبلمان'}
-                        >
-                            {'مبلمان'}
-                        </SelectItem>
-                    </SelectContent>
-                </Select>
-
-                <div className="grid grid-cols-1 sm:!grid-cols-2 md:!grid-cols-3 lg:!grid-cols-4 gap-x-[25px] gap-y-[40px] pb-20">
-                    {blogs.map((blog) => (
-                        <BlogCard key={blog.id} {...blog} />
-                    ))}
+                        <SelectTrigger className={"sm:!w-[300px] w-full sm:!mx-0 mx-auto mb-5 !h-11"}>
+                            <SelectValue placeholder="مرتب‌سازی" />
+                        </SelectTrigger>
+                        <SelectContent dir="rtl">
+                            <SelectItem value="all">همه</SelectItem>
+                            <SelectItem value="-createdAt">جدیدترین</SelectItem>
+                            <SelectItem value="createdAt">قدیمی‌ترین</SelectItem>
+                        </SelectContent>
+                    </Select>
                 </div>
+
+                {data && !isPending ? (
+                    data.articles.length > 0 ? (
+                        <div className='space-y-5'>
+                            <div className="grid grid-cols-1 sm:!grid-cols-2 md:!grid-cols-3 lg:!grid-cols-4 gap-x-[25px] gap-y-[40px]">
+                                {data.articles.map((blog: BlogItem) => (
+                                    <BlogCard key={blog.slug} {...blog} />
+                                ))}
+                            </div>
+                            <PaginationWrapper limit={2} key={'blogs'} page={data.page} totalItems={data.total} />
+
+                        </div>
+                    ) : <p className='text-center pt-20 w-full text-3xl'>مقاله ای یافت نشد</p>
+
+
+                ) : <BlogsSkeleton />}
+
             </div>
         </Container>
     )
 }
 
-export default BlogsScreen
+export default BlogsScreen 
