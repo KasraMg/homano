@@ -18,6 +18,7 @@ const ProductCard = ({
   code
 }: Product) => (
   <Link
+    key={code}
     to={`/product/${code}`}
     className="w-full h-max block shadow rounded-xl relative group transition-all hover:shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
   >

@@ -17,13 +17,21 @@ const useShop = (filters?: Filters) => {
         params.append('color', filters.color);
       }
       if (
-        filters.priceRange && (filters.priceRange[0] !== 0 && filters.priceRange[1] !==0)
+        filters.priceRange &&
+        filters.priceRange[0] !== 0 &&
+        filters.priceRange[1] !== 0
       ) {
         params.append('minPrice', Number(filters.priceRange[0]).toString());
         params.append('maxPrice', Number(filters.priceRange[1]).toString());
       }
       if (filters.inStock) {
         params.append('inStock', 'true');
+      }
+      if (true) {
+        params.append('limit', '5');
+      }
+      if (getParam('page') as string) {
+        params.append('page', getParam('page') as string);
       }
       if (getParam('name') as string) {
         params.append('search', getParam('name') as string);
@@ -51,7 +59,12 @@ const useShop = (filters?: Filters) => {
     queryFn: fetchShopFiltersData,
   });
   const { data, isPending } = useQuery({
-    queryKey: ['shop', getParam('name') as string, filters],
+    queryKey: [
+      'shop',
+      getParam('name') as string,
+      getParam('page') as string,
+      filters,
+    ],
     queryFn: fetchShopData,
     enabled: !!filters,
   });

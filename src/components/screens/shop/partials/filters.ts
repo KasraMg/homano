@@ -1,3 +1,5 @@
+import { useQueryParams } from '../../../../hooks/useQueryParams';
+
 export interface Filters {
   category: string;
   color: string;
@@ -48,3 +50,5 @@ export const updateFilters = (
   onFilterChange(updated);
   onFilterChange(updated);
 };
+
+ 

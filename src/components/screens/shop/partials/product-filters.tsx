@@ -22,7 +22,6 @@ export function ProductFilters({ onFilterChange, filtersData }: {
     const isDesktop = useMediaQuery("(min-width: 768px)");
     const [open, setOpen] = useState(false);
     const { getParams, clearParams, setParams } = useQueryParams();
-    console.log(filtersData);
 
     const [filters, setFilters] = useState({
         category: "all",
@@ -79,7 +78,7 @@ export function ProductFilters({ onFilterChange, filtersData }: {
                         <SelectItem value="all">همه</SelectItem>
                         {filtersData ? (
                             filtersData.categories.map(ct => (
-                                <SelectItem value={ct.slug}>{ct.name}</SelectItem>
+                                <SelectItem key={ct.slug} value={ct.slug}>{ct.name}</SelectItem>
 
                             ))
                         ) : ""}
@@ -140,7 +139,7 @@ export function ProductFilters({ onFilterChange, filtersData }: {
                         <SelectItem value="all">همه</SelectItem>
                         {filtersData ? (
                             filtersData.colors.map(color => (
-                                <SelectItem value={color}>{color}</SelectItem>
+                                <SelectItem key={color} value={color}>{color}</SelectItem>
 
                             ))
                         ) : ""}

@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from 'react-router-dom';
 
 type QueryValue = string | number | boolean | null | undefined;
 type QueryParams = Record<string, QueryValue>;
@@ -9,9 +9,10 @@ export function useQueryParams() {
   const getParams = (): QueryParams => {
     const params: QueryParams = {};
     searchParams.forEach((value, key) => {
-      if (value === "true") params[key] = true;
-      else if (value === "false") params[key] = false;
-      else if (!isNaN(Number(value)) && value !== "") params[key] = Number(value);
+      if (value === 'true') params[key] = true;
+      else if (value === 'false') params[key] = false;
+      else if (!isNaN(Number(value)) && value !== '')
+        params[key] = Number(value);
       else params[key] = value;
     });
     return params;
@@ -23,7 +24,7 @@ export function useQueryParams() {
 
   const setParams = (newParams: QueryParams, replace: boolean = false) => {
     const currentParams = getParams();
-    
+
     const merged = { ...currentParams, ...newParams };
 
     Object.keys(merged).forEach((key) => {
@@ -42,14 +43,16 @@ export function useQueryParams() {
     setSearchParams(urlParams, { replace });
   };
 
-  const removeParams = (keys: string | string[], replace: boolean = false) => {
+  const removeParams = (keys: string | string[]) => {
     const keysArray = Array.isArray(keys) ? keys : [keys];
-    const currentParams = getParams();
-    const newParams = { ...currentParams };
-    keysArray.forEach((key) => {
-      delete newParams[key];
-    });
-    setParams(newParams, replace);
+    const params = new URLSearchParams(window.location.search);
+
+    keysArray.forEach((key) => params.delete(key));
+
+    const newQuery = params.toString();
+    const newUrl = newQuery ? `?${newQuery}` : window.location.pathname;
+
+    window.history.replaceState({}, '', newUrl);
   };
 
   const clearParams = (replace: boolean = false) => {
