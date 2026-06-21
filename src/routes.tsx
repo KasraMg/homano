@@ -16,7 +16,7 @@ import Blog from "./pages/blogs/blog/blog";
 const routes = [
     { path: '/', element: <Home /> },
     { path: '/shop', element: <Shop /> },
-    { path: '/product/:id', element: <Product /> },
+    { path: '/product/:code/:slug', element: <Product /> },
     { path: '/contact-us', element: <ContactUs /> },
     { path: '/cart', element: <ShoppingCart /> },
     { path: '/checkout', element: <Checkout /> },

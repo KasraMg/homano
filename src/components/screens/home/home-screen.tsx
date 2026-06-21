@@ -7,21 +7,20 @@ import Container from "../../modules/container";
 import Blogs from "./partials/blogs/blogs";
 import useLanding from "../../../hooks/useLanding";
 import Banners from "./partials/banners/banners";
+import Search from "./partials/search";
 
 const HomeScreen = () => {
   const { data } = useLanding()
 
   return (
     <Container>
-      <Banners
-        data={data?.banner}
-      />
-      <div className="space-y-20 pb-20">
-        <h2 className="w-[57.5] pt-10 text-xl md:text-3xl xl:text-4xl text-right tracking-hero transition-all">
-          بهترین قیمت و تنوع لوازم خانگی در هومانو
-        </h2>
-        <Categories data={data?.categories} />
+      <Search />
+      <div className="space-y-20 pb-20 pt-12">
         <Products data={data?.products} />
+        <Banners
+          data={data?.banner}
+        />
+        <Categories data={data?.categories} />
         <ServicesSection />
         <SaleBanner
           showSaleText

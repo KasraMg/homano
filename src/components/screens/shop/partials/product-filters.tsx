@@ -164,7 +164,7 @@ export function ProductFilters({ onFilterChange, filtersData }: {
                 onClick={() => {
                     const resetFilters = {
                         category: "all",
-                        sortBy: "newest",
+                        sortBy: "all",
                         color: "all",
                         priceRange: [filtersData.minPrice, filtersData.maxPrice],
                         inStock: false,

@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import { useEffect, useState } from "react";
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "../../../ui/carousel";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
-
+import { localAssetsUrl } from "../../../../constants";
 
 const Gallery = ({
-  images = [
-    "/Images/product-5.png",
-    "/Images/slider-area-1.svg",
-    "/Images/slider-area-2.svg",
-    "/Images/slider-area-3.svg",
-  ],
+  images
 }: {
-  images?: string[];
+  images: string[];
 }) => {
   const [api, setApi] = useState<CarouselApi>();
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const thumbnails = images.slice(1);
 
   useEffect(() => {
     if (!api) return;
@@ -27,7 +19,7 @@ const Gallery = ({
   }, [api]);
 
   return (
-    <div className="flex flex-col gap-6 w-full relative">
+    <div className="flex flex-col gap-6 w-full relative xl:!w-[350px]">
       <Carousel
         className="w-[350px]"
         setApi={setApi}
@@ -45,7 +37,7 @@ const Gallery = ({
               <div className="relative w-full overflow-hidden rounded-lg transition-all">
                 <div className="w-full h-full">
                   <img
-                    src={src}
+                    src={localAssetsUrl + src}
                     alt={`product-${i}`}
                     className="rounded-md h-[300px] object-contain mx-auto"
                   />
@@ -56,7 +48,6 @@ const Gallery = ({
         </CarouselContent>
       </Carousel>
 
-      {/* arrows moved OUTSIDE map */}
       <div className="absolute inset-y-1/2 left-4 right-4 flex justify-between pointer-events-none">
         <button
           onClick={() => api?.scrollPrev()}
@@ -79,16 +70,15 @@ const Gallery = ({
         </button>
       </div>
 
-      {/* thumbnails */}
       <div className="hidden sm:flex justify-center gap-4 w-full">
-        {thumbnails.map((img, i) => (
+        {images.map((img, i) => (
           <button
             key={i}
-            onClick={() => api?.scrollTo(i + 1)}
+            onClick={() => api?.scrollTo(i)}
             className={`flex-1 cursor-pointer aspect-square max-w-[56px] size-[56px] bg-cover bg-center rounded-md transition-all 
-                            ${activeIndex === i + 1 ? "ring-2 ring-neutral-07" : ""}
-                        `}
-            style={{ backgroundImage: `url(${img})` }}
+                    ${activeIndex === i ? "ring-2 ring-neutral-07" : ""}  
+                `}
+            style={{ backgroundImage: `url(${localAssetsUrl + img})` }}
           />
         ))}
       </div>

@@ -67,13 +67,13 @@ const Products = ({ data }: { data?: Product[] }) => {
         <ProductsSkeleton />}
 
 
-      <div className="flex justify-center mt-10">
+      {/* <div className="flex justify-center mt-10">
         <ButtonCard
           title="مشاهده بیشتر"
           onClick={() => console.log("Show more clicked")}
           className="add-to-cart-btn  text-neutral-07 text-base text-center leading-7 tracking-button-s whitespace-nowrap box-border inline-flex items-center justify-center gap-2 px-10 py-1.5 rounded-full border border-neutral-07 transition-all hover:shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
         />
-      </div>
+      </div> */}
 
       <div className="flex justify-start mt-6 md:hidden">
         <Link
