@@ -1,6 +1,6 @@
 export type Product = {
-  category:string;
-  code: number;
+  category: string;
+  code: string;
   createdAt: string;
   images: string[];
   name: string;

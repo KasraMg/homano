@@ -47,14 +47,6 @@ const Navbar = () => {
         </ul>
 
         <div className="flex items-center gap-4 py-4">
-          <button className="hidden sm:block">
-            <img
-              src="/Images/Search.svg"
-              alt="search-icon"
-              className="hover:drop-shadow-custom size-6 cursor-pointer transition-all"
-            />
-          </button>
-
           <div
             onClick={() => setOpenCart(true)}
             className="relative flex items-center cursor-pointer justify-center gap-2"

@@ -21,12 +21,14 @@ const ShopScreen = () => {
 
   useEffect(() => {
     if (data) {
-      if (data.totalPages < data.page) {
-        navigate('/shop', { replace: true });
+      if (data.page > 1) {
+        if (data.totalPages < data.page) {
+          navigate('/shop', { replace: true });
+        }
       }
     }
   }, [data])
- 
+
 
   return (
     <Container>
@@ -39,7 +41,7 @@ const ShopScreen = () => {
 
         {!isPending || data?.products.length == 0 ? (
           data?.products.length > 0 ?
-            <div className='space-y-5'>
+            <div className='space-y-5 w-full'>
               <div className="grid grid-cols-1 xs:grid-cols-2 lg:!grid-cols-3 gap-6 w-full">
                 {data.products.map((pr: Product) => (
                   <Card {...pr} />

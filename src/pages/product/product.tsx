@@ -1,11 +1,8 @@
-import ProductScreen from "../../components/screens/product/product-screen"; 
-import { useParams } from "react-router-dom";
+import ProductScreen from "../../components/screens/product/product-screen";
 
 const Product = () => {
-  const { id } = useParams();
-
   return (
-    <ProductScreen /> 
+    <ProductScreen />
   );
 };
 

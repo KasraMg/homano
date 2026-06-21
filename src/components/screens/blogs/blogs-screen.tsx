@@ -19,8 +19,6 @@ const BlogsScreen = () => {
 
     useEffect(() => {
         if (data) {
-            console.log(data);
-            console.log(data.page);
             if (data.totalPages < data.page) {
                 navigate('/blogs', { replace: true });
             }
