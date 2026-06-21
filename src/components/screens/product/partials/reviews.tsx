@@ -1,4 +1,4 @@
-import { ProductCardProps } from "../../../../types/product.types";
+import { Product } from "../../../../types/product.types";
 import { Review } from "../../../../types/review.types";
 import ButtonCard from "../../../ui/button-card";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../../../ui/select";
@@ -56,7 +56,7 @@ const REVIEWS_DATA: Review[] = [
   },
 ];
 
-const Reviews = ({ product }: { product?: ProductCardProps }) => {
+const Reviews = ({ data }: { data: Product }) => {
 
 
   return (

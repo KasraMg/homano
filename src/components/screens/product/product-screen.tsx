@@ -4,17 +4,24 @@ import Order from './partials/order'
 import Main from './partials/main'
 import Reviews from './partials/reviews'
 import { useParams } from "react-router-dom";
+import useProduct from '../../../hooks/useProduct'
 const ProductScreen = () => {
-    const { id } = useParams();
+    const { code, slug } = useParams();
+    const { data, isPending } = useProduct(Number(code));
+    console.log(data);
 
     return (
         <Container>
             <div className='py-10'>
-                <div className="flex gap-4">
-                    <Main />
-                    <Order />
-                </div>
-                <Reviews />
+                {!isPending ? (
+                    <>
+                        <div className="flex gap-4">
+                            <Main data={data} />
+                            <Order data={data} />
+                        </div>
+                        <Reviews data={data} /></>
+                ) : ""}
+
             </div>
         </Container>
     )

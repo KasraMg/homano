@@ -15,11 +15,12 @@ const ProductCard = ({
   priceWithoutOff,
   star,
   off,
-  code
+  code,
+  slug
 }: Product) => (
       <Link
         key={code}
-        to={`/product/${String(code).replaceAll(" ", "-")}`}
+        to={`/product/${code}/${String(slug).replaceAll(" ", "-")}`}
         className="w-full h-max block shadow rounded-xl relative group transition-all hover:shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       >
         <div className="relative group-hover:blur-xs w-full bg-cover bg-center transition-all ">
