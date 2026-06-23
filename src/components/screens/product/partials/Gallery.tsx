@@ -19,9 +19,9 @@ const Gallery = ({
   }, [api]);
 
   return (
-    <div className="flex flex-col gap-6 w-full relative xl:!w-[350px]">
+    <div className="flex flex-col gap-6 md:!w-[300px] w-full relative xl:!w-[350px]">
       <Carousel
-        className="w-[350px]"
+        className="xl:!w-[350px] md:!w-[300px] w-full md:!h-auto h-[240px]"
         setApi={setApi}
         opts={{
           direction: "rtl",
@@ -39,7 +39,7 @@ const Gallery = ({
                   <img
                     src={localAssetsUrl + src}
                     alt={`product-${i}`}
-                    className="rounded-md h-[300px] object-contain mx-auto"
+                    className="rounded-md h-[240px] md:!h-max xl:!h-[300px] object-cover w-full mx-auto"
                   />
                 </div>
               </div>

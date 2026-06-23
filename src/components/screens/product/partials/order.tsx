@@ -4,7 +4,7 @@ import { ShoppingBag } from 'lucide-react'
 
 const Order = ({ data }: { data: Product }) => {
   return (
-    <div className='w-2/6 bg-neutral-02 lg:!w-2/6  sticky top-3 h-max flex flex-col items-start gap-4 rounded-xl p-6 shadow-m'>
+    <div className='w-full bg-neutral-02 lg:!w-2/6 sticky top-3 h-max flex flex-col items-start gap-4 rounded-xl p-4 sm:!p-6 shadow-m'>
       <p className='line-clamp-3 text-xl font-VazirMedium leading-8.5 -tracking-0.5 xl:line-clamp-2'>{data.name}</p>
       <ul className='list-disc text-sm space-y-2 pr-3'>
         <li className='text-gray-500'>
