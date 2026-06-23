@@ -8,3 +8,6 @@ body {
 .leaflet-control-attribution {
   display: none;
 }
+html {
+  scroll-behavior: smooth;
+}

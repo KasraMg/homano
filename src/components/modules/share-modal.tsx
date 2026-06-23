@@ -24,13 +24,13 @@ const ShareModal = ({ link }: { link: string }) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <div className='bg-white rounded-xl shadow-xl hover:opacity-55 transition-opacity cursor-pointer p-2'>
+                <div className='bg-white rounded-xl sm:shadow-xl hover:opacity-55 transition-opacity cursor-pointer p-2'>
                     <Share2Icon size={20} />
                 </div>
             </DialogTrigger>
             <DialogContent
                 dir="rtl"
-                className="overflow-y-auto max-w-[300px] !px-7 !pb-7 !pt-10">
+                className="overflow-y-auto max-w-[300px] !px-7 !rounded-lg !pb-7 !pt-10">
                 <Link
                     to={whatsappLink}
                     className="flex w-full cursor-pointer items-center justify-between gap-2 rounded-md bg-green-600 p-2 text-white transition-opacity hover:opacity-70"

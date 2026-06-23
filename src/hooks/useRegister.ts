@@ -60,7 +60,7 @@ export const registerUser = async (
   return response.json();
 };
 
-export const useRegister = () => {
+export const useRegister = (endFunction?: () => void) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (data: RegisterRequest) => registerUser(data),
@@ -68,6 +68,7 @@ export const useRegister = () => {
       Cookies.set('token', data.token);
       toast.success(data.message);
       queryClient.refetchQueries({ queryKey: ['me'] });
+      endFunction?.();
     },
     onError: (error: Error) => {
       toast.error(error.message);

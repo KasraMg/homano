@@ -70,7 +70,7 @@ const Gallery = ({
         </button>
       </div>
 
-      <div className="hidden sm:flex justify-center gap-4 w-full">
+      <div className="hidden md:flex justify-center gap-4 w-full">
         {images.map((img, i) => (
           <button
             key={i}

@@ -19,7 +19,7 @@ const ProductScreen = () => {
                             <Main data={data} />
                             <Order data={data} />
                         </div>
-                        {/* <Reviews data={data} /> */}
+                        <Reviews data={data} />
                     </>
 
                 ) : <ProductScreenSkeleton />}

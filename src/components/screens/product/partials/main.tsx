@@ -20,13 +20,18 @@ const Main = ({ data }: { data: Product }) => {
           </Link>
         </Breadcrumb>
 
-        <MainIcons className="sm:!flex hidden"/>
+        <MainIcons isFave={data.isFave} productCode={data.code} className="sm:!flex hidden" />
       </div>
       <div className='flex gap-3  md:!flex-row flex-col-reverse justify-between'>
         <div className='space-y-4'>
           <h1 className='line-clamp-3 text-xl font-VazirMedium leading-8.5 -tracking-0.5 xl:line-clamp-2'>{data.name}</h1>
-          <Button className='text-black' variant={"mainShaded"}>10 دیدگاه <ChevronLeft size={17} />
-          </Button>
+          <div className='flex gap-2 justify-between'>
+            <a href="#comments">
+              <Button className='text-black' variant={"mainShaded"}>10 دیدگاه <ChevronLeft size={17} />
+              </Button></a>
+            <MainIcons isFave={data.isFave} productCode={data.code} className="sm:!hidden flex" />
+
+          </div>
           <div className='flex gap-3'>
             {data.colors.map(color => (
               <div className='flex gap-2 items-center border border-gray-300 px-1 rounded-md pl-4 text-sm py-0.5'>

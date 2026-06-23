@@ -50,9 +50,9 @@ const ProductScreenSkeleton = () => {
 
                     </div>
 
-                    <div>
-                        <Skeleton className="w-full h-8 sm:!hidden mb-4 bg-gray-200" />
-                         <Skeleton className="flex flex-col gap-6 sm:!mt-16 relative xl:!w-[350px] w-[300px] h-[240px] md:!h-[300px] aspect-square rounded-lg bg-gray-200" />
+                    <div className="w-full">
+                        <Skeleton className="w-full h-8 md:!hidden mb-4 bg-gray-200" />
+                         <Skeleton className="flex flex-col gap-6 sm:!mt-16 relative xl:!w-[350px] w-full md:!w-[300px] h-[240px] md:!h-[300px] aspect-square rounded-lg bg-gray-200" />
                         <div className="hidden gap-2 justify-center mt-4 md:!flex">
                             {[...Array(4)].map((_, i) => (
                                 <Skeleton key={i} className="w-14 h-14 rounded-lg bg-gray-200" />

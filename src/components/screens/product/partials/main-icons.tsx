@@ -1,16 +1,16 @@
-import { Heart, MessagesSquare } from 'lucide-react'
+import { MessagesSquare } from 'lucide-react'
 import ShareModal from '../../../modules/share-modal'
+import Favorite from '../../../modules/favorite'
+import { Link } from 'react-router-dom'
 
-const MainIcons = ({ className }: { className?: string }) => {
+const MainIcons = ({ className, productCode, isFave }: { className?: string, productCode: number, isFave: boolean }) => {
     return (
-        <div className={`${className ?? ''} flex gap-5`}>
-            <div className='bg-white hover:[&>*]:fill-red-600 rounded-xl shadow-xl transition-colors cursor-pointer p-2'>
-                <Heart size={20} className='transition-colors stroke-red-600' />
-            </div>
-            <ShareModal link={location.href}/>
-            <div className='bg-white rounded-xl shadow-xl hover:opacity-55 transition-opacity cursor-pointer p-2'>
+        <div className={`${className ?? ''} flex gap-0.5 sm:!gap-5`}>
+            <Favorite productCode={productCode} isFave={isFave} />
+            <ShareModal link={location.href} />
+            <a href="#comments" className='bg-white block rounded-xl sm:shadow-xl hover:opacity-55 transition-opacity cursor-pointer p-2'>
                 <MessagesSquare size={20} />
-            </div>
+            </a>
         </div>
     )
 }

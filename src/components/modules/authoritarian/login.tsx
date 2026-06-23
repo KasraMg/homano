@@ -2,8 +2,8 @@ import { DialogDescription, DialogHeader, DialogTitle } from '../../ui/dialog';
 import { Button } from '../../ui/button';
 import { useLogin } from '../../../hooks/useLogin';
 
-const Login = ({ setStep }: { setStep: (val: string) => void }) => {
-  const { register, errors, handleSubmit, onSubmit } = useLogin();
+const Login = ({ setStep, endFunction }: { setStep: (val: string) => void, endFunction?: () => void }) => {
+  const { register, errors, handleSubmit, onSubmit } = useLogin(endFunction);
 
   return (
     <>
@@ -20,6 +20,10 @@ const Login = ({ setStep }: { setStep: (val: string) => void }) => {
           <div>
             <label className="block pb-2 text-sm">شماره موبایل</label>
             <input
+              autoComplete='off'
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
               className="w-full rounded-xl border border-gray-200 p-2 outline-0"
               {...register('phone')}
             />
@@ -31,6 +35,10 @@ const Login = ({ setStep }: { setStep: (val: string) => void }) => {
           <div>
             <label className="block pb-2 text-sm">رمز عبور</label>
             <input
+              autoComplete='off'
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
               className="w-full rounded-xl border border-gray-200 p-2 outline-0"
               type="password"
               {...register('password')}

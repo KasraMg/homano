@@ -50,7 +50,7 @@ export const loginUser = async (data: LoginRequest): Promise<LoginResponse> => {
   return response.json();
 };
 
-export const useLogin = () => {
+export const useLogin = (endFunction?: () => void) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (data: LoginRequest) => loginUser(data),
@@ -58,6 +58,7 @@ export const useLogin = () => {
       Cookies.set('token', data.token);
       toast.success(data.message);
       queryClient.refetchQueries({ queryKey: ['me'] });
+      endFunction?.();
     },
     onError: (error: Error) => {
       toast.error(error.message);
