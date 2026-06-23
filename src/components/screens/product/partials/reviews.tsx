@@ -60,7 +60,7 @@ const Reviews = ({ data }: { data: Product }) => {
 
 
   return (
-    <section className="flex flex-col items-start gap-12 bg-white w-full px-4 py-12">
+    <section id="comments" className="flex flex-col items-start gap-12 bg-white w-full px-4 py-12">
       <div className="relative w-full">
         <h2 className="self-stretch  text-[#23262F] text-2xl tracking-headline-6 leading-[34px] transition-all  ">
           نظر شما

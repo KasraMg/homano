@@ -2,8 +2,8 @@ import { useRegister } from '../../../hooks/useRegister';
 import { Button } from '../../ui/button';
 import { DialogDescription, DialogHeader, DialogTitle } from '../../ui/dialog';
 
-const Register = ({ setStep }: { setStep: (val: string) => void }) => {
-  const { register, errors, handleSubmit, onSubmit } = useRegister();
+const Register = ({ setStep, endFunction }: { setStep: (val: string) => void, endFunction?: () => void }) => {
+  const { register, errors, handleSubmit, onSubmit } = useRegister(endFunction);
 
   return (
     <>

@@ -18,7 +18,7 @@ const Breadcrumb = ({ title, children, className }: BreadcrumbProps) => {
           className="inline-flex flex-col items-center gap-6"
           aria-label="Breadcrumb"
         >
-          <ul className="m-0 flex items-center gap-2 p-0">
+          <ul className="m-0 flex items-center gap-2 p-0 flex-wrap">
             <li className="inline-flex items-center gap-1">
               <Link
                 to="/"
@@ -37,7 +37,7 @@ const Breadcrumb = ({ title, children, className }: BreadcrumbProps) => {
 
             <li className="inline-flex items-center gap-1">
               <span
-                className=" text-black-900text-sm whitespace-nowrap"
+                className=" text-black-900 text-sm whitespace-nowrap"
                 aria-current="page"
               >
                 {title}

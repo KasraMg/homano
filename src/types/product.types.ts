@@ -7,6 +7,7 @@ export type Product = {
   name: string;
   off: number;
   price: number;
+  isFave:boolean;
   priceWithoutOff: number;
   star: number;
   colors: Array<{
@@ -22,4 +23,5 @@ export type Product = {
   }>;
   updatedAt: string;
   __v: number;
+  _id: string;
 };

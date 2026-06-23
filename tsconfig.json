@@ -16,10 +16,11 @@
     "resolveJsonModule": true,
     "allowImportingTsExtensions": false,
     "isolatedModules": true,
+    
     /* Type Safety */
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+    "exactOptionalPropertyTypes": false,
     "noEmit": true,
     "types": ["react", "react-dom"]
 
