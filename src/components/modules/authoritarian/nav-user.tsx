@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import AuthoritarianSteps from './authoritarian-steps';
 import { useUser } from '../../../hooks/useUser';
 import { Skeleton } from '../skeleton';
