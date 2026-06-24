@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import { localBackendUrl } from '../constants';
 import { toast } from 'sonner';
@@ -23,7 +23,21 @@ const createFeedback = async (
   return data;
 };
 
-const useFeedback = () => {
+const fetchData = async (productCode: number) => {
+  const response = await fetch(
+    localBackendUrl + `/getProductFeedbacks/${productCode}`,
+  );
+  const data = await response.json();
+  return data;
+};
+
+const useFeedback = (productCode?: number) => {
+  const { data, isPending } = useQuery({
+    queryKey: ['product-feedbacks'],
+    queryFn: () => fetchData(Number(productCode)),
+    enabled: !!productCode,
+  });
+
   const createMutation = useMutation({
     mutationFn: (params: {
       productCode: number;
@@ -38,7 +52,7 @@ const useFeedback = () => {
     },
   });
 
-  return { createMutation };
+  return { createMutation, data, isPending };
 };
 
 export default useFeedback;
