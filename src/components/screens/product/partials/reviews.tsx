@@ -65,7 +65,7 @@ const Reviews = ({ data }: { data: Product }) => {
         <h2 className="self-stretch  text-[#23262F] text-2xl tracking-headline-6 leading-[34px] transition-all  ">
           نظر شما
         </h2>
-        <ReviewInput />
+        <ReviewInput productCode={data.code}/>
       </div>
 
       <div className="flex flex-col items-start gap-10 w-full">

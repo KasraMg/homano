@@ -6,9 +6,9 @@ import { useParams } from "react-router-dom";
 import useProduct from '../../../hooks/useProduct'
 import ProductScreenSkeleton from './partials/product-screen-skeleton'
 const ProductScreen = () => {
-    const { code, slug } = useParams();
+    const { code } = useParams();
     const { data, isPending } = useProduct(Number(code));
-    console.log(data);
+    console.log('product', data);
 
     return (
         <Container>
