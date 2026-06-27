@@ -5,8 +5,13 @@ import { ChevronLeft } from 'lucide-react'
 import Gallery from './Gallery'
 import { Product } from '../../../../types/product.types'
 import MainIcons from './main-icons'
+interface Props {
+  data: Product,
+  activeColor: { code: string, name: string } | null,
+  setActiveColor: (c: { code: string, name: string }) => void
+}
 
-const Main = ({ data }: { data: Product }) => {
+const Main = ({ data, activeColor, setActiveColor }: Props) => {
   return (
     <div className='lg:!w-4/6 w-full bg-white shadow-m rounded-xl p-4 sm:!p-6'>
       <div className="flex justify-between items-center gap-2 pb-6">
@@ -34,8 +39,8 @@ const Main = ({ data }: { data: Product }) => {
           </div>
           <div className='flex gap-3'>
             {data.colors.map(color => (
-              <div className='flex gap-2 items-center border border-gray-300 px-1 rounded-md pl-4 text-sm py-0.5'>
-                <div className={`w-5 h-5 border border-neutral-03 bg-[${color.code}] rounded-md`}></div>
+              <div onClick={() => setActiveColor(color)} className={`${color.code == activeColor?.code ? "bg-neutral-02" : ''} cursor-pointer flex gap-2 items-center border border-gray-300 px-1 rounded-md pl-4 text-sm py-0.5`}>
+                <div style={{ background: color.code }} className={`w-5 h-5 border border-neutral-03 rounded-md`}></div>
                 <p>{color.name}</p>
               </div>
             ))}

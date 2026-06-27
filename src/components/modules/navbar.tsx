@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Badge from '../ui/badge';
 import CartSidebar from './cart-sidebar';
 import MobileMenu from './mobile-menu';
 import NavUser from './authoritarian/nav-user';
 import { Menu, ShoppingCartIcon } from 'lucide-react';
+import { useUser } from '../../hooks/useUser';
 
 type MenuItem = {
   name: string;
@@ -19,8 +20,16 @@ const Navbar = () => {
     { name: 'تماس با ما', path: '/contact-us' },
   ]);
   const [openCart, setOpenCart] = useState<boolean>(false);
+  const [count, setCount] = useState<null | number>(null);
   const [openMobileMenu, setOpenMobileMenu] = useState<boolean>(false);
   const location = useLocation();
+  const { data: user, isLoading } = useUser();
+
+  useEffect(() => {
+    if (user) {
+      setCount(user.cart.length)
+    }
+  }, [user])
 
   return (
     <div>
@@ -52,16 +61,16 @@ const Navbar = () => {
             className="relative flex items-center cursor-pointer justify-center gap-2"
           >
             <ShoppingCartIcon />
-            <Badge
+            {count ? <Badge
               className="bg-red-600 absolute -top-2 -left-1 flex items-center justify-center rounded-full px-1.5 py-0.5 text-xs text-white"
-              number={(2).toLocaleString('fa-IR')}
-            />
+              number={(Number(count)).toLocaleString('fa-IR')}
+            /> : ''}
           </div>
-          <NavUser />
+          <NavUser user={user} isLoading={isLoading} />
         </div>
       </nav>
 
-      <CartSidebar open={openCart} onClose={() => setOpenCart(false)} />
+      <CartSidebar data={user} open={openCart} onClose={() => setOpenCart(false)} />
       <MobileMenu
         open={openMobileMenu}
         onClose={() => setOpenMobileMenu(false)}

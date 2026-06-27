@@ -23,18 +23,19 @@ const createFeedback = async (
   return data;
 };
 
-const fetchData = async (productCode: number) => {
+const fetchData = async (productCode: number, page: number) => {
   const response = await fetch(
-    localBackendUrl + `/getProductFeedbacks/${productCode}`,
+    localBackendUrl +
+      `/getProductFeedbacks/${productCode}${page ? `?page=${page}&limit=1` : ''}`,
   );
   const data = await response.json();
   return data;
 };
 
-const useFeedback = (productCode?: number) => {
+const useFeedback = (productCode?: number, page?: number) => {
   const { data, isPending } = useQuery({
-    queryKey: ['product-feedbacks'],
-    queryFn: () => fetchData(Number(productCode)),
+    queryKey: [`product-feedbacks-${productCode}`, page],
+    queryFn: () => fetchData(Number(productCode), Number(page)),
     enabled: !!productCode,
   });
 

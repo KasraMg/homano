@@ -1,10 +1,8 @@
 import AuthoritarianSteps from './authoritarian-steps';
-import { useUser } from '../../../hooks/useUser';
 import { Skeleton } from '../skeleton';
+import { User } from '../../../types/user.types';
 
-const NavUser = () => {
-  const { data: user, isLoading } = useUser();
-
+const NavUser = ({ user, isLoading }: { user: User, isLoading: boolean }) => {
   return <div>{isLoading ? <Skeleton className='sm:!w-20 w-11 h-9 rounded-lg' /> : user ? <p>login</p> : <AuthoritarianSteps />}</div>;
 };
 
