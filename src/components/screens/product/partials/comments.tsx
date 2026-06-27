@@ -1,12 +1,7 @@
 import { Star } from "lucide-react";
-import { Review } from "../../../../types/review.types";
-import CustomRating from "../../../ui/custom-rating";
+import { Review } from "../../../../types/review.types";  
 
-
-const Comments = ({ review }: { review: Review }) => {
-  console.log(review);
-
-
+const Comments = ({ review }: { review: Review }) => {  
   return (
     <div className="w-full items-start gap-10  p-4 relative border-b border-solid shadow-m rounded-xl border-neutral-03">
       <div className="flex gap-3 items-center">

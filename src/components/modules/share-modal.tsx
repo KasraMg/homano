@@ -6,7 +6,7 @@ import {
 } from '../ui/dialog';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-const ShareModal = ({ link }: { link: string }) => {
+const ShareModal = ({ link, className }: { link: string, className?: string }) => {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = async () => {
@@ -24,7 +24,7 @@ const ShareModal = ({ link }: { link: string }) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <div className='bg-white rounded-xl sm:shadow-xl hover:opacity-55 transition-opacity cursor-pointer p-2'>
+                <div className={`${className ?? ''} bg-white rounded-xl sm:shadow-xl hover:opacity-55 transition-opacity cursor-pointer p-2`}>
                     <Share2Icon size={20} />
                 </div>
             </DialogTrigger>

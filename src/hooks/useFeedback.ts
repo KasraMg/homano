@@ -32,10 +32,10 @@ const fetchData = async (productCode: number, page: number) => {
   return data;
 };
 
-const useFeedback = (productCode: number, page: number) => {
+const useFeedback = (productCode?: number, page?: number) => {
   const { data, isPending } = useQuery({
     queryKey: [`product-feedbacks-${productCode}`, page],
-    queryFn: () => fetchData(Number(productCode), page),
+    queryFn: () => fetchData(Number(productCode), Number(page)),
     enabled: !!productCode,
   });
 

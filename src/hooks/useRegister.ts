@@ -44,7 +44,7 @@ const registerSchema = yup.object({
 export const registerUser = async (
   data: RegisterRequest,
 ): Promise<RegisterResponse> => {
-  const response = await fetch(`${localBackendUrl}/auth/register`, {
+  const response = await fetch(`${localBackendUrl}/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

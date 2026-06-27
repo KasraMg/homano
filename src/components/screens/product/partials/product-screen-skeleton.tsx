@@ -17,11 +17,11 @@ const ProductScreenSkeleton = () => {
                         <div className="grid grid-cols-2 gap-3 pt-4 border-t">
                             <div>
                                 <Skeleton className="w-20 h-4 bg-gray-200 mb-1" />
-                                <Skeleton className="w-32 h-5 bg-gray-300" />
+                                <Skeleton className="w-24 h-5 bg-gray-300" />
                             </div>
                             <div>
                                 <Skeleton className="w-20 h-4 bg-gray-200 mb-1" />
-                                <Skeleton className="w-28 h-5 bg-gray-300" />
+                                <Skeleton className="w-24 h-5 bg-gray-300" />
                             </div>
                         </div>
 
@@ -32,7 +32,7 @@ const ProductScreenSkeleton = () => {
                             </div>
                             <div>
                                 <Skeleton className="w-20 h-4 bg-gray-200 mb-1" />
-                                <Skeleton className="w-36 h-5 bg-gray-300" />
+                                <Skeleton className="w-24 h-5 bg-gray-300" />
                             </div>
                         </div>
 
@@ -43,16 +43,16 @@ const ProductScreenSkeleton = () => {
                             </div>
                             <div>
                                 <Skeleton className="w-20 h-4 bg-gray-200 mb-1" />
-                                <Skeleton className="w-32 h-5 bg-gray-300" />
+                                <Skeleton className="w-24 h-5 bg-gray-300" />
                             </div>
                         </div>
 
 
                     </div>
 
-                    <div className="w-full">
+                    <div className="md:!w-max w-full">
                         <Skeleton className="w-full h-8 md:!hidden mb-4 bg-gray-200" />
-                         <Skeleton className="flex flex-col gap-6 sm:!mt-16 relative xl:!w-[350px] w-full md:!w-[300px] h-[240px] md:!h-[300px] aspect-square rounded-lg bg-gray-200" />
+                         <Skeleton className="flex flex-col gap-6 sm:!mt-16 relative xl:!w-[330px] w-full md:!w-[300px] h-[240px] md:!h-[300px] aspect-square rounded-lg bg-gray-200" />
                         <div className="hidden gap-2 justify-center mt-4 md:!flex">
                             {[...Array(4)].map((_, i) => (
                                 <Skeleton key={i} className="w-14 h-14 rounded-lg bg-gray-200" />

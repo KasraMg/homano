@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 export const fetchMe = async () => {
   const token = Cookies.get('token');
 
-  const response = await fetch(`${localBackendUrl}/auth/getMe`, {
+  const response = await fetch(`${localBackendUrl}/getMe`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

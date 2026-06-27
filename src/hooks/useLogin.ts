@@ -34,7 +34,7 @@ const loginSchema = yup.object({
 });
 
 export const loginUser = async (data: LoginRequest): Promise<LoginResponse> => {
-  const response = await fetch(`${localBackendUrl}/auth/login`, {
+  const response = await fetch(`${localBackendUrl}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
