@@ -25,17 +25,18 @@ const Main = ({ data, activeColor, setActiveColor }: Props) => {
           </Link>
         </Breadcrumb>
 
-        <MainIcons isFave={data.isFave} productCode={data.code} className="sm:!flex hidden" />
+        <MainIcons isFave={data.isFave} star={data.feedback.totalRatings} productCode={data.code} className="sm:!flex hidden" />
       </div>
       <div className='flex gap-3  md:!flex-row flex-col-reverse justify-between'>
         <div className='space-y-4'>
           <h1 className='line-clamp-3 text-xl font-VazirMedium leading-8.5 -tracking-0.5 xl:line-clamp-2'>{data.name}</h1>
           <div className='flex gap-2 justify-between'>
-            <a href="#comments">
-              <Button className='text-black' variant={"mainShaded"}>10 دیدگاه <ChevronLeft size={17} />
-              </Button></a>
-            <MainIcons isFave={data.isFave} productCode={data.code} className="sm:!hidden flex" />
-
+            {data.feedback.totalComments !== 0 ? (
+              <a href="#comments">
+                <Button className='text-black' variant={"mainShaded"}>{data.feedback.totalComments} دیدگاه <ChevronLeft size={17} />
+                </Button></a>
+            ) : ""}
+            <MainIcons star={data.feedback.totalRatings} isFave={data.isFave} productCode={data.code} className="sm:!hidden flex" />
           </div>
           <div className='flex gap-3'>
             {data.colors.map(color => (

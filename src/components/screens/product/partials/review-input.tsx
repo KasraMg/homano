@@ -12,19 +12,18 @@ const ReviewInput = ({ productCode }: { productCode: number }) => {
     const [rate, setRate] = useState<null | number>(null)
     const { data: user } = useUser();
     const [showLoginForm, setShowLoginForm] = useState(false);
-
     return (
         <>
             <div className="flex flex-col w-full items-end justify-center gap-10 pt-4">
-                <form className="flex w-full items-start justify-between pl-6 pr-4 py-4 relative bg-white rounded-2xl border-2 border-neutral-03">
+                <form className="flex md:!flex-row flex-col w-full items-start justify-between pl-6 pr-4 py-4 relative bg-white rounded-2xl border-2 border-neutral-03">
                     <textarea
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         placeholder="نظر خود را بنویسید"
-                        className="relative w-fit ml-6 text-neutral-05 text-base tracking-normal leading-relaxed bg-transparent border-0 outline-0 flex-1 transition-all  "
+                        className="relative md:!w-fit ml-6 text-neutral-05 text-base tracking-normal leading-relaxed bg-transparent border-0 outline-0 flex-1 transition-all w-full md:!min-h-auto min-h-[150px]"
                         aria-label="نوشتن نظر"
                     />
-                    <div className='flex gap-4 pt-2'>
+                    <div className='flex md:!flex-row justify-center md:!w-max w-full flex-col gap-4 pt-2 md:!border-t-0 border-t-2 border-neutral-03'>
                         <StarRating rate={rate} setRate={setRate} />
 
                         <Button
