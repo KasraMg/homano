@@ -28,6 +28,7 @@ const ShopScreen = () => {
       }
     }
   }, [data])
+console.log(data);
 
 
   return (

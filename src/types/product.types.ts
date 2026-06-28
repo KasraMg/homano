@@ -7,7 +7,7 @@ export type Product = {
   name: string;
   off: number;
   price: number;
-  isFave:boolean;
+  isFave: boolean;
   priceWithoutOff: number;
   star: number;
   colors: Array<{
@@ -21,7 +21,13 @@ export type Product = {
     value: string;
     _id: string;
   }>;
+  isInCart: boolean;
   updatedAt: string;
   __v: number;
   _id: string;
+  feedback: {
+    averageRating: number;
+    totalComments: number;
+    totalRatings: number;
+  };
 };

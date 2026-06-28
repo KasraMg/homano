@@ -26,7 +26,7 @@ const createFeedback = async (
 const fetchData = async (productCode: number, page: number) => {
   const response = await fetch(
     localBackendUrl +
-      `/getProductFeedbacks/${productCode}${page ? `?page=${page}&limit=1` : ''}`,
+      `/getProductFeedbacks/${productCode}${page ? `?page=${page}` : ''}`,
   );
   const data = await response.json();
   return data;

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { localBackendUrl } from '../constants';
 import { Filters } from '../components/screens/shop/partials/filters';
 import { useQueryParams } from './useQueryParams';
+import Cookies from 'js-cookie';
 
 const useShop = (filters?: Filters) => {
   const { getParam } = useQueryParams();
@@ -43,8 +44,15 @@ const useShop = (filters?: Filters) => {
       }
     }
 
+    const headers: { authorization?: string } = {};
+    if (Cookies.get('token')) {
+      headers.authorization = `Bearer ${Cookies.get('token')}`;
+    }
+
     const url = `${localBackendUrl}/products${params.toString() ? `?${params.toString()}` : ''}`;
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers,
+    });
     const data = await response.json();
     return data;
   };

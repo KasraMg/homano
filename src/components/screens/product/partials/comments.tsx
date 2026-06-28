@@ -6,13 +6,13 @@ const Comments = ({ review }: { review: Review }) => {
     <div className="w-full items-start gap-10  p-4 relative border-b border-solid shadow-m rounded-xl border-neutral-03">
       <div className="flex gap-3 items-center">
         <img
-          className="relative size-18 rounded-full bg-cover bg-[50%_50%]"
+          className="relative size-12 xs:!size-18 rounded-full bg-cover bg-[50%_50%]"
           src={(review as any).avatar ?? '/Images/User.svg'}
           alt={`${review.user?.name} تصویر پروفایل`}
         />
         <div className="space-y-2">
           <div className="flex gap-2 items-center">
-            <p className="font-VazirMedium">{review.user?.name}</p>
+            <p className="font-VazirMedium xs:!text-base text-sm">{review.user?.name}</p>
             <p
               className="font-VazirRegular text-xs whitespace-nowrap"
             >
@@ -21,7 +21,7 @@ const Comments = ({ review }: { review: Review }) => {
           </div>
           <div className="flex gap-1">
             {[...Array(review.rating)].map(() => (
-              <Star className="fill-orange-500 stroke-orange-500" size={19} />
+              <Star className="fill-orange-500 stroke-orange-500 xs:!size-5 size-4"  />
             ))}
           </div>
         </div>

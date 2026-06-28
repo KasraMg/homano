@@ -5,7 +5,7 @@ const StarRating = ({ setRate, rate }: { rate: number | null, setRate: (val: num
   const [hover, setHover] = useState(0);
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center mx-auto md:!mx-0 gap-1">
       {[1, 2, 3, 4, 5].map((star) => (
         <button
           key={star}

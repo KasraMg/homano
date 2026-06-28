@@ -44,7 +44,7 @@ export default function CartSidebar({ data, open, onClose }: CartSidebarProps) {
 
         <div className="scrollbar-custom flex-1 space-y-6 overflow-y-auto bg-white">
           {data?.cart.map((item: CartItem) => (
-            <MobileProductCard {...item} />
+            <MobileProductCard total={data?.cart.length} onClose={onClose} item={item} />
           ))}
         </div>
 

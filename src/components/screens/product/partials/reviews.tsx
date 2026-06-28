@@ -18,7 +18,7 @@ const Reviews = ({ data }: { data: Product }) => {
   useEffect(() => {
     if (comments) {
       setCommentsData((prev) => [...prev, ...comments.feedbacks])
-      setTotalPage(comments.pages)
+      setTotalPage(comments.pages || 1)
     }
   }, [comments])
 
@@ -35,7 +35,7 @@ const Reviews = ({ data }: { data: Product }) => {
         {totalPages ?
           commentsData.length > 0 ?
             <>
-              <div className="grid grid-cols-2 items-center gap-6 relative w-full">
+              <div className="grid md:!grid-cols-2 items-center gap-6 relative w-full">
                 {commentsData.map((review: Review, index: number) => (
                   <Comments key={index + 1} review={review} />
                 ))}

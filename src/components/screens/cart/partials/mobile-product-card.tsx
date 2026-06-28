@@ -1,8 +1,14 @@
-import { Minus, Plus, Trash } from 'lucide-react';
 import { CartItem } from '../../../../types/user.types';
 import { localAssetsUrl } from '../../../../constants';
+import QuantityControls from '../../product/partials/quantity-controls';
+import { useQueryClient } from '@tanstack/react-query';
 
-const MobileProductCard = (item: CartItem) => {
+const MobileProductCard = ({ item, onClose, total }: {
+  item: CartItem,
+  onClose: () => void
+  total: number
+}) => {
+  const queryclient = useQueryClient()
   return (
     item ?
       <div
@@ -28,20 +34,12 @@ const MobileProductCard = (item: CartItem) => {
               {(item.quantity * item.product.price).toLocaleString()}
             </span>
           </div>
-          <div className="flex flex-col items-end gap-2">
-            <div className="border-neutral-04 mt-2 flex h-8 w-20 items-center justify-between rounded border px-2 transition-all hover:shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-              <button className="cursor-pointer text-black/900">
-                <Plus size={16} />
-              </button>
-              <span className="text-xs text-black/900">{item.quantity}</span>
-              <button className="cursor-pointer text-black/900">
-                <Minus size={16} />
-              </button>
-            </div>
-            <div className="cursor-pointer rounded-md bg-red-600 px-8 py-2 transition-opacity hover:opacity-75">
-              <Trash size={17} className="stroke-white" />
-            </div>
-          </div>
+          <QuantityControls endFunctionHandler={() => {
+            if (total == 1) {
+              onClose()
+            }
+            queryclient.invalidateQueries({ queryKey: ["me"] })
+          }} className="" data={item} />
         </div>
       </div>
       : "");

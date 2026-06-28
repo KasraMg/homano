@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Badge from '../ui/badge';
 import CartSidebar from './cart-sidebar';
 import MobileMenu from './mobile-menu';
@@ -24,7 +24,7 @@ const Navbar = () => {
   const [openMobileMenu, setOpenMobileMenu] = useState<boolean>(false);
   const location = useLocation();
   const { data: user, isLoading } = useUser();
-
+  const router = useNavigate()
   useEffect(() => {
     if (user) {
       setCount(user.cart.length)
@@ -57,7 +57,7 @@ const Navbar = () => {
 
         <div className="flex items-center gap-4 py-4">
           <div
-            onClick={() => setOpenCart(true)}
+            onClick={() => count ? setOpenCart(true) : router('/cart')}
             className="relative flex items-center cursor-pointer justify-center gap-2"
           >
             <ShoppingCartIcon />
