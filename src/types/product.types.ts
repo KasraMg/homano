@@ -21,9 +21,13 @@ export type Product = {
     value: string;
     _id: string;
   }>;
+  isInCart: boolean;
   updatedAt: string;
   __v: number;
   _id: string;
-  feedback: { averageRating: number; totalComments: number; totalRatings: number };
- 
+  feedback: {
+    averageRating: number;
+    totalComments: number;
+    totalRatings: number;
+  };
 };

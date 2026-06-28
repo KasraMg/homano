@@ -5,7 +5,7 @@ import { CartItem } from "../../../../types/user.types"
 import useOrder from "../../../../hooks/useOrder"
 import { useState } from "react"
 
-const QuantityControls = ({ data, showBtn, setCartProduct, className }: { data: CartItem, setCartProduct: (v: null) => void, showBtn?: boolean, className?: string }) => {
+const QuantityControls = ({ data, showBtn, endFunctionHandler, className }: { data: CartItem, endFunctionHandler?: (v?: null) => void, showBtn?: boolean, className?: string }) => {
     const { updateQuantityMutation, removeItemMutation } = useOrder()
     const [quantity, setQuantity] = useState(data.quantity)
     return (
@@ -18,7 +18,7 @@ const QuantityControls = ({ data, showBtn, setCartProduct, className }: { data: 
             </div>
             <div onClick={() => removeItemMutation.mutate(data._id, {
                 onSuccess() {
-                    setCartProduct(null)
+                    endFunctionHandler?.()
                 },
             })} className="cursor-pointer rounded-md bg-red-600 px-3 py-2 transition-opacity hover:opacity-75">
                 <Trash size={17} className="stroke-white" />

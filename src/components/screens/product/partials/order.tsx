@@ -48,7 +48,7 @@ const Order = ({ data, activeColor }: {
           <p className='text-[19px] font-VazirMedium pt-1 !leading-5 xl:text-[20px]'>{data.price.toLocaleString()} <span className='text-sm'>تومان</span></p>
         </div>
       </div>
-      {cartProduct ? <QuantityControls setCartProduct={setCartProduct} showBtn className="!flex-row w-full" data={cartProduct} /> : <Button onClick={(() => mutation.mutate({ color: String(activeColor?.code), code: data.code }, { onSuccess: (data) => setCartProduct(data.product) }))} className='w-full h-12' variant={"main"}>{mutation.isPending ? <LoaderCircleIcon className='mx-auto size-5 animate-spin' /> : <>افزودن به سبد خرید <ShoppingBag /></>} </Button>
+      {cartProduct ? <QuantityControls endFunctionHandler={() => setCartProduct(null)} showBtn className="!flex-row w-full" data={cartProduct} /> : <Button onClick={(() => mutation.mutate({ color: String(activeColor?.code), code: data.code }, { onSuccess: (data) => setCartProduct(data.product) }))} className='w-full h-12' variant={"main"}>{mutation.isPending ? <LoaderCircleIcon className='mx-auto size-5 animate-spin' /> : <>افزودن به سبد خرید <ShoppingBag /></>} </Button>
       }
     </div >
   )
