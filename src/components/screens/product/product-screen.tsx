@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import useProduct from '../../../hooks/useProduct'
 import ProductScreenSkeleton from './partials/product-screen-skeleton'
 import { useEffect, useState } from 'react';
+
 const ProductScreen = () => {
     const { code } = useParams();
     const { data, isPending } = useProduct(Number(code));
@@ -22,7 +23,7 @@ const ProductScreen = () => {
             <div className='sm:!py-10 py-5'>
                 {!isPending ? (
                     <>
-                        <div className="flex lg:!flex-row flex-col gap-4">
+                        <div className="flex lg:!flex-row flex-col gap-y-8 gap-4">
                             <Main activeColor={activeColor} setActiveColor={setActiveColor} data={data} />
                             <Order activeColor={activeColor} data={data} />
                         </div>

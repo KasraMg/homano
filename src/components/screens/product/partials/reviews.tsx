@@ -18,7 +18,7 @@ const Reviews = ({ data }: { data: Product }) => {
   useEffect(() => {
     if (comments) {
       setCommentsData((prev) => [...prev, ...comments.feedbacks])
-      setTotalPage(comments.pages)
+      setTotalPage(comments.pages || 1)
     }
   }, [comments])
 
