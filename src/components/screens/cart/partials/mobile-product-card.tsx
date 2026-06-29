@@ -44,7 +44,6 @@ const MobileProductCard = ({ item, onClose, total, isCartPage }: {
               if (total == 1) {
                 onClose?.()
               }
-              queryclient.invalidateQueries({ queryKey: ["me"] })
             }} className="" data={item} />
         </div>
       </div>

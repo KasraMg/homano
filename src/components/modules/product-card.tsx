@@ -6,6 +6,7 @@ import { localAssetsUrl } from '../../constants';
 import ShareModal from './share-modal';
 import useOrder from '../../hooks/useOrder';
 import { useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 
 const ProductCard = ({
   images,
@@ -21,6 +22,7 @@ const ProductCard = ({
 }: Product) => {
   const { mutation } = useOrder();
   const [isInCartStatus, setIsInCartStatus] = useState(isInCart);
+  const queryClinet = useQueryClient()
   return (
     <div
       key={code}
@@ -46,6 +48,7 @@ const ProductCard = ({
                 {
                   onSuccess() {
                     setIsInCartStatus(true);
+                    queryClinet.invalidateQueries({ queryKey: ['me'] })
                   },
                 },
               )

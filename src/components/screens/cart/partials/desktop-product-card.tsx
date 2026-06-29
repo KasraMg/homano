@@ -40,10 +40,7 @@ const DesktopProductCard = (item: CartItem) => {
 
         </div>
 
-        <QuantityControls endFunctionHandler={() =>
-          queryclient.invalidateQueries({ queryKey: ["me"] })
-
-        } endUpdateQuantityHandler={() => {
+        <QuantityControls endUpdateQuantityHandler={() => {
           queryclient.invalidateQueries({ queryKey: ["me"] })
         }
         } data={item} className='flex-row' />

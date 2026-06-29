@@ -4,10 +4,13 @@ import { Button } from "../../../ui/button"
 import { CartItem } from "../../../../types/user.types"
 import useOrder from "../../../../hooks/useOrder"
 import { useState } from "react"
+import { useQueryClient } from "@tanstack/react-query"
 
 const QuantityControls = ({ data, showBtn, endFunctionHandler, endUpdateQuantityHandler, className }: { data: CartItem, endUpdateQuantityHandler?: () => void, endFunctionHandler?: (v?: null) => void, showBtn?: boolean, className?: string }) => {
     const { updateQuantityMutation, removeItemMutation } = useOrder()
     const [quantity, setQuantity] = useState(data.quantity)
+    const queryClinet = useQueryClient()
+
     return (
         <div className={`${className ?? ''} flex flex-col items-center gap-2`}>
             {showBtn ? <Link className="w-full" to={'/cart'}><Button className="lg:!w-full" variant={"outline"}>مشاهده سبد خرید</Button></Link> : ''}
@@ -29,6 +32,7 @@ const QuantityControls = ({ data, showBtn, endFunctionHandler, endUpdateQuantity
             <div onClick={() => removeItemMutation.mutate(data._id, {
                 onSuccess() {
                     endFunctionHandler?.()
+                    queryClinet.invalidateQueries({ queryKey: ['me'] })
                 },
             })} className="cursor-pointer rounded-md bg-red-600 px-3 py-2 transition-opacity hover:opacity-75">
                 <Trash size={17} className="stroke-white" />

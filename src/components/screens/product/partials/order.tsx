@@ -6,6 +6,7 @@ import { Button } from '../../../ui/button'
 import { LoaderCircleIcon, ShoppingBag } from 'lucide-react'
 import { CartItem } from '../../../../types/user.types'
 import QuantityControls from './quantity-controls'
+import { useQueryClient } from '@tanstack/react-query'
 
 const Order = ({ data, activeColor }: {
   data: Product,
@@ -23,6 +24,7 @@ const Order = ({ data, activeColor }: {
     }
   }, [user])
 
+  const queryClinet = useQueryClient()
   return (
     <div className='w-full max-w-[500px] mx-auto lg:!mx-0 bg-neutral-02 lg:!w-2/6 sticky top-3 h-max flex flex-col items-start gap-4 rounded-xl p-4 sm:!p-6 shadow-m'>
       <p className='line-clamp-3 text-xl font-VazirMedium leading-8.5 -tracking-0.5 xl:line-clamp-2'>{data.name}</p>
@@ -48,7 +50,12 @@ const Order = ({ data, activeColor }: {
           <p className='text-[19px] font-VazirMedium pt-1 !leading-5 xl:text-[20px]'>{data.price.toLocaleString()} <span className='text-sm'>تومان</span></p>
         </div>
       </div>
-      {cartProduct ? <QuantityControls endFunctionHandler={() => setCartProduct(null)} showBtn className="!flex-row w-full" data={cartProduct} /> : <Button onClick={(() => mutation.mutate({ color: String(activeColor?.code), code: data.code }, { onSuccess: (data) => setCartProduct(data.product) }))} className='w-full h-12' variant={"main"}>{mutation.isPending ? <LoaderCircleIcon className='mx-auto size-5 animate-spin' /> : <>افزودن به سبد خرید <ShoppingBag /></>} </Button>
+      {cartProduct ? <QuantityControls endFunctionHandler={() => setCartProduct(null)} showBtn className="!flex-row w-full" data={cartProduct} /> : <Button onClick={(() => mutation.mutate({ color: String(activeColor?.code), code: data.code }, {
+        onSuccess: (data) => {
+          queryClinet.invalidateQueries({ queryKey: ['me'] })
+          setCartProduct(data.product)
+        }
+      }))} className='w-full h-12' variant={"main"}>{mutation.isPending ? <LoaderCircleIcon className='mx-auto size-5 animate-spin' /> : <>افزودن به سبد خرید <ShoppingBag /></>} </Button>
       }
     </div >
   )
