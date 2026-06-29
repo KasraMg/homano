@@ -3,10 +3,11 @@ import { localAssetsUrl } from '../../../../constants';
 import QuantityControls from '../../product/partials/quantity-controls';
 import { useQueryClient } from '@tanstack/react-query';
 
-const MobileProductCard = ({ item, onClose, total }: {
+const MobileProductCard = ({ item, onClose, total, isCartPage }: {
   item: CartItem,
-  onClose: () => void
-  total: number
+  onClose?: () => void
+  total?: number
+  isCartPage?: boolean
 }) => {
   const queryclient = useQueryClient()
   return (
@@ -22,7 +23,7 @@ const MobileProductCard = ({ item, onClose, total }: {
             className="h-24 w-20 object-cover mix-blend-multiply rounded-md"
           />
         </div>
-        <div className="flex flex-1 justify-between">
+        <div className="flex flex-1 gap-1.5 justify-between">
           <div className="space-y-2">
             <h2 className="text-neutral-07 leading-[22px] transition-all">
               {item.product.name}
@@ -34,12 +35,16 @@ const MobileProductCard = ({ item, onClose, total }: {
               {(item.quantity * item.product.price).toLocaleString()}
             </span>
           </div>
-          <QuantityControls endFunctionHandler={() => {
-            if (total == 1) {
-              onClose()
+          <QuantityControls
+            endUpdateQuantityHandler={() => {
+              isCartPage ? queryclient.invalidateQueries({ queryKey: ["me"] }) : ''
             }
-            queryclient.invalidateQueries({ queryKey: ["me"] })
-          }} className="" data={item} />
+            }
+            endFunctionHandler={() => {
+              if (total == 1) {
+                onClose?.()
+              }
+            }} className="" data={item} />
         </div>
       </div>
       : "");

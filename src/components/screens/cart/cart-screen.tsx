@@ -7,11 +7,10 @@ const CartScreen = () => {
   return (
     <Container>
       <div className="relative flex flex-col items-center bg-white py-10">
-        <Stepper title="سبد خرید" currentStep={1} />
-
+        <Stepper title="سبد خرید" currentStep={1} /> 
         <div className="flex w-full flex-col gap-8 py-12 relative lg:flex-row">
           <ProductsTable />
-          <CheckoutSidebar />
+          <CheckoutSidebar/>
         </div>
       </div>
     </Container>

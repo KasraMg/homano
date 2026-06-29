@@ -1,75 +1,73 @@
-import { Minus, Plus } from 'lucide-react';
-import { CartItems } from '../../../../types/cart.types';
 import MobileProductCard from './mobile-product-card';
 import DesktopProductCard from './desktop-product-card';
+import { useUser } from '../../../../hooks/useUser';
+import { CartItem } from '../../../../types/user.types';
+import { Button } from '../../../ui/button';
+import { toast } from 'sonner';
+import TableSkeleton from './table-skeleton';
+import MobileProductSkeleton from '../../product/partials/mobile-product-skeleton';
 
 const ProductsTable = () => {
-  const cartItems: CartItems[] = [
-    {
-      id: 1,
-      name: 'میز سینی',
-      color: 'مشکی',
-      price: 3070000,
-      quantity: 2,
-      image: '/Images/product-5.png',
-    },
-    {
-      id: 2,
-      name: 'میز سینی',
-      color: 'قرمز',
-      price: 3070000,
-      quantity: 2,
-      image: '/Images/product-5-2.svg',
-    },
-    {
-      id: 3,
-      name: 'چراغ رومیزی',
-      color: 'طلایی',
-      price: 6240000,
-      quantity: 1,
-      image: '/Images/product-2.png',
-    },
-  ];
+  const { data, isPending } = useUser();
+
   return (
     <div className="flex w-full flex-col gap-10 lg:w-4/6">
       <div className="flex flex-col gap-10">
         <div className="hidden w-full flex-col items-start sm:flex">
           <div className="grid w-full grid-cols-[168px_1fr] border-b border-solid border-[#6c7174] pb-6">
-            <div className="font-bold text-black-900 leading-6.5 tracking-[0] whitespace-nowrap transition-all">
+            <div className="text-black-900 leading-6.5 font-bold tracking-[0] whitespace-nowrap transition-all">
               محصول
             </div>
 
-            <div className="font-bold text-black-900 grid grid-cols-3 text-center text-base leading-6.5 tracking-[0] whitespace-nowrap">
-              <div className="transition-all">تعداد</div>
+            <div className="text-black-900 grid grid-cols-3 text-center text-base leading-6.5 font-bold tracking-[0] whitespace-nowrap">
               <div className="transition-all">قیمت</div>
               <div className="transition-all">جمع</div>
+              <div className="transition-all">تعداد</div>
             </div>
           </div>
 
-          {cartItems.map((item) => (
-            <DesktopProductCard {...item} />
-          ))}
+          {!isPending ? (
+            data?.cart.length > 0 ? (
+              data?.cart.map((item: CartItem) => (
+                <DesktopProductCard {...item} />
+              ))
+            ) : (
+              <p className="w-full pt-5 text-center">محصولی یافت نشد</p>
+            )
+          ) : (
+            <TableSkeleton />
+          )}
         </div>
 
         {/* MOBILE */}
         <div className="scrollbar-custom block flex-1 overflow-y-auto bg-white sm:hidden">
           <div className="mb-6 w-full border-b border-solid border-[#6c7174] pb-4">
-            <h2 className="font-bold text-black-900 leading-6.5 tracking-[0] whitespace-nowrap transition-all">
+            <h2 className="text-black-900 leading-6.5 font-bold tracking-[0] whitespace-nowrap transition-all">
               محصول
             </h2>
           </div>
 
           <div className="space-y-6">
-            {cartItems.map((item) => (
-              <MobileProductCard {...item} />
-            ))}
+
+            {!isPending ? (
+              data?.cart.length > 0 ? (
+                data?.cart.map((item: CartItem) => (
+                  <MobileProductCard isCartPage item={item} />
+                ))
+              ) : (
+                <p className="w-full pt-0 text-center">محصولی یافت نشد</p>
+              )
+            ) : (
+              <MobileProductSkeleton />
+            )}
+
           </div>
         </div>
       </div>
 
       <div className="order-2 flex flex-col gap-4">
         <div className="flex w-full flex-col items-start gap-[7px] self-stretch">
-          <div className=" text-neutral-07 self-stretch text-xl leading-7 tracking-[0] transition-all">
+          <div className="text-neutral-07 self-stretch text-xl leading-7 tracking-[0] transition-all">
             کد تخفیف دارید؟
           </div>
           <p className="font-VazirRegular text-neutral-04 self-stretch text-base leading-6.5 tracking-[0] transition-all">
@@ -85,16 +83,19 @@ const ProductsTable = () => {
             <input
               type="text"
               placeholder="کد تخفیف"
-              className=" text-neutral-04 tracking-button-s placeholder:text-neutral-04 flex-1 text-base leading-7 transition-all focus:outline-none"
+              className="text-neutral-04 tracking-button-s placeholder:text-neutral-04 flex-1 text-base leading-7 transition-all focus:outline-none"
             />
           </div>
 
-          <button
-            type="submit"
-            className="all-[unset]  text-neutral-07 tracking-button-s box-border inline-flex cursor-pointer items-center border-0 border-none text-base leading-7 whitespace-nowrap transition-all"
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              toast.error('کد وارد شده صحیح نمی باشد');
+            }}
+            variant={'ghost'}
           >
             اعمال
-          </button>
+          </Button>
         </form>
       </div>
     </div>
