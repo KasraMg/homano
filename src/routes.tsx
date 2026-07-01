@@ -10,7 +10,7 @@ import Blog from "./pages/blogs/blog/blog";
 import Dashboard from "./pages/user-panel/dashboard/dashboard";
 import Address from "./pages/user-panel/address/Address";
 import Orders from "./pages/user-panel/orders/orders";
-import Wishlist from "./pages/user-panel/wishlist/Wishlist";
+import Favorites from "./pages/user-panel/favorites/favorties";
 import Tickets from "./pages/user-panel/tickets/tickets";
 import Account from "./pages/user-panel/acount/account";
 import { Navigate } from "react-router-dom";
@@ -34,7 +34,7 @@ const routes = [
             { path: "dashboard", element: <Dashboard /> },
             { path: "address", element: <Address /> },
             { path: "orders", element: <Orders /> },
-            { path: "wishlist", element: <Wishlist /> },
+            { path: "favorites", element: <Favorites /> },
             { path: "tickets", element: <Tickets /> },
             { path: "account", element: <Account /> },
         ]

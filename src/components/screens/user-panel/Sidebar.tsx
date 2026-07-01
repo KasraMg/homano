@@ -34,7 +34,7 @@ const items: SidebarItem[] = [
   {
     id: 'wishlist',
     label: 'علاقه‌مندی‌ها',
-    to: '/user-panel/wishlist',
+    to: '/user-panel/favorites',
     icon: Heart,
   },
   {

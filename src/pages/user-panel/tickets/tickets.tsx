@@ -1,9 +1,7 @@
-import TicketsScreen from '../../../components/screens/user-panel/tickets/tickets-screen'
+import TicketsScreen from '../../../components/screens/user-panel/tickets/tickets-screen';
 
 const Tickets = () => {
-    return (
-        <TicketsScreen />
-    )
-}
+  return <TicketsScreen />;
+};
 
-export default Tickets
+export default Tickets;

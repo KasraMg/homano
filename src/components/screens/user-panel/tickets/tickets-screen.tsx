@@ -98,9 +98,7 @@ const TicketsScreen: React.FC = () => {
     };
 
     return (
-        <section className="flex-1 bg-white rounded-md shadow-lg my-10 p-6 border transition-all hover:drop-shadow-custom">
-            <PageHierarchy items={["پیشخوان", "تیکت ها"]} />
-
+        <section className="bg-white rounded-md shadow-lg my-10 p-6 border">
             <div className="flex justify-between items-center mb-8">
                 <div>
                     <div className="flex items-center justify-start gap-3">
@@ -216,7 +214,7 @@ const TicketsScreen: React.FC = () => {
                     </SelectContent>
                 </Select>
 
-                <div className="relative transition-all hover:drop-shadow-custom">
+                <div className="relative">
                     <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-04 cursor-pointer z-10" />
 
                     {/* <CustomInput

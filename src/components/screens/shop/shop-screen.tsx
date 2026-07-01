@@ -28,8 +28,6 @@ const ShopScreen = () => {
       }
     }
   }, [data])
-console.log(data);
-
 
   return (
     <Container>
@@ -45,7 +43,7 @@ console.log(data);
             <div className='space-y-5 w-full'>
               <div className="grid grid-cols-1 xs:grid-cols-2 lg:!grid-cols-3 gap-6 w-full">
                 {data.products.map((pr: Product) => (
-                  <Card {...pr} />
+                  <Card data={pr} />
                 ))}
               </div>
               <PaginationWrapper limit={5} key={'shop'} page={data.page} totalItems={data.total} />
