@@ -22,7 +22,7 @@ export interface CartItem {
 
 export interface WishlistItem {
   _id: string;
-  product: string;
+  product: Product;
   createdAt?: string;
   updatedAt?: string;
 }
