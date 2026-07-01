@@ -1,109 +1,89 @@
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
-import Sidebar from "../../components/screens/user-panel/Sidebar";
-import MobileSidebar from "../../components/screens/user-panel/mobile-sidebar";
-import { Bell, Handbag, ChevronLeft, ChevronDown, Menu } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "../../components/ui/sheet";
- 
+import { Link, Outlet } from 'react-router-dom';
+import { Bell, Menu, LogOut, ShoppingCartIcon } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger } from '../../components/ui/sheet';
+import { useUser } from '../../hooks/useUser';
+import { useEffect, useState } from 'react';
+import Badge from '../../components/ui/badge';
+import Sidebar from '../../components/screens/user-panel/sidebar';
 
-const UserPanelLayout: React.FC = () => {
+const UserPanelLayout = () => {
+  const { data } = useUser();
+  const [count, setCount] = useState<null | number>(null);
+  console.log(data);
+  useEffect(() => {
+    if (data) {
+      setCount(data.cart.length);
+    }
+  }, [data]);
+
   return (
-    <div className="flex bg-neutral-03 min-h-screen">
-      {/* desktop aside */}
-      <aside className="hidden lg:flex lg:sticky lg:top-0 w-[280px] lg:w-[18%] flex-col shrink-0 z-50 overflow-y-auto scrollbar-minimal h-screen hide-scrollbar bg-white border-r border-neutral-02 p-5">
-        <Link to="/" className="flex justify-center">
-          <img src="/Images/logo-3.png" alt="" className="w-30 h-16" />
-        </Link>
+    <div className="bg-neutral-03 flex min-h-screen">
+      <Sidebar className="hidden lg:!block" />
 
-        <Sidebar />
-
-        <div className="bg-[url('/Images/banner-1.jpg')] w-full h-56 bg-cover bg-[position:50%_100%] sm:bg-[position:50%_90%] rounded-2xl mt-6 overflow-hidden">
-          <div className="p-4">
-            <h3 className="text-sm text-neutral-07 font-VazirBold mb-1">
-              جدیدترین مجموعه مبلمان
-            </h3>
-            <p className="text-xs text-neutral-04 font-VazirRegular mb-3">
-              با طراحی اصیل و کیفیت بی‌نظیر
-            </p>
-            <button className="flex gap-2 text-xs text-white font-VazirRegular bg-main hover:bg-main/90 transition rounded-lg px-3 py-2 cursor-pointer">
-              مشاهده خرید
-              <ChevronLeft size={14} />
-            </button>
-          </div>
-        </div>
-      </aside>
-
-      {/* mobile aside */}
-      <Sheet>
-        <SheetContent
-          side="right"
-          className="w-[280px] p-0 bg-transparent shadow-none border-none"
-        >
-          <MobileSidebar />
-        </SheetContent>
-
-        <section className="w-full p-2">
-          <div className="p-4 sm:p-6 bg-white border border-neutral-02 shadow-sm rounded-md">
-            <header className="flex flex-wrap lg:flex-nowrap items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
+      <section className="w-full p-2">
+        <div className="border-neutral-02 rounded-md border bg-white p-4 shadow-sm sm:p-6">
+          <div className="flex flex-wrap items-center justify-between gap-4 lg:flex-nowrap">
+            <div className="flex items-center gap-3">
+              <div className="hidden lg:!block">
+                <h2 className="font-VazirBold text-neutral-07 text-lg sm:text-xl">
+                   درود {data?.name} عزیز 👋
+                </h2>
+                <p className="font-VazirMedium text-neutral-04 mt-2 text-xs sm:text-sm">
+                  به پنل کاربری خود در گالری هومانو خوش آمدید.
+                </p>
+              </div>
+              <Sheet>
                 <SheetTrigger asChild>
                   <button className="lg:hidden">
                     <Menu />
                   </button>
                 </SheetTrigger>
-
-                <div>
-                  <h2 className="text-lg sm:text-xl font-VazirBold text-neutral-07">
-                    👋 سلام سینای عزیز
-                  </h2>
-                  <p className="font-VazirMedium text-neutral-04 text-xs sm:text-sm mt-2">
-                    به پنل کاربری خود در گالری هومانو خوش آمدید.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <button className="relative">
-                  <Handbag
-                    size={18}
-                    className="cursor-pointer text-neutral-07 transition-all hover:text-main"
-                  />
-                  <span className="absolute -top-2 -right-2 bg-main text-white text-[10px] rounded-full size-4 flex items-center justify-center">
-                    2
-                  </span>
-                </button>
-
-                <Bell
-                  size={18}
-                  className="cursor-pointer text-neutral-07 transition-all hover:text-main"
+                <SheetContent
+                  side="right"
+                  className="w-[280px] border-none bg-transparent p-0 shadow-none"
+                >
+                  <Sidebar className="!block !rounded-l-2xl lg:!hidden" />
+                </SheetContent>
+              </Sheet>
+              <Link to="/" className="flex justify-center lg:!hidden">
+                <img
+                  src="/Images/logo.jpg"
+                  alt=""
+                  className="h-8 w-30 object-contain"
                 />
+              </Link>
+            </div>
 
-                <div className="hidden sm:block w-[1px] h-6 bg-neutral-03 mx-1"></div>
-
-                <div className="flex items-center gap-2 sm:gap-3">
-                  <span className="hidden sm:flex items-center gap-1 text-sm lg:text-lg font-VazirMedium text-neutral-07">
-                    سینا یوسفی
-                    <ChevronDown size={14} />
-                  </span>
-
-                  <img
-                    src="/Images/avatar_2.svg"
-                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border border-neutral-02"
+            <div className="flex items-center gap-4">
+              <Link
+                to={'/cart'}
+                className="relative flex cursor-pointer items-center justify-center gap-2"
+              >
+                <ShoppingCartIcon size={20} />
+                {count ? (
+                  <Badge
+                    className="absolute -top-2 -left-1 flex items-center justify-center rounded-full bg-red-600 px-1.5 py-0.5 text-xs text-white"
+                    number={Number(count).toLocaleString('fa-IR')}
                   />
-                </div>
-              </div>
-            </header>
+                ) : (
+                  ''
+                )}
+              </Link>
+              <Bell
+                size={20}
+                className="hover:text-main cursor-pointer transition-all"
+              />
+              <div className="bg-neutral-03 mx-1 hidden h-6 w-[1px] sm:block"></div>
 
-            <Outlet />
+              <LogOut size={20} />
+            </div>
           </div>
-        </section>
-      </Sheet>
+
+          <Outlet />
+        </div>
+      </section>
     </div>
   );
 };
 
 export default UserPanelLayout;
-
-
-
-

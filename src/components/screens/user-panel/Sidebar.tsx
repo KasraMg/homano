@@ -1,127 +1,123 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
   Handbag,
   Heart,
-  Sofa,
   User,
   TicketCheck,
   LogOut,
-} from "lucide-react";
-import { LucideIcon } from "lucide-react";
+  ChevronLeft,
+} from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
+import { Button } from '../../ui/button';
 
 type SidebarItem = {
   id: string;
   label: string;
   icon: LucideIcon;
-  to?: string;
-  type?: "action";
-  onClick?: () => void;
+  to: string;
 };
 
 const items: SidebarItem[] = [
   {
-    id: "dashboard",
-    label: "پیشخوان",
-    to: "/my-account/dashboard",
+    id: 'dashboard',
+    label: 'پیشخوان',
+    to: '/user-panel/dashboard',
     icon: LayoutDashboard,
   },
   {
-    id: "orders",
-    label: "سفارش‌ها",
-    to: "/my-account/orders",
+    id: 'orders',
+    label: 'سفارش‌ها',
+    to: '/user-panel/orders',
     icon: Handbag,
   },
   {
-    id: "wishlist",
-    label: "علاقه‌مندی‌ها",
-    to: "/my-account/wishlist",
+    id: 'wishlist',
+    label: 'علاقه‌مندی‌ها',
+    to: '/user-panel/wishlist',
     icon: Heart,
   },
   {
-    id: "products",
-    label: "محصولات",
-    to: "",
-    icon: Sofa,
-  },
-  {
-    id: "user-account",
-    label: "حساب کاربری",
-    to: "/my-account/user-account",
+    id: 'user-account',
+    label: 'حساب کاربری',
+    to: '/user-panel/user-account',
     icon: User,
   },
   {
-    id: "tickets",
-    label: "تیکت ها",
-    to: "/my-account/tickets",
+    id: 'tickets',
+    label: 'تیکت ها',
+    to: '/user-panel/tickets',
     icon: TicketCheck,
-  },
-  {
-    id: "logout",
-    label: "خروج از حساب",
-    type: "action",
-    icon: LogOut,
-    onClick: () => {
-      console.log("logout");
-    },
   },
 ];
 
-const Sidebar: React.FC = () => {
+const Sidebar = ({ className }: { className: string }) => {
   const { pathname } = useLocation();
 
-  const baseClass =
-    "flex items-center gap-4 px-4 py-3 rounded-xl cursor-pointer transition-all";
-
-  const activeClass = "bg-[#EAF1FF] text-secondary-color-blue";
-  const inactiveClass = "hover:bg-[#F3F6FC] text-neutral-07";
-
   return (
-    <nav className="space-y-1 mt-3">
-      {items.map((item) => {
-        const Icon = item.icon;
-        const isActive = item.to && pathname === item.to;
+    <aside
+      className={`${className} scrollbar-minimal hide-scrollbar border-neutral-02 z-50 hidden h-screen min-w-[280px] shrink-0 flex-col overflow-y-auto border-r bg-white p-5 lg:sticky lg:top-0 lg:flex lg:w-[18%]`}
+    >
+      <Link to="/" className="flex justify-center">
+        <img src="/Images/logo.jpg" alt="" className="h-10 w-30" />
+      </Link>
 
-        const wrapperClass = `${baseClass} ${isActive ? activeClass : inactiveClass
-          }`;
+      <nav className="space-y-1 pt-10">
+        {items.map((item) => {
+          const Icon = item.icon;
+          const isActive = item.to && pathname === item.to;
 
-        const iconClass = isActive
-          ? "text-secondary-color-blue"
-          : "text-neutral-04";
-
-        const textClass = isActive
-          ? "font-VazirMedium text-sm text-secondary-color-blue"
-          : "font-VazirMedium text-sm text-neutral-07";
-
-        if (item.to) {
           return (
-            <Link key={item.id} to={item.to} className={wrapperClass}>
-              <Icon size={18} className={iconClass} />
-              <span className={textClass}>{item.label}</span>
+            <Link
+              key={item.id}
+              to={item.to}
+              className={`${isActive ? 'text-secondary-color-blue bg-[#EAF1FF]' : 'text-neutral-07 hover:bg-[#F3F6FC]'} flex cursor-pointer items-center gap-4 rounded-xl px-4 py-3 transition-all`}
+            >
+              <Icon
+                size={18}
+                className={`${
+                  isActive ? 'text-secondary-color-blue' : 'text-neutral-04'
+                }`}
+              />
+              <span
+                className={`${
+                  isActive
+                    ? 'text-secondary-color-blue text-sm'
+                    : 'text-neutral-07 text-sm'
+                } font-VazirMedium`}
+              >
+                {item.label}
+              </span>
             </Link>
           );
-        }
-
-        return (
-          <button
-            key={item.id}
-            type="button"
-            onClick={item.onClick}
-            className={`${wrapperClass} w-full text-right`}
-          >
-            <Icon size={18} className={iconClass} />
-            <span className={textClass}>{item.label}</span>
+        })}
+        <Button
+          variant={'ghost'}
+          className={`font-VazirMedium mr-1 w-full justify-start gap-4 text-right`}
+        >
+          <LogOut size={18} className="text-neutral-04" />
+          خروج
+        </Button>
+      </nav>
+      <Link
+        to={'/shop?category=couches'}
+        className="mt-6 lg:!h-60 h-44 block w-full overflow-hidden rounded-2xl bg-[url('/Images/banner-1.jpg')] bg-cover lg:!bg-[position:50%_100%] bg-[position:50%_83%]"
+      >
+        <div className="p-4">
+          <h3 className="text-neutral-07 font-VazirBold mb-1 text-sm">
+            جدیدترین مجموعه مبلمان
+          </h3>
+          <p className="text-neutral-04 font-VazirRegular mb-3 text-xs">
+            با طراحی اصیل و کیفیت بی‌نظیر
+          </p>
+          <button className="font-VazirRegular bg-main hover:bg-main/90 flex cursor-pointer gap-2 rounded-lg px-3 py-2 text-xs text-white transition">
+            مشاهده 
+            <ChevronLeft size={14} />
           </button>
-        );
-      })}
-    </nav>
+        </div>
+      </Link>
+    </aside>
   );
 };
 
 export default Sidebar;
-
-
-
-
-
