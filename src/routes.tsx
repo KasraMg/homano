@@ -6,12 +6,15 @@ import ShoppingCart from "./pages/cart/cart";
 import Checkout from "./pages/checkout/checkout";
 import OrderComplete from "./pages/order-complete/order-complete";
 import Blogs from "./pages/blogs/blogs";
-import UserPanel from "./pages/UserPanel/Index";
-import Account from "./pages/UserPanel/account/Account";
-import Address from "./pages/UserPanel/address/Address";
-import Orders from "./pages/UserPanel/orders/Orders";
-import Wishlist from "./pages/UserPanel/wishlist/Wishlist";
 import Blog from "./pages/blogs/blog/blog";
+import Dashboard from "./pages/user-panel/dashboard/dashboard";
+import Address from "./pages/user-panel/address/Address";
+import Orders from "./pages/user-panel/orders/orders";
+import Wishlist from "./pages/user-panel/wishlist/Wishlist";
+import Tickets from "./pages/user-panel/tickets/tickets";
+import Account from "./pages/user-panel/acount/account";
+import { Navigate } from "react-router-dom";
+import UserPanelLayout from "./pages/user-panel/layout";
 
 const routes = [
     { path: '/', element: <Home /> },
@@ -24,15 +27,19 @@ const routes = [
     { path: '/blogs', element: <Blogs /> },
     { path: '/blogs/:id', element: <Blog /> },
     {
-        path: '/my-account/*',
-        element: <UserPanel />,
+        path: '/user-panel',
+        element: <UserPanelLayout />,
         children: [
-            { path: "account", element: <Account /> },
+            { index: true, element: <Navigate to="dashboard" replace /> },
+            { path: "dashboard", element: <Dashboard /> },
             { path: "address", element: <Address /> },
             { path: "orders", element: <Orders /> },
             { path: "wishlist", element: <Wishlist /> },
+            { path: "tickets", element: <Tickets /> },
+            { path: "account", element: <Account /> },
         ]
-    }
+    },
+
 ]
 
 export default routes;
