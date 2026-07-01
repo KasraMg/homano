@@ -40,7 +40,7 @@ const items: SidebarItem[] = [
   {
     id: 'user-account',
     label: 'حساب کاربری',
-    to: '/user-panel/user-account',
+    to: '/user-panel/account',
     icon: User,
   },
   {

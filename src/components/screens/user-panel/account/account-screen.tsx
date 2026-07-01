@@ -1,137 +1,216 @@
-import React from 'react'
-import PageHierarchy from '../../../modules/page-hierarchy'
-import { Camera, Edit2, Shield, User } from 'lucide-react'
+import { Controller, useForm } from 'react-hook-form';
+import DatePicker from 'react-multi-date-picker';
+import persian from 'react-date-object/calendars/persian';
+import persian_fa from 'react-date-object/locales/persian_fa';
+
+type FormValues = {
+  fullName: string;
+  nationalCode: string;
+  email: string;
+  birthDate: string;
+  mobile: string;
+  gender: string;
+};
+import { Edit2, Shield, User } from 'lucide-react';
+import { Button } from '../../../ui/button';
+import { useEffect } from 'react';
+import { useUser } from '../../../../hooks/useUser';
+import ChangePasswordModal from './partials/change-password-modal';
 
 const AccountScreen = () => {
+  const { data } = useUser();
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormValues>({
+    defaultValues: {
+      //   fullName: 'سینا یوسفی',
+      //   nationalCode: '2284324665',
+      //   email: 'sina.yousefi@email.com',
+      //   birthDate: '1368/05/20',
+      //   mobile: '09123456789',
+    },
+  });
+
+  const onSubmit = (data: FormValues) => {
+    console.log(data);
+  };
+
+  useEffect(() => {
+    if (data) {
+      reset({
+        fullName: data.name,
+        nationalCode: data.nationalCode,
+        email: data.email,
+        birthDate: data.birthDate || '۱۴۰۵/۰۴/۱۰',
+        mobile: data.phone,
+      });
+    }
+  }, [data, reset]);
   return (
-   <section className="w-full bg-white rounded-md shadow-lg my-10 p-6 border transition-all hover:drop-shadow-custom">
-            <PageHierarchy items={["پیشخوان", "حساب کاربری"]} />
+    <section className="hover:drop-shadow-custom my-10 w-full rounded-md border bg-white p-6 shadow-lg transition-all">
+      <div className="mb-8">
+        <div className="flex items-center justify-start gap-3">
+          <div className="bg-neutral-01 flex size-9 items-center justify-center rounded-md">
+            <User className="text-secondary-color-blue" />
+          </div>
+          <h2 className="font-VazirBold text-neutral-07 flex items-center text-xl sm:!text-2xl">
+            اطلاعات حساب کاربری
+          </h2>
+        </div>
+        <p className="font-VazirRegular mt-2 text-sm text-gray-500">
+          اطلاعات شخصی و تنظیمات حساب کاربری خود را مدیریت کنید.
+        </p>
+      </div>
 
-            {/* Header Section */}
-            <div className="mb-8">
-                <div className="flex items-center justify-start gap-3">
-                    <div className="flex items-center justify-center size-9 rounded-md bg-neutral-01">
-                        <User className="text-secondary-color-blue" />
-                    </div>
-                    <h2 className="flex items-center text-2xl font-VazirBold text-neutral-07">
-                        اطلاعات حساب کاربری
-                    </h2>
-                </div>
-                <p className="font-VazirRegular text-sm text-gray-500 mt-2">
-                    اطلاعات شخصی و تنظیمات حساب کاربری خود را مدیریت کنید.
-                </p>
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
+        <div className="order-2 space-y-6 lg:order-1 sm:!mt-0 mt-8">
+          <div className="hover:drop-shadow-custom space-y-4 rounded-md sm:!border-x sm:!border-b border-t pt-6 bg-white sm:!p-4 text-center sm:!shadow-lg transition-all">
+            <h2 className="font-VazirBold text-neutral-07 mb-4 text-right text-lg">
+              اطلاعات ورود
+            </h2>
+            <ChangePasswordModal />
+          </div>
+        </div>
+
+        <div className="hover:drop-shadow-custom rounded-md sm:!border bg-white sm:!p-6 sm:!shadow-lg transition-all md:col-span-2">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div className="flex flex-col gap-2">
+                <label className="font-VazirMedium text-neutral-07 text-sm">
+                  نام و نام خانوادگی
+                </label>
+
+                <input
+                  className="border-neutral-03 rounded-md border p-2 text-sm text-gray-600"
+                  {...register('fullName', {
+                    required: 'نام و نام خانوادگی الزامی است',
+                    minLength: {
+                      value: 3,
+                      message: 'حداقل ۳ کاراکتر وارد کنید',
+                    },
+                  })}
+                />
+
+                {errors.fullName && (
+                  <span className="scroll-pt-2.5 text-sm text-red-500">
+                    {errors.fullName.message}
+                  </span>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="font-VazirMedium text-neutral-07 text-sm">
+                  کد ملی
+                </label>
+                <input
+                  className="border-neutral-03 rounded-md border p-2 text-sm text-gray-600"
+                  {...register('nationalCode', {
+                    required: 'کد ملی الزامی است',
+                    pattern: {
+                      value: /^\d{10}$/,
+                      message: 'کد ملی باید دقیقا ۱۰ رقم باشد',
+                    },
+                  })}
+                />
+
+                {errors.nationalCode && (
+                  <span className="scroll-pt-2.5 text-sm text-red-500">
+                    {errors.nationalCode.message}
+                  </span>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="font-VazirMedium text-neutral-07 text-sm">
+                  ایمیل
+                </label>
+
+                <input
+                  className="border-neutral-03 rounded-md border p-2 text-sm text-gray-600"
+                  type="email"
+                  {...register('email', {
+                    required: 'ایمیل الزامی است',
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: 'ایمیل معتبر نیست',
+                    },
+                  })}
+                />
+                {errors.email && (
+                  <span className="scroll-pt-2.5 text-sm text-red-500">
+                    {errors.email.message}
+                  </span>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="font-VazirMedium text-neutral-07 text-sm">
+                  تاریخ تولد
+                </label>
+
+                <Controller
+                  name="birthDate"
+                  control={control}
+                  rules={{
+                    required: 'تاریخ تولد الزامی است',
+                  }}
+                  render={({ field }) => (
+                    <DatePicker
+                      inputClass="border-neutral-03 rounded-md border p-2 text-sm text-gray-600"
+                      calendar={persian}
+                      locale={persian_fa}
+                      value={field.value}
+                      onChange={field.onChange}
+                      format="YYYY/MM/DD"
+                      calendarPosition="bottom-right"
+                    />
+                  )}
+                />
+
+                {errors.birthDate && (
+                  <span className="scroll-pt-2.5 text-sm text-red-500">
+                    {errors.birthDate.message}
+                  </span>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="font-VazirMedium text-neutral-07 text-sm">
+                  شماره موبایل
+                </label>
+
+                <input
+                  className="border-neutral-03 rounded-md border p-2 text-sm text-gray-600"
+                  dir="ltr"
+                  {...register('mobile', {
+                    required: 'شماره موبایل الزامی است',
+                    pattern: {
+                      value: /^09\d{9}$/,
+                      message: 'شماره موبایل معتبر نیست',
+                    },
+                  })}
+                />
+                {errors.mobile && (
+                  <span className="scroll-pt-2.5 text-sm text-red-500">
+                    {errors.mobile.message}
+                  </span>
+                )}
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                {/* right Column (Profile & Security) */}
-                <div className="space-y-6 order-2 lg:order-1">
-                    {/* Profile Card */}
-                    <div className="bg-white p-6 rounded-md border shadow-lg text-center transition-all hover:drop-shadow-custom">
-                        <img
-                            src="/Images/avatar_2.svg"
-                            alt="Profile"
-                            className="size-24 rounded-full mx-auto mb-4 object-cover"
-                        />
-                        <h2 className="text-lg font-VazirBold text-neutral-07">سینا یوسفی</h2>
-                        <button className="mt-4 mx-auto font-VazirMedium text-sm flex items-center justify-center gap-2 border border-main text-neutral-04 cursor-pointer transition-all hover:text-white hover:bg-main hover:border-main px-6 py-2 rounded-md">
-                            <Camera size={18} />
-                            تغییر تصویر پروفایل
-                        </button>
-                    </div>
+            <Button type="submit" variant={'main'} className="mt-6 w-full">
+              ثبت
+            </Button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-                    {/* Security Card */}
-                    <div className="bg-white p-4 rounded-md border shadow-lg text-center space-y-4 transition-all hover:drop-shadow-custom">
-                        <h2 className="font-VazirBold text-lg text-neutral-07 mb-4 text-right">
-                            اطلاعات ورود
-                        </h2>
-
-                        <div className="flex items-center gap-2 p-3 border rounded-md transition-all hover:shadow-[0_4px_4px_rgb(0,0,0,0.25)]">
-                            <Edit2 size={16} className="text-gray-400 cursor-pointer shrink-0" />
-                            <div className="flex flex-col items-start text-right">
-                                <span className="font-VazirRegular text-sm">تغییر رمز عبور</span>
-                                <span className="font-VazirRegular text-xs text-gray-400 whitespace-nowrap">
-                                    برای امنیت بیشتر رمز عبور خود را تغییر دهید
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className="flex items-center gap-2 p-3 border rounded-md transition-all hover:shadow-[0_4px_4px_rgb(0,0,0,0.25)]">
-                            <Shield size={16} className="text-gray-400 cursor-pointer shrink-0" />
-                            <div className="flex flex-col items-start text-right">
-                                <span className="font-VazirRegular text-sm">احراز هویت دو مرحله ای</span>
-                                <span className="font-VazirRegular text-xs text-gray-400 whitespace-nowrap">
-                                    ورود خود را با کد یکبار مصرف ایمن کنید
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* left Column (Personal Info) */}
-                <div className="md:col-span-2 bg-white p-6 rounded-md border shadow-lg transition-all hover:drop-shadow-custom">
-                    <h2 className="font-VazirBold text-lg text-neutral-07 mb-4 text-right">
-                        اطلاعات شخصی
-                    </h2>
-{/* 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <input
-                            label="نام و نام خانوادگی"
-                            value="سینا یوسفی"
-                            icon={<User size={18} />}
-                            showEditIcon={true}
-                        />
-
-                        <input
-                            label="کد ملی"
-                            value="1234567890"
-                            icon={<CreditCard size={18} />}
-                            digits="fa"
-                            showEditIcon={true}
-                        />
-
-                        <input
-                            label="ایمیل"
-                            value="sina.yousefi@email.com"
-                            icon={<Mail size={18} />}
-                            showEditIcon={true}
-                        />
-
-                        <input
-                            label="تاریخ تولد"
-                            value="1368/05/20"
-                            icon={<Calendar size={18} />}
-                            digits="fa"
-                            showEditIcon={true}
-                        />
-
-                        <input
-                            label="شماره موبایل"
-                            value="0912 345 6789"
-                            icon={<Phone size={18} />}
-                            digits="fa"
-                            dir="ltr"
-                            showEditIcon={true}
-                        />
-
-                        <div className="flex flex-col gap-2 w-full">
-                            <label className="font-VazirMedium text-sm text-neutral-07">جنسیت</label>
-
-                            <Select defaultValue="male" dir="rtl">
-                                <SelectTrigger className="font-VazirMedium text-sm min-h-12 text-right w-full leading-none">
-                                    <SelectValue placeholder="انتخاب کنید" />
-                                </SelectTrigger>
-
-                                <SelectContent className="font-VazirMedium">
-                                    <SelectItem value="male">مرد</SelectItem>
-                                    <SelectItem value="female">زن</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
-                    </div> */}
-                </div>
-            </div>
-        </section>
-  )
-}
-
-export default AccountScreen
+export default AccountScreen;
