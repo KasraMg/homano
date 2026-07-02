@@ -35,19 +35,40 @@ const editUser = async (data: {
     },
     body: JSON.stringify(data),
   });
+
+  const result = await response.json();
+
   if (!response.ok) {
-    if (response.status === 401) {
-      Cookies.remove('token');
-      throw new Error('Unauthorized');
-    }
-    const error = await response.json().catch(() => ({}));
-    throw new Error(error.message || 'خطا در دریافت اطلاعات کاربر');
+    throw new Error(result.message);
   }
-  return response.json();
+
+  return result;
+};
+
+const changePassword = async (data: {
+  currentPassword: string;
+  newPassword: string;
+}) => {
+  const response = await fetch(`${localBackendUrl}/changePassword`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${Cookies.get('token')}`,
+    },
+    body: JSON.stringify(data),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message);
+  }
+
+  return result;
 };
 
 export const useUser = () => {
-  const mutation = useMutation({
+  const editUsermutation = useMutation({
     mutationFn: (data: any) => editUser(data),
     mutationKey: ['editUser'],
     onSuccess(data) {
@@ -57,11 +78,24 @@ export const useUser = () => {
       toast.error(data.message);
     },
   });
+
+  const changePasswordMutation = useMutation({
+    mutationFn: (data: any) => changePassword(data),
+    mutationKey: ['changePassword'],
+    onSuccess(data) {
+      toast.success(data.message);
+      Cookies.set('token', data.token);
+    },
+    onError(data) {
+      toast.error(data.message);
+    },
+  });
+
   const { data, isPending } = useQuery({
     queryKey: ['me'],
     queryFn: fetchMe,
     enabled: true,
     retry: false,
   });
-  return { data, isPending, mutation };
+  return { data, isPending, editUsermutation, changePasswordMutation };
 };

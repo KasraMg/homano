@@ -18,7 +18,7 @@ type FormValues = {
 };
 
 const AccountScreen = () => {
-  const { data, mutation } = useUser();
+  const { data, editUsermutation } = useUser();
 
   const {
     register,
@@ -31,7 +31,7 @@ const AccountScreen = () => {
   });
 
   const onSubmit = (data: FormValues) => {
-    mutation.mutate(data)
+    editUsermutation.mutate(data)
   };
 
   useEffect(() => {
