@@ -1,5 +1,4 @@
 import SectionTitle from "../../../../ui/section-header";
-import ButtonCard from "../../../../ui/button-card";
 import { GoArrowLeft } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { Product } from "../../../../../types/product.types";
@@ -49,7 +48,7 @@ const Products = ({ data }: { data?: Product[] }) => {
                 key={product.code}
                 className="min-w-full min-x-full xl:!min-w-[25%] xl:!max-w-[25%] lg:!min-w-[30%] lg:!max-w-[30%] md:!min-w-[45%] md:!max-w-[45%] sm:!pl-8"
               >
-                <ProductCard {...product} />
+                <ProductCard data={product} />
               </CarouselItem>
             ))}
           </CarouselContent>

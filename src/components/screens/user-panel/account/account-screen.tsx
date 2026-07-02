@@ -2,23 +2,23 @@ import { Controller, useForm } from 'react-hook-form';
 import DatePicker from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
-
-type FormValues = {
-  fullName: string;
-  nationalCode: string;
-  email: string;
-  birthDate: string;
-  mobile: string;
-  gender: string;
-};
-import { Edit2, Shield, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import { Button } from '../../../ui/button';
 import { useEffect } from 'react';
 import { useUser } from '../../../../hooks/useUser';
 import ChangePasswordModal from './partials/change-password-modal';
 
+type FormValues = {
+  name: string;
+  nationalCode: string;
+  email: string;
+  birthDate: string;
+  phone: string;
+  gender: string;
+};
+
 const AccountScreen = () => {
-  const { data } = useUser();
+  const { data, mutation } = useUser();
 
   const {
     register,
@@ -27,27 +27,21 @@ const AccountScreen = () => {
     reset,
     formState: { errors },
   } = useForm<FormValues>({
-    defaultValues: {
-      //   fullName: 'سینا یوسفی',
-      //   nationalCode: '2284324665',
-      //   email: 'sina.yousefi@email.com',
-      //   birthDate: '1368/05/20',
-      //   mobile: '09123456789',
-    },
+    defaultValues: {},
   });
 
   const onSubmit = (data: FormValues) => {
-    console.log(data);
+    mutation.mutate(data)
   };
 
   useEffect(() => {
     if (data) {
       reset({
-        fullName: data.name,
+        name: data.name,
         nationalCode: data.nationalCode,
         email: data.email,
         birthDate: data.birthDate || '۱۴۰۵/۰۴/۱۰',
-        mobile: data.phone,
+        phone: data.phone,
       });
     }
   }, [data, reset]);
@@ -68,8 +62,8 @@ const AccountScreen = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
-        <div className="order-2 space-y-6 lg:order-1 sm:!mt-0 mt-8">
-          <div className="hover:drop-shadow-custom space-y-4 rounded-md sm:!border-x sm:!border-b border-t pt-6 bg-white sm:!p-4 text-center sm:!shadow-lg transition-all">
+        <div className="order-2 mt-8 space-y-6 sm:!mt-0 lg:order-1">
+          <div className="hover:drop-shadow-custom space-y-4 rounded-md border-t bg-white pt-6 text-center transition-all sm:!border-x sm:!border-b sm:!p-4 sm:!shadow-lg">
             <h2 className="font-VazirBold text-neutral-07 mb-4 text-right text-lg">
               اطلاعات ورود
             </h2>
@@ -77,7 +71,7 @@ const AccountScreen = () => {
           </div>
         </div>
 
-        <div className="hover:drop-shadow-custom rounded-md sm:!border bg-white sm:!p-6 sm:!shadow-lg transition-all md:col-span-2">
+        <div className="hover:drop-shadow-custom rounded-md bg-white transition-all sm:!border sm:!p-6 sm:!shadow-lg md:col-span-2">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div className="flex flex-col gap-2">
@@ -87,7 +81,7 @@ const AccountScreen = () => {
 
                 <input
                   className="border-neutral-03 rounded-md border p-2 text-sm text-gray-600"
-                  {...register('fullName', {
+                  {...register('name', {
                     required: 'نام و نام خانوادگی الزامی است',
                     minLength: {
                       value: 3,
@@ -96,9 +90,9 @@ const AccountScreen = () => {
                   })}
                 />
 
-                {errors.fullName && (
+                {errors.name && (
                   <span className="scroll-pt-2.5 text-sm text-red-500">
-                    {errors.fullName.message}
+                    {errors.name.message}
                   </span>
                 )}
               </div>
@@ -110,7 +104,6 @@ const AccountScreen = () => {
                 <input
                   className="border-neutral-03 rounded-md border p-2 text-sm text-gray-600"
                   {...register('nationalCode', {
-                    required: 'کد ملی الزامی است',
                     pattern: {
                       value: /^\d{10}$/,
                       message: 'کد ملی باید دقیقا ۱۰ رقم باشد',
@@ -165,7 +158,9 @@ const AccountScreen = () => {
                       calendar={persian}
                       locale={persian_fa}
                       value={field.value}
-                      onChange={field.onChange}
+                      onChange={(date) => {
+                        field.onChange(date?.format('YYYY/MM/DD') || '');
+                      }}
                       format="YYYY/MM/DD"
                       calendarPosition="bottom-right"
                     />
@@ -187,7 +182,7 @@ const AccountScreen = () => {
                 <input
                   className="border-neutral-03 rounded-md border p-2 text-sm text-gray-600"
                   dir="ltr"
-                  {...register('mobile', {
+                  {...register('phone', {
                     required: 'شماره موبایل الزامی است',
                     pattern: {
                       value: /^09\d{9}$/,
@@ -195,9 +190,9 @@ const AccountScreen = () => {
                     },
                   })}
                 />
-                {errors.mobile && (
+                {errors.phone && (
                   <span className="scroll-pt-2.5 text-sm text-red-500">
-                    {errors.mobile.message}
+                    {errors.phone.message}
                   </span>
                 )}
               </div>
