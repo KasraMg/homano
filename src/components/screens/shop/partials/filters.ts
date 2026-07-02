@@ -1,5 +1,3 @@
-import { useQueryParams } from '../../../../hooks/useQueryParams';
-
 export interface Filters {
   category: string;
   color: string;
@@ -15,6 +13,8 @@ export const updateFilters = (
   setFilters: any,
   onFilterChange: any,
   setParams: any,
+  maxPrice: number,
+  minPrice: number,
 ) => {
   const updated = { ...filters, ...newFilters };
   setFilters(updated);
@@ -25,7 +25,7 @@ export const updateFilters = (
     urlParams.category = updated.category;
   }
 
-  if (updated.sortBy && updated.sortBy !== 'newest') {
+  if (updated.sortBy && updated.sortBy !== 'all') {
     urlParams.sortBy = updated.sortBy;
   }
 
@@ -35,7 +35,7 @@ export const updateFilters = (
 
   if (
     updated.priceRange &&
-    (updated.priceRange[0] !== 0 || updated.priceRange[1] !== 1000)
+    (updated.priceRange[0] !== minPrice || updated.priceRange[1] !== maxPrice)
   ) {
     urlParams.minPricev = updated.priceRange[0] as number;
     urlParams.maxPrice = updated.priceRange[1] as number;
@@ -50,5 +50,3 @@ export const updateFilters = (
   onFilterChange(updated);
   onFilterChange(updated);
 };
-
- 
