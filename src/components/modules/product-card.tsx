@@ -2,9 +2,9 @@ import { ShoppingBag, StarIcon, Trash } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Product } from '../../types/product.types';
 import { Button } from '../ui/button';
-import { localAssetsUrl } from '../../constants';
+import { localAssetsUrl } from '../../utils/constants';
 import ShareModal from './share-modal';
-import useOrder from '../../hooks/useOrder';
+import useOrder from '../../endpoints/useOrder';
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 

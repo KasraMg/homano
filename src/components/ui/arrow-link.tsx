@@ -18,7 +18,7 @@ const ArrowLink = ({
 }: ArrowLinkProps) => {
   return (
     <button
-      className={`inline-flex items-center gap-0.5 hover:drop-shadow-custom transition-all border-b sm:!pb-1 ${borderColor}`}
+      className={`inline-flex items-center gap-0.5   transition-all border-b sm:!pb-1 ${borderColor}`}
       aria-label="Shop now for 30% off"
     >
       <div className={`inline-flex items-center ${textColor} gap-1`}>

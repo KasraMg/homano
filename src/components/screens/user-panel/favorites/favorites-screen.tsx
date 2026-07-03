@@ -1,5 +1,5 @@
 import { Heart } from 'lucide-react';
-import { useUser } from '../../../../hooks/useUser';
+import { useUser } from '../../../../endpoints/useUser';
 import ProductSkeleton from '../../shop/partials/product-skeleton';
 import { WishlistItem } from '../../../../types/user.types';
 import Card from '../../../modules/product-card';

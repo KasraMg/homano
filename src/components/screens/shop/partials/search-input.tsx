@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import { IoMdClose } from 'react-icons/io';
-import { useQueryParams } from '../../../../hooks/useQueryParams';
+import { useQueryParams } from '../../../../endpoints/useQueryParams';
 
 type Props = {
     className?:string

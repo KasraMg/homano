@@ -5,7 +5,7 @@ import {
   CarouselItem,
   type CarouselApi,
 } from "../../../../ui/carousel";
-import { localAssetsUrl } from "../../../../../constants";
+import { localAssetsUrl } from "../../../../../utils/constants";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import BannersSkeleton from "./banners-skeleton";
 

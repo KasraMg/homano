@@ -1,6 +1,6 @@
 import { Product } from '../../../../../types/product.types';
 import { Link } from 'react-router-dom';
-import { localAssetsUrl } from '../../../../../constants';
+import { localAssetsUrl } from '../../../../../utils/constants';
 import { StarIcon } from 'lucide-react';
 
 const DashboardProductCard = ({ images, name, code, slug, star }: Product) => {

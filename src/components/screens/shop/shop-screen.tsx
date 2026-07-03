@@ -2,7 +2,7 @@ import Breadcrumb from '../../../components/modules/breadcrumb';
 import Container from '../../../components/modules/container';
 import Card from '../../modules/product-card';
 import { Product } from '../../../types/product.types';
-import useShop from '../../../hooks/useShop';
+import useShop from '../../../endpoints/useShop';
 import { useEffect, useState } from 'react';
 import { ProductFilters } from './partials/product-filters';
 import ProductSkeleton from './partials/product-skeleton';

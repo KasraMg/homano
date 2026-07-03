@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { BlogItem } from "../../types/blog.types";
-import { localAssetsUrl } from "../../constants";
+import { localAssetsUrl } from "../../utils/constants";
 
 const BlogCard = ({
   name,

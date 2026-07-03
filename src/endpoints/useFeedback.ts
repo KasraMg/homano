@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import Cookies from 'js-cookie';
-import { localBackendUrl } from '../constants';
+import { localBackendUrl } from '../utils/constants';
 import { toast } from 'sonner';
 
 const createFeedback = async (

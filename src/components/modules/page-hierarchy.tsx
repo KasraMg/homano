@@ -30,7 +30,7 @@ const PageHierarchy: React.FC<PageHierarchyProps> = ({ items = [] }) => {
                         return (
                             <li key={index}>
                                 <div
-                                    className={`inline-flex items-center gap-1 transition-all hover:drop-shadow-custom ${isLast ? "text-black" : ""
+                                    className={`inline-flex items-center gap-1 transition-all   ${isLast ? "text-black" : ""
                                         }`}
                                 >
                                     <div className="w-fit">{item}</div>

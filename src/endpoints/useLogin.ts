@@ -1,8 +1,5 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { localBackendUrl } from '../constants';
+import { useMutation, useQueryClient } from '@tanstack/react-query'; 
+import { localBackendUrl } from '../utils/constants';
 import { toast } from 'sonner';
 import Cookies from 'js-cookie';
 
@@ -21,17 +18,6 @@ interface LoginResponse {
     password: string;
   };
 }
-
-const loginSchema = yup.object({
-  phone: yup
-    .string()
-    .required('شماره موبایل الزامی است')
-    .matches(/^09\d{9}$/, 'شماره موبایل معتبر نیست (مثلاً: 09123456789)'),
-  password: yup
-    .string()
-    .required('رمز عبور الزامی است')
-    .min(6, 'حداقل ۶ کاراکتر'),
-});
 
 export const loginUser = async (data: LoginRequest): Promise<LoginResponse> => {
   const response = await fetch(`${localBackendUrl}/login`, {
@@ -65,17 +51,5 @@ export const useLogin = (endFunction?: () => void) => {
     },
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(loginSchema),
-  });
-
-  const onSubmit = (data: any) => {
-    mutation.mutate(data);
-  };
-
-  return { register, errors, handleSubmit, onSubmit };
+  return { mutation };
 };

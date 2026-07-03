@@ -1,6 +1,6 @@
 import MobileProductCard from './mobile-product-card';
 import DesktopProductCard from './desktop-product-card';
-import { useUser } from '../../../../hooks/useUser';
+import { useUser } from '../../../../endpoints/useUser';
 import { CartItem } from '../../../../types/user.types';
 import { Button } from '../../../ui/button';
 import { toast } from 'sonner';

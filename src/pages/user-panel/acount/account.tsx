@@ -1,10 +1,7 @@
-import AccountScreen from "../../../components/screens/user-panel/account/account-screen";
+import AccountScreen from '../../../components/screens/user-panel/account/account-screen';
 
 const Account = () => {
-    return <AccountScreen />
+  return <AccountScreen />;
 };
 
 export default Account;
-
-
-

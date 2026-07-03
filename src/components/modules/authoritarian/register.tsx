@@ -1,23 +1,29 @@
-import { useRegister } from '../../../hooks/useRegister';
 import { Button } from '../../ui/button';
 import { DialogDescription, DialogHeader, DialogTitle } from '../../ui/dialog';
+import { useRegister } from './hook';
 
-const Register = ({ setStep, endFunction }: { setStep: (val: string) => void, endFunction?: () => void }) => {
+const Register = ({
+  setStep,
+  endFunction,
+}: {
+  setStep: (val: string) => void;
+  endFunction?: () => void;
+}) => {
   const { register, errors, handleSubmit, onSubmit } = useRegister(endFunction);
 
   return (
     <>
       <DialogHeader>
         <DialogTitle>
-          <img className='h-12 mx-auto' src="/Images/logo.jpg" alt="" />
+          <img className="mx-auto h-12" src="/Images/logo.jpg" alt="" />
         </DialogTitle>
-        <DialogDescription className='text-gray-400 text-center w-full'>
+        <DialogDescription className="w-full text-center text-gray-400">
           لطفا فرم زیر را تکمیل کنید
         </DialogDescription>
       </DialogHeader>
       <div className="pl-2">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-          <div className='gap-3 grid md:!grid-cols-2'>
+          <div className="grid gap-3 md:!grid-cols-2">
             <div>
               <label className="block pb-2 text-sm">نام کاربری</label>
               <input
@@ -71,9 +77,9 @@ const Register = ({ setStep, endFunction }: { setStep: (val: string) => void, en
           </Button>
           <p
             onClick={() => setStep('login')}
-            className="text-main cursor-pointer text-center text-sm  w-max mx-auto"
+            className="text-main mx-auto w-max cursor-pointer text-center text-sm"
           >
-            <span className='text-black'>حساب کاربری دارید؟</span> وارد شوید
+            <span className="text-black">حساب کاربری دارید؟</span> وارد شوید
           </p>
         </form>
       </div>

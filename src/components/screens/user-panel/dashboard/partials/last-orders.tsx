@@ -11,7 +11,7 @@ const LastOrders = ({ data }: { data: User }) => {
   }, [data]);
 
   return (
-    <div className="hover:drop-shadow-custom w-full rounded-md border bg-white px-6 py-6 shadow-sm transition-all xl:w-[40%]">
+    <div className="  w-full rounded-md border bg-white px-6 py-6 shadow-sm transition-all xl:w-[40%]">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="font-VazirBold text-neutral-07 ml-2 text-base">
           آخرین سفارش ها

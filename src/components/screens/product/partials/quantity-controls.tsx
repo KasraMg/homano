@@ -2,7 +2,7 @@ import { Minus, Plus, Trash } from "lucide-react"
 import { Link } from "react-router-dom"
 import { Button } from "../../../ui/button"
 import { CartItem } from "../../../../types/user.types"
-import useOrder from "../../../../hooks/useOrder"
+import useOrder from "../../../../endpoints/useOrder"
 import { useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 

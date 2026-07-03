@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 import { Button } from '../../ui/button';
+import Cookies from 'js-cookie';
 
 type SidebarItem = {
   id: string;
@@ -92,6 +93,9 @@ const Sidebar = ({ className }: { className: string }) => {
           );
         })}
         <Button
+          onClick={() => {
+            Cookies;
+          }}
           variant={'ghost'}
           className={`font-VazirMedium mr-1 w-full justify-start gap-4 text-right`}
         >
@@ -101,7 +105,7 @@ const Sidebar = ({ className }: { className: string }) => {
       </nav>
       <Link
         to={'/shop?category=couches'}
-        className="mt-6 lg:!h-60 h-44 block w-full overflow-hidden rounded-2xl bg-[url('/Images/banner-1.jpg')] bg-cover lg:!bg-[position:50%_100%] bg-[position:50%_83%]"
+        className="mt-6 block h-44 w-full overflow-hidden rounded-2xl bg-[url('/Images/banner-1.jpg')] bg-cover bg-[position:50%_83%] lg:!h-60 lg:!bg-[position:50%_100%]"
       >
         <div className="p-4">
           <h3 className="text-neutral-07 font-VazirBold mb-1 text-sm">
@@ -111,7 +115,7 @@ const Sidebar = ({ className }: { className: string }) => {
             با طراحی اصیل و کیفیت بی‌نظیر
           </p>
           <button className="font-VazirRegular bg-main hover:bg-main/90 flex cursor-pointer gap-2 rounded-lg px-3 py-2 text-xs text-white transition">
-            مشاهده 
+            مشاهده
             <ChevronLeft size={14} />
           </button>
         </div>

@@ -32,7 +32,7 @@ const Statistics = () => {
       {items.map((box, i) => (
         <div
           key={i}
-          className="hover:drop-shadow-custom flex items-start gap-4 rounded-md border bg-white px-6 py-4 shadow-sm transition-all"
+          className="  flex items-start gap-4 rounded-md border bg-white px-6 py-4 shadow-sm transition-all"
         >
           <div className="bg-neutral-01 text-secondary-color-blue flex size-14 items-center justify-center rounded-full">
             {box.icon}

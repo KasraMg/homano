@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import useOrder from '../../../../hooks/useOrder'
-import { useUser } from '../../../../hooks/useUser'
+import useOrder from '../../../../endpoints/useOrder'
+import { useUser } from '../../../../endpoints/useUser'
 import { Product } from '../../../../types/product.types'
 import { Button } from '../../../ui/button'
 import { LoaderCircleIcon, ShoppingBag } from 'lucide-react'
