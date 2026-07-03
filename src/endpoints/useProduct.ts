@@ -1,4 +1,4 @@
-import { localBackendUrl } from '../constants';
+import { localBackendUrl } from '../utils/constants';
 import { useQuery } from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 

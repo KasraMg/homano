@@ -1,6 +1,6 @@
 import { Button } from '../../../ui/button';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../../../hooks/useUser';
+import { useUser } from '../../../../endpoints/useUser';
 import { useEffect, useState } from 'react';
 import { CartItem } from '../../../../types/user.types';
 
@@ -22,7 +22,7 @@ const CheckoutSidebar = () => {
     }
   }, [data]);
   return (
-    <div className={`${data?.cart.length == 0 ? 'pointer-events-none opacity-20' : ''} bg-neutral-02 lg:!w-2/6  sticky top-3 h-max flex w-full flex-col items-start gap-4 rounded-xl p-6 shadow-m transition-all`}>
+    <div className={`${data?.cart.length == 0 || !data ? 'pointer-events-none opacity-20' : ''} bg-neutral-02 lg:!w-2/6  sticky top-3 h-max flex w-full flex-col items-start gap-4 rounded-xl p-6 shadow-m transition-all`}>
       <div className=" text-neutral-07 self-stretch text-xl leading-7 transition-all">
         خلاصه سبد خرید
       </div>

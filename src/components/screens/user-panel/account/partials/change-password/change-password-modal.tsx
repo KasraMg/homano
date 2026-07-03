@@ -1,44 +1,19 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { Edit2 } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { Dialog, DialogContent, DialogTrigger } from '../../../../ui/dialog';
-import { Button } from '../../../../ui/button';
-import { useUser } from '../../../../../hooks/useUser';
-import { useState } from 'react';
-
-const schema = z
-  .object({
-    currentPassword: z.string().min(1, 'رمز عبور فعلی را وارد کنید'),
-    newPassword: z.string().min(6, 'رمز عبور باید حداقل 6 کاراکتر باشد'),
-    confirmPassword: z.string().min(1, 'تکرار رمز عبور را وارد کنید'),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    path: ['confirmPassword'],
-    message: 'تکرار رمز عبور با رمز جدید یکسان نیست',
-  });
-
-type FormValues = z.infer<typeof schema>;
+import { Dialog, DialogContent, DialogTrigger } from '../../../../../ui/dialog';
+import { Button } from '../../../../../ui/button';
+import useChangePassword from './hook';
 
 const ChangePasswordModal = () => {
-  const { changePasswordMutation } = useUser();
-  const [open, setOpen] = useState(false);
   const {
-    register,
+    onSubmit,
     handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
-  });
-
-  const onSubmit = (data: FormValues) => {
-    changePasswordMutation.mutate(data, {
-      onSuccess() {
-        setOpen(false);
-      },
-    });
-  };
-
+    register,
+    open,
+    setOpen,
+    errors,
+    isSubmitting,
+  } = useChangePassword();
+  
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>

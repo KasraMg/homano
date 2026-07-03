@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useQueryParams } from './useQueryParams';
-import { localBackendUrl } from '../constants';
+import { localBackendUrl } from '../utils/constants';
 
 const useBlogs = () => {
   const { getParam } = useQueryParams();

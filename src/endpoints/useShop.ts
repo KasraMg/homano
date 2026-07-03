@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { localBackendUrl } from '../constants';
+import { localBackendUrl } from '../utils/constants';
 import { Filters } from '../components/screens/shop/partials/filters';
 import { useQueryParams } from './useQueryParams';
 import Cookies from 'js-cookie';

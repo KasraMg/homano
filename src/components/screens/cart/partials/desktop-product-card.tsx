@@ -1,5 +1,5 @@
 import { CartItem } from '../../../../types/user.types';
-import { localAssetsUrl } from '../../../../constants';
+import { localAssetsUrl } from '../../../../utils/constants';
 import QuantityControls from '../../product/partials/quantity-controls';
 import { useQueryClient } from '@tanstack/react-query';
 

@@ -8,9 +8,12 @@ export interface User {
   role: 'admin' | 'user' | 'moderator';
   cart: CartItem[];
   wishlist: WishlistItem[];
+  nationalCode: string | null;
+  birthDate: string | null;
   impersonatedBy: string | null;
   createdAt: string; //
   updatedAt: string;
+  addresses: Address[];
 }
 
 export interface CartItem {
@@ -25,4 +28,18 @@ export interface WishlistItem {
   product: Product;
   createdAt?: string;
   updatedAt?: string;
+}
+export interface Address {
+  _id: number;
+  postalCode: string;
+  address: string;
+  city: {
+    cityName: string;
+    cityId: string;
+    provinceId: string;
+  };
+  province: {
+    provinceId: string;
+    provinceName: string;
+  };
 }

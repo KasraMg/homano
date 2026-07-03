@@ -74,7 +74,7 @@ const OrdersScreen: React.FC = () => {
   ];
 
   return (
-    <section className="hover:drop-shadow-custom my-10 w-full rounded-md border bg-white p-6 shadow-lg transition-all">
+    <section className="  my-10 w-full rounded-md border bg-white p-6 shadow-lg transition-all">
       <div className="itmes-center flex justify-start gap-3">
         <div className="bg-neutral-01 flex size-9 items-center justify-center rounded-md">
           <Handbag className="text-secondary-color-blue" />
@@ -137,7 +137,7 @@ const OrdersScreen: React.FC = () => {
         {filteredOrders.map((order) => (
           <div
             key={order.id}
-            className="hover:drop-shadow-custom relative flex items-center justify-between rounded-md bg-white px-4 py-6 shadow-sm transition-all"
+            className="  relative flex items-center justify-between rounded-md bg-white px-4 py-6 shadow-sm transition-all"
           >
             <div className="flex items-start gap-10">
               <img

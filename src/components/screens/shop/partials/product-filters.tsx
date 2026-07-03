@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Filter, X } from 'lucide-react';
-import { useMediaQuery } from '../../../../hooks/useMediaQuery';
+import { useMediaQuery } from '../../../../endpoints/useMediaQuery';
 import {
   Select,
   SelectContent,
@@ -18,7 +18,7 @@ import {
   DrawerTrigger,
 } from '../../../ui/drawer';
 import { Slider } from '../../../ui/slider';
-import { useQueryParams } from '../../../../hooks/useQueryParams';
+import { useQueryParams } from '../../../../endpoints/useQueryParams';
 import { updateFilters } from './filters';
 import SearchInput from './search-input';
 import { Skeleton } from '../../../modules/skeleton';

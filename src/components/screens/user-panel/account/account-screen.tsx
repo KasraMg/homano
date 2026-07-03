@@ -5,8 +5,9 @@ import persian_fa from 'react-date-object/locales/persian_fa';
 import { User } from 'lucide-react';
 import { Button } from '../../../ui/button';
 import { useEffect } from 'react';
-import { useUser } from '../../../../hooks/useUser';
-import ChangePasswordModal from './partials/change-password-modal';
+import { useUser } from '../../../../endpoints/useUser';
+import ChangePasswordModal from './partials/change-password/change-password-modal';
+import AddressModal from './partials/address/address-modal';
 
 type FormValues = {
   name: string;
@@ -31,7 +32,7 @@ const AccountScreen = () => {
   });
 
   const onSubmit = (data: FormValues) => {
-    editUsermutation.mutate(data)
+    editUsermutation.mutate(data);
   };
 
   useEffect(() => {
@@ -45,8 +46,9 @@ const AccountScreen = () => {
       });
     }
   }, [data, reset]);
+  
   return (
-    <section className="hover:drop-shadow-custom my-10 w-full rounded-md border bg-white p-6 shadow-lg transition-all">
+    <section className="  my-10 w-full rounded-md border bg-white p-6 shadow-lg transition-all">
       <div className="mb-8">
         <div className="flex items-center justify-start gap-3">
           <div className="bg-neutral-01 flex size-9 items-center justify-center rounded-md">
@@ -63,15 +65,16 @@ const AccountScreen = () => {
 
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <div className="order-2 mt-8 space-y-6 sm:!mt-0 lg:order-1">
-          <div className="hover:drop-shadow-custom space-y-4 rounded-md border-t bg-white pt-6 text-center transition-all sm:!border-x sm:!border-b sm:!p-4 sm:!shadow-lg">
+          <div className="  space-y-4 rounded-md border-t bg-white pt-6 text-center transition-all sm:!border-x sm:!border-b sm:!p-4 sm:!shadow-lg">
             <h2 className="font-VazirBold text-neutral-07 mb-4 text-right text-lg">
-              اطلاعات ورود
+              سایر اطلاعات
             </h2>
             <ChangePasswordModal />
+            <AddressModal />
           </div>
         </div>
 
-        <div className="hover:drop-shadow-custom rounded-md bg-white transition-all sm:!border sm:!p-6 sm:!shadow-lg md:col-span-2">
+        <div className="  rounded-md bg-white transition-all sm:!border sm:!p-6 sm:!shadow-lg md:col-span-2">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div className="flex flex-col gap-2">

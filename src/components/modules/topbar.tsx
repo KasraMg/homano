@@ -28,7 +28,7 @@ const Topbar = ({ onClose, forceHide = false }: TopbarProps) => {
             <img
               style={{ filter: "invert(1)" }}
               src="/Images/ticket-percent.svg"
-              className="relative size-6 hover:drop-shadow-custom transition-all"
+              className="relative size-6   transition-all"
             />
             <p className="font-bold text-white leading-[22px] text-sm text-center">
               ۳۰٪ تخفیف روی تمام محصولات — مدت محدود!

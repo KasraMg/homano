@@ -189,7 +189,7 @@ const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
                         <img
                           src="/Images/Shop.svg"
                           alt="shop-icon"
-                          className="size-6 hover:drop-shadow-custom transition-all cursor-pointer"
+                          className="size-6   transition-all cursor-pointer"
                         />
                         <img
                           src="/Images/Curve.svg"

@@ -1,8 +1,8 @@
 import { Heart } from 'lucide-react';
 import { useState } from 'react';
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../../endpoints/useUser';
 import AuthoritarianSteps from './authoritarian/authoritarian-steps';
-import useFavorite from '../../hooks/useFavorite';
+import useFavorite from '../../endpoints/useFavorite';
 
 const Favorite = ({
     isFave,

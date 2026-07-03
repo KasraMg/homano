@@ -1,7 +1,7 @@
 
 
 import { Link } from 'react-router-dom'
-import { localAssetsUrl } from '../../../../../constants'
+import { localAssetsUrl } from '../../../../../utils/constants'
 import { CategoriesProps } from '../../../../../types/category.types'
 import { ChevronLeft } from 'lucide-react'
 

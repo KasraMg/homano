@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { localBackendUrl } from '../constants';
+import { localBackendUrl } from '../utils/constants';
 import Cookies from 'js-cookie';
 
 const addToCart = async (args: { color: string; code: number }) => {

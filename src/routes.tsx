@@ -8,7 +8,6 @@ import OrderComplete from "./pages/order-complete/order-complete";
 import Blogs from "./pages/blogs/blogs";
 import Blog from "./pages/blogs/blog/blog";
 import Dashboard from "./pages/user-panel/dashboard/dashboard";
-import Address from "./pages/user-panel/address/Address";
 import Orders from "./pages/user-panel/orders/orders";
 import Favorites from "./pages/user-panel/favorites/favorties";
 import Tickets from "./pages/user-panel/tickets/tickets";
@@ -32,7 +31,6 @@ const routes = [
         children: [
             { index: true, element: <Navigate to="dashboard" replace /> },
             { path: "dashboard", element: <Dashboard /> },
-            { path: "address", element: <Address /> },
             { path: "orders", element: <Orders /> },
             { path: "favorites", element: <Favorites /> },
             { path: "tickets", element: <Tickets /> },

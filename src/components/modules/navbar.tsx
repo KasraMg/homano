@@ -5,7 +5,7 @@ import CartSidebar from './cart-sidebar';
 import MobileMenu from './mobile-menu';
 import NavUser from './authoritarian/nav-user';
 import { Menu, ShoppingCartIcon } from 'lucide-react';
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../../endpoints/useUser';
 
 type MenuItem = {
   name: string;

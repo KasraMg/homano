@@ -1,5 +1,5 @@
 import { LoaderCircle } from "lucide-react";
-import useFeedback from "../../../../hooks/useFeedback";
+import useFeedback from "../../../../endpoints/useFeedback";
 import { Product } from "../../../../types/product.types";
 import { Review } from "../../../../types/review.types";
 import Comments from "./comments";

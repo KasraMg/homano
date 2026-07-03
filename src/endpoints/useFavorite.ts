@@ -1,5 +1,5 @@
 import { toast } from 'sonner';
-import { localBackendUrl } from '../constants';
+import { localBackendUrl } from '../utils/constants';
 import { useMutation } from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 

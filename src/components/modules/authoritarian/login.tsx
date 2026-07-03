@@ -1,17 +1,23 @@
 import { DialogDescription, DialogHeader, DialogTitle } from '../../ui/dialog';
 import { Button } from '../../ui/button';
-import { useLogin } from '../../../hooks/useLogin';
+import { useLogin } from './hook';
 
-const Login = ({ setStep, endFunction }: { setStep: (val: string) => void, endFunction?: () => void }) => {
+const Login = ({
+  setStep,
+  endFunction,
+}: {
+  setStep: (val: string) => void;
+  endFunction?: () => void;
+}) => {
   const { register, errors, handleSubmit, onSubmit } = useLogin(endFunction);
 
   return (
     <>
       <DialogHeader>
         <DialogTitle>
-          <img className='h-12 mx-auto' src="/Images/logo.jpg" alt="" />
+          <img className="mx-auto h-12" src="/Images/logo.jpg" alt="" />
         </DialogTitle>
-        <DialogDescription className='text-gray-400 text-center w-full'>
+        <DialogDescription className="w-full text-center text-gray-400">
           برای استفاده از خدمات ما، شماره موبایل خود را وارد کنید.
         </DialogDescription>
       </DialogHeader>
@@ -20,22 +26,20 @@ const Login = ({ setStep, endFunction }: { setStep: (val: string) => void, endFu
           <div>
             <label className="block pb-2 text-sm">شماره موبایل</label>
             <input
-              autoComplete='off'
+              autoComplete="off"
               autoCorrect="off"
               autoCapitalize="off"
               spellCheck="false"
               className="w-full rounded-xl border border-gray-200 p-2 outline-0"
               {...register('phone')}
             />
-            <p className="pt-1 text-xs text-red-600">
-              {errors.phone?.message}
-            </p>
+            <p className="pt-1 text-xs text-red-600">{errors.phone?.message}</p>
           </div>
 
           <div>
             <label className="block pb-2 text-sm">رمز عبور</label>
             <input
-              autoComplete='off'
+              autoComplete="off"
               autoCorrect="off"
               autoCapitalize="off"
               spellCheck="false"
@@ -57,9 +61,9 @@ const Login = ({ setStep, endFunction }: { setStep: (val: string) => void, endFu
           </Button>
           <p
             onClick={() => setStep('register')}
-            className="text-main cursor-pointer text-center text-sm w-max mx-auto"
+            className="text-main mx-auto w-max cursor-pointer text-center text-sm"
           >
-            <span className='text-black'>حساب کاربری ندارید؟</span> ثبت نام کنید
+            <span className="text-black">حساب کاربری ندارید؟</span> ثبت نام کنید
           </p>
         </form>
       </div>

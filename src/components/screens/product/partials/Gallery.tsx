@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "../../../ui/carousel";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { localAssetsUrl } from "../../../../constants";
+import { localAssetsUrl } from "../../../../utils/constants";
 
 const Gallery = ({
   images

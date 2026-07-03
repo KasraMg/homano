@@ -1,7 +1,7 @@
 import { Link, Outlet } from 'react-router-dom';
 import { Bell, Menu, LogOut, ShoppingCartIcon } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '../../components/ui/sheet';
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../../endpoints/useUser';
 import { useEffect, useState } from 'react';
 import Badge from '../../components/ui/badge';
 import Sidebar from '../../components/screens/user-panel/sidebar';

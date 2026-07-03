@@ -5,7 +5,7 @@ import DashboardProductCard from './dashboard-product-card';
 
 const FavoriteProducts = ({ data }: { data: User }) => {
   return (
-    <div className="hover:drop-shadow-custom w-full rounded-md border bg-white px-4 py-6 shadow-sm transition-all xl:w-[60%]">
+    <div className="  w-full rounded-md border bg-white px-4 py-6 shadow-sm transition-all xl:w-[60%]">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="font-VazirBold text-neutral-07 ml-2 text-base">
           محصولات محبوب شما
