@@ -35,24 +35,24 @@ const Stepper = ({ title, currentStep }: StepperProps) => {
               <div
                 key={step.id}
                 className={`flex flex-col pb-4 sm:flex-1 ${!isVisibleOnMobile ? 'hidden sm:flex' : 'flex'} ${isCurrent ? 'flex-1' : ''} ${
-                  isCompleted ? 'border-secondary-color-green border-b-2' : ''
+                  isCompleted || step.id == 3 ? 'border-secondary-color-green border-b-2' : ''
                 } ${isCurrent ? 'border-b-2 border-[#23262F]' : ''} `}
               >
-                <div className="flex items-center gap-3 justify-center">
+                <div className="flex items-center justify-center gap-3">
                   <div
                     className={`flex size-10 shrink-0 items-center justify-center rounded-full ${isCompleted || currentStep == 3 ? 'bg-secondary-color-green text-white' : ''} ${isCurrent ? 'bg-main text-white' : ''} ${isUpcoming ? 'bg-[#B1B5C3] text-white' : ''} `}
                   >
-                    {isCompleted || currentStep == 3? (
+                    {isCompleted || currentStep == 3 ? (
                       <img src="/Images/tick.svg" className="size-6" />
                     ) : (
-                      <span className="font-bold text-base">
+                      <span className="text-base font-bold">
                         {step.id.toLocaleString('fa-IR')}
                       </span>
                     )}
                   </div>
 
                   <div
-                    className={`font-bold text-center truncate text-sm sm:text-base ${step.id !== currentStep ? 'hidden sm:block' : 'block'} ${isCompleted ? 'text-secondary-color-green' : ''} ${isCurrent ? 'text-[#23262F]' : ''} ${isUpcoming ? 'text-[#B1B5C3]' : ''} `}
+                    className={`truncate text-center text-sm font-bold sm:text-base ${step.id !== currentStep ? 'hidden sm:block' : 'block'} ${isCompleted ? 'text-secondary-color-green' : ''} ${isCurrent && step.id !== 3 ? 'text-[#23262F]' : 'text-secondary-color-green'} ${isUpcoming ? 'text-[#B1B5C3]' : ''} `}
                   >
                     {step.name}
                   </div>

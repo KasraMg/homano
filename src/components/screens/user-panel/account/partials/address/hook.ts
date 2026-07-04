@@ -41,7 +41,8 @@ const useAddress = () => {
     );
 
     const city = (data as any).cities.find(
-      (c: { cityId: string }) => c.cityId == values.city,
+      (c: { cityId: string; provinceId: string }) =>
+        c.cityId == values.city && c.provinceId == province.provinceId,
     );
 
     createAddressMutation.mutate(
@@ -77,7 +78,7 @@ const useAddress = () => {
     handleSubmit,
     selectedProvince,
     control,
-    reset
+    reset,
   };
 };
 

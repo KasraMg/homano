@@ -39,16 +39,16 @@ const AccountScreen = () => {
     if (data) {
       reset({
         name: data.name,
-        nationalCode: data.nationalCode,
+        nationalCode: String(data.nationalCode),
         email: data.email,
         birthDate: data.birthDate || '۱۴۰۵/۰۴/۱۰',
         phone: data.phone,
       });
     }
   }, [data, reset]);
-  
+
   return (
-    <section className="  my-10 w-full rounded-md border bg-white p-6 shadow-lg transition-all">
+    <section className="my-10 w-full rounded-md border bg-white p-6 shadow-lg transition-all">
       <div className="mb-8">
         <div className="flex items-center justify-start gap-3">
           <div className="bg-neutral-01 flex size-9 items-center justify-center rounded-md">
@@ -65,7 +65,7 @@ const AccountScreen = () => {
 
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <div className="order-2 mt-8 space-y-6 sm:!mt-0 lg:order-1">
-          <div className="  space-y-4 rounded-md border-t bg-white pt-6 text-center transition-all sm:!border-x sm:!border-b sm:!p-4 sm:!shadow-lg">
+          <div className="space-y-4 rounded-md border-t bg-white pt-6 text-center transition-all sm:!border-x sm:!border-b sm:!p-4 sm:!shadow-lg">
             <h2 className="font-VazirBold text-neutral-07 mb-4 text-right text-lg">
               سایر اطلاعات
             </h2>
@@ -74,7 +74,7 @@ const AccountScreen = () => {
           </div>
         </div>
 
-        <div className="  rounded-md bg-white transition-all sm:!border sm:!p-6 sm:!shadow-lg md:col-span-2">
+        <div className="rounded-md bg-white transition-all sm:!border sm:!p-6 sm:!shadow-lg md:col-span-2">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div className="flex flex-col gap-2">

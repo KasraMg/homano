@@ -1,29 +1,38 @@
 import { Button } from '../../../ui/button';
-import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../../../endpoints/useUser';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { CartItem } from '../../../../types/user.types';
+import useCheckout from './hook';
 
 const CheckoutSidebar = () => {
-  const [type, setType] = useState('post')
-  const navigate = useNavigate();
-  const { data } = useUser()
+  const [type, setType] = useState('post');
+  const [totalPrice, setTotalPrice] = useState<number | null>(null);
 
-  const handleCkeckout = () => {
-    navigate('/checkout');
-  };
-  const [totalPrice, setTotalPrice] = useState<number | null>(null)
+  const { user, isSubmitting } = useCheckout();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (data?.cart) {
-      const prices = data.cart.map((item: CartItem) => item.quantity * item.product.price);
+    if (user?.cart) {
+      const prices = user.cart.map(
+        (item: CartItem) => item.quantity * item.product.price,
+      );
       const total = prices.reduce((a: number, b: number) => a + b, 0);
       setTotalPrice(total);
     }
-  }, [data]);
+  }, [user]);
+
+  useEffect(() => {
+    if (type) {
+      localStorage.setItem('order-type', type);
+    }
+  }, [type]);
+
   return (
-    <div className={`${data?.cart.length == 0 || !data ? 'pointer-events-none opacity-20' : ''} bg-neutral-02 lg:!w-2/6  sticky top-3 h-max flex w-full flex-col items-start gap-4 rounded-xl p-6 shadow-m transition-all`}>
-      <div className=" text-neutral-07 self-stretch text-xl leading-7 transition-all">
+    <div
+      className={`${user?.cart.length == 0 || !user ? 'pointer-events-none opacity-20' : ''} bg-neutral-02 shadow-m sticky top-3 flex h-max w-full flex-col items-start gap-4 rounded-xl p-6 transition-all lg:!w-2/6`}
+    >
+      <div className="text-neutral-07 self-stretch text-xl leading-7 transition-all">
         خلاصه سبد خرید
       </div>
 
@@ -63,7 +72,6 @@ const CheckoutSidebar = () => {
               </div>
             </div>
 
-
             <div className="flex w-full items-center justify-between gap-2 rounded-xl bg-white p-3">
               <div className="flex items-center gap-3">
                 <input
@@ -85,21 +93,25 @@ const CheckoutSidebar = () => {
           <hr className="border-neutral-03 w-full border" />
           {/* Total */}
           <div className="flex w-full items-center justify-between py-3">
-            <div className="font-bold text-neutral-07 text-xl transition-all">
+            <div className="text-neutral-07 text-xl font-bold transition-all">
               مجموع
             </div>
-            <div className="font-bold text-neutral-07 text-xl transition-all">
-              {data?.cart.length !== 0 ? (Number(totalPrice) + (type == 'post' ? 50000 : type == 'tipax' ? 120000 : 0))?.toLocaleString() : 0} تومان
+            <div className="text-neutral-07 text-xl font-bold transition-all">
+              {user?.cart.length !== 0
+                ? (
+                    Number(totalPrice) +
+                    (type == 'post' ? 50000 : type == 'tipax' ? 120000 : 0)
+                  )?.toLocaleString()
+                : 0}{' '}
+              تومان
             </div>
           </div>
         </div>
-        <Button
-          className="h-10 w-full"
-          variant={'main'}
-          onClick={handleCkeckout}
-        >
-          ادامه فرایند خرید
-        </Button>
+        <Link to={'/checkout'} className='w-full'>
+          <Button className="h-10 w-full" variant={'main'}>
+            ادامه فرایند خرید
+          </Button>
+        </Link>
       </div>
     </div>
   );

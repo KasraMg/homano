@@ -1,77 +1,44 @@
-"use client"
-
-import { useForm, Controller, useWatch } from "react-hook-form"
+import { Controller } from 'react-hook-form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
-} from "../../../ui/select"
+  SelectValue,
+} from '../../../ui/select';
+import useCheckout from './hook';
 
-type FormValues = {
-  fname: string
-  lname: string
-  phone: string
-  email?: string
-  province: string
-  city: string
-  post: string
-  street: string
-}
-
-type Props = {
-  onSubmit: (data: FormValues) => void
-}
-
-const provinces = [
-  {
-    name: "فارس",
-    cities: ["شیراز", "مرودشت"]
-  },
-  {
-    name: "تهران",
-    cities: ["تهران", "ری", "پردیس"]
-  }
-]
-
-const CheckoutForm = ({ onSubmit }: Props) => {
+const CheckoutForm = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
   const {
+    data,
+    user,
+    errors,
     register,
     handleSubmit,
+    selectedProvince,
     control,
-    setValue,
-    formState: { errors }
-  } = useForm<FormValues>()
-
-  const selectedProvince = useWatch({
-    control,
-    name: "province"
-  })
-
-  const cities =
-    provinces.find((p) => p.name === selectedProvince)?.cities || []
-
+    reset,
+  } = useCheckout();
   return (
     <form
       id="checkout-form"
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6 w-full xl:!w-3/5"
+      className="flex w-full flex-col gap-6 xl:!w-3/5"
     >
-      <div className="space-y-6 bg-white shadow-m rounded-xl p-6 w-full">
-        <div className="text-black text-xl">اطلاعات تماس</div>
+      <div className="shadow-m w-full space-y-6 rounded-xl bg-white p-6">
+        <div className="text-xl text-black">اطلاعات تماس</div>
 
         <div className="flex gap-3">
           <div className="w-full">
             <input
-              {...register("fname", { required: "نام الزامی است" })}
+              {...register('fname')}
               placeholder="نام"
-              className={`w-full border p-2 rounded-md ${
-                errors.fname ? "border-red-500" : "border-gray-300"
+              className={`w-full rounded-md border p-2 ${
+                errors.fname ? 'border-red-500' : 'border-gray-300'
               }`}
             />
             {errors.fname && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="mt-1 text-sm text-red-500">
                 {errors.fname.message}
               </p>
             )}
@@ -79,14 +46,14 @@ const CheckoutForm = ({ onSubmit }: Props) => {
 
           <div className="w-full">
             <input
-              {...register("lname", { required: "نام خانوادگی الزامی است" })}
+              {...register('lname')}
               placeholder="نام خانوادگی"
-              className={`w-full border p-2 rounded-md ${
-                errors.lname ? "border-red-500" : "border-gray-300"
+              className={`w-full rounded-md border p-2 ${
+                errors.lname ? 'border-red-500' : 'border-gray-300'
               }`}
             />
             {errors.lname && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="mt-1 text-sm text-red-500">
                 {errors.lname.message}
               </p>
             )}
@@ -95,67 +62,63 @@ const CheckoutForm = ({ onSubmit }: Props) => {
 
         <div>
           <input
-            {...register("phone", { required: "شماره تلفن الزامی است" })}
+            {...register('phone')}
             placeholder="شماره تلفن"
-            className={`w-full border p-2 rounded-md ${
-              errors.phone ? "border-red-500" : "border-gray-300"
+            className={`pointer-events-none w-full cursor-not-allowed rounded-md border p-2 opacity-30 ${
+              errors.phone ? 'border-red-500' : 'border-gray-300'
             }`}
           />
           {errors.phone && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.phone.message}
-            </p>
+            <p className="mt-1 text-sm text-red-500">{errors.phone.message}</p>
           )}
         </div>
 
         <div>
           <input
-            {...register("email")}
+            {...register('email')}
             placeholder="ایمیل (اختیاری)"
-            className="w-full border p-2 rounded-md border-gray-300"
+            className="w-full rounded-md border border-gray-300 p-2"
           />
+          {errors.email && (
+            <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+          )}
         </div>
       </div>
 
-      <div className="space-y-6 bg-white shadow-m rounded-xl p-6 w-full">
-        <div className="text-black text-xl">آدرس ارسال</div>
+      <div className="shadow-m w-full space-y-6 rounded-xl bg-white p-6">
+        <p className="text-xl text-black">آدرس ارسال</p>
 
         <div className="flex gap-3">
           <div className="w-full">
             <Controller
               control={control}
               name="province"
-              rules={{ required: "انتخاب استان الزامی است" }}
               render={({ field }) => (
-                <Select
-                  onValueChange={(value) => {
-                    field.onChange(value)
-                    setValue("city", "")
-                  }}
-                  value={field.value}
-                >
-                  <SelectTrigger
-                    className={
-                      errors.province ? "border-red-500 w-full !h-11" : "w-full !h-11"
-                    }
-                  >
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger className="h-12 w-full">
                     <SelectValue placeholder="انتخاب استان" />
                   </SelectTrigger>
-                  <SelectContent>
-                    {provinces.map((province) => (
-                      <SelectItem
-                        key={province.name}
-                        value={province.name}
-                      >
-                        {province.name}
-                      </SelectItem>
-                    ))}
+
+                  <SelectContent dir="rtl">
+                    {(data as any)?.provinces.map(
+                      (province: {
+                        provinceId: number;
+                        provinceName: string;
+                      }) => (
+                        <SelectItem
+                          key={province.provinceId}
+                          value={String(province.provinceId)}
+                        >
+                          {province.provinceName}
+                        </SelectItem>
+                      ),
+                    )}
                   </SelectContent>
                 </Select>
               )}
             />
             {errors.province && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="mt-1 text-xs text-red-500">
                 {errors.province.message}
               </p>
             )}
@@ -165,70 +128,100 @@ const CheckoutForm = ({ onSubmit }: Props) => {
             <Controller
               control={control}
               name="city"
-              rules={{ required: "انتخاب شهر الزامی است" }}
               render={({ field }) => (
                 <Select
-                  onValueChange={field.onChange}
-                  value={field.value}
                   disabled={!selectedProvince}
+                  value={field.value}
+                  onValueChange={field.onChange}
                 >
-                  <SelectTrigger
-                    className={
-                      errors.city ? "border-red-500 w-full !h-11" : "w-full !h-11"
-                    }
-                  >
+                  <SelectTrigger className="h-12 w-full">
                     <SelectValue placeholder="انتخاب شهر" />
                   </SelectTrigger>
-                  <SelectContent>
-                    {cities.map((city) => (
-                      <SelectItem key={city} value={city}>
-                        {city}
-                      </SelectItem>
-                    ))}
+
+                  <SelectContent dir="rtl">
+                    {(data as any)?.cities
+                      .filter(
+                        (city: { provinceId: number }) =>
+                          city.provinceId == Number(selectedProvince),
+                      )
+                      .map((city: { cityId: number; cityName: string }) => (
+                        <SelectItem
+                          key={city.cityId}
+                          value={String(city.cityId)}
+                        >
+                          {city.cityName}
+                        </SelectItem>
+                      ))}
                   </SelectContent>
                 </Select>
               )}
             />
+
             {errors.city && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.city.message}
-              </p>
+              <p className="mt-1 text-xs text-red-500">{errors.city.message}</p>
             )}
           </div>
         </div>
 
         <div>
           <input
-            {...register("post", { required: "کد پستی الزامی است" })}
+            {...register('postalCode')}
             placeholder="کد پستی"
-            className={`w-full border p-2 rounded-md ${
-              errors.post ? "border-red-500" : "border-gray-300"
+            className={`w-full rounded-md border p-2 ${
+              errors.postalCode ? 'border-red-500' : 'border-gray-300'
             }`}
           />
-          {errors.post && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.post.message}
+          {errors.postalCode && (
+            <p className="mt-1 text-sm text-red-500">
+              {errors.postalCode.message}
             </p>
           )}
         </div>
 
         <div>
           <textarea
-            {...register("street", { required: "آدرس الزامی است" })}
+            {...register('address')}
             placeholder="آدرس"
-            className={`w-full border p-2 rounded-md ${
-              errors.street ? "border-red-500" : "border-gray-300"
+            className={`w-full rounded-md border p-2 ${
+              errors.address ? 'border-red-500' : 'border-gray-300'
             }`}
           />
-          {errors.street && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.street.message}
+          {errors.address && (
+            <p className="mt-1 text-sm text-red-500">
+              {errors.address.message}
             </p>
           )}
         </div>
+
+        {user?.addresses && user?.addresses.length > 0 ? (
+          <>
+            <p className="text-xl text-black">آدرس های پیش نویس</p>
+            {user.addresses.map((address) => (
+              <div
+                onClick={() => {
+                  reset({
+                    province: address.province.provinceId,
+                    city: address.city.cityId,
+                    postalCode: address.postalCode,
+                    address: address.address,
+                  });
+                }}
+                className="border-neutral-03 bg-light-blue relative w-full cursor-pointer rounded-md border p-3 text-sm"
+              >
+                <p>
+                  {address.province.provinceName} / {address.city.cityName} -{' '}
+                  <span className="text-gray-500">{address.postalCode}</span>
+                </p>
+                <p>{address.address}</p>
+              </div>
+            ))}
+          </>
+        ) : (
+          ''
+        )}
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default CheckoutForm
+export default CheckoutForm;

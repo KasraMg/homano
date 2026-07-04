@@ -1,6 +1,6 @@
 import Container from '../../modules/container';
 import Stepper from '../../modules/stepper';
-import CheckoutSidebar from './partials/checkout-sidebar';
+import CheckoutSidebar from '../checkout/partials/checkout-sidebar';
 import ProductsTable from './partials/products-table';
 
 const CartScreen = () => {

@@ -1,10 +1,7 @@
-
-import CheckoutScreen from "../../components/screens/checkout/checkout-screen";
+import CheckoutScreen from '../../components/screens/checkout/checkout-screen';
 
 function Checkout() {
-  return (
-    <CheckoutScreen />
-  );
+  return <CheckoutScreen />;
 }
 
 export default Checkout;
