@@ -1,63 +1,110 @@
-import { useEffect, useState } from 'react'
-import useOrder from '../../../../endpoints/useOrder'
-import { useUser } from '../../../../endpoints/useUser'
-import { Product } from '../../../../types/product.types'
-import { Button } from '../../../ui/button'
-import { LoaderCircleIcon, ShoppingBag } from 'lucide-react'
-import { CartItem } from '../../../../types/user.types'
-import QuantityControls from './quantity-controls'
-import { useQueryClient } from '@tanstack/react-query'
+import { useEffect, useState } from 'react';
+import useCart from '../../../../endpoints/useCart';
+import { useUser } from '../../../../endpoints/useUser';
+import { Product } from '../../../../types/product.types';
+import { Button } from '../../../ui/button';
+import { LoaderCircleIcon, ShoppingBag } from 'lucide-react';
+import { CartItem } from '../../../../types/user.types';
+import QuantityControls from './quantity-controls';
+import { useQueryClient } from '@tanstack/react-query';
 
-const Order = ({ data, activeColor }: {
-  data: Product,
-  activeColor: { code: string, name: string } | null,
-
+const Order = ({
+  data,
+  activeColor,
+}: {
+  data: Product;
+  activeColor: { code: string; name: string } | null;
 }) => {
-  const { mutation } = useOrder()
-  const { data: user } = useUser()
-  const [cartProduct, setCartProduct] = useState<null | CartItem>(null)
+  const { mutation } = useCart();
+  const { data: user } = useUser();
+  const [cartProduct, setCartProduct] = useState<null | CartItem>(null);
 
   useEffect(() => {
     if (user) {
-      const isExit = user.cart.find((i: CartItem) => i.product.code == data.code)
-      setCartProduct(isExit)
+      const isExit = user.cart.find(
+        (i: CartItem) => i.product.code == data.code,
+      );
+      setCartProduct(isExit as any);
     }
-  }, [user])
+  }, [user]);
 
-  const queryClinet = useQueryClient()
+  const queryClinet = useQueryClient();
   return (
-    <div className='w-full max-w-[500px] mx-auto lg:!mx-0 bg-neutral-02 lg:!w-2/6 sticky top-3 h-max flex flex-col items-start gap-4 rounded-xl p-4 sm:!p-6 shadow-m'>
-      <p className='line-clamp-3 text-xl font-VazirMedium leading-8.5 -tracking-0.5 xl:line-clamp-2'>{data.name}</p>
-      <ul className='list-disc text-sm space-y-2 pr-3'>
-        <li className='text-gray-500'>
-          7 روز ضمانت بازگشت کالا
-        </li>
-        <li className='text-gray-500'>
-          ضمانت اصالت کالا
-        </li>
+    <div className="bg-neutral-02 shadow-m sticky top-3 mx-auto flex h-max w-full max-w-[500px] flex-col items-start gap-4 rounded-xl p-4 sm:!p-6 lg:!mx-0 lg:!w-2/6">
+      <p className="font-VazirMedium -tracking-0.5 line-clamp-3 text-xl leading-8.5 xl:line-clamp-2">
+        {data.name}
+      </p>
+      <ul className="list-disc space-y-2 pr-3 text-sm">
+        <li className="text-gray-500">7 روز ضمانت بازگشت کالا</li>
+        <li className="text-gray-500">ضمانت اصالت کالا</li>
       </ul>
 
-      {data.priceWithoutOff ? <p className='text-neutral-04 line-through font-VazirMedium !leading-5 mr-auto'>{data.priceWithoutOff.toLocaleString()} <span className='text-sm'>تومان</span></p> : ""}
-      <div className='flex justify-between items-center gap-2 w-full'>
-        {activeColor ?
-          <div className={`cursor-pointer flex gap-2 items-center text-sm`}>
-            <div style={{ background: activeColor.code }} className={`w-5 h-5 border border-neutral-03 rounded-md`}></div>
+      {data.priceWithoutOff ? (
+        <p className="text-neutral-04 font-VazirMedium mr-auto !leading-5 line-through">
+          {data.priceWithoutOff.toLocaleString()}{' '}
+          <span className="text-sm">تومان</span>
+        </p>
+      ) : (
+        ''
+      )}
+      <div className="flex w-full items-center justify-between gap-2">
+        {activeColor ? (
+          <div className={`flex cursor-pointer items-center gap-2 text-sm`}>
+            <div
+              style={{ background: activeColor.code }}
+              className={`border-neutral-03 h-5 w-5 rounded-md border`}
+            ></div>
             <p>{activeColor.name}</p>
           </div>
-          : ''}
-        <div className='flex gap-2 justify-end items-center'>
-          {data.off ? <span className='bg-red-500 rounded-full block py-1 px-1.5 text-xs text-white'>{data.off}%</span> : ''}
-          <p className='text-[19px] font-VazirMedium pt-1 !leading-5 xl:text-[20px]'>{data.price.toLocaleString()} <span className='text-sm'>تومان</span></p>
+        ) : (
+          ''
+        )}
+        <div className="flex items-center justify-end gap-2">
+          {data.off ? (
+            <span className="block rounded-full bg-red-500 px-1.5 py-1 text-xs text-white">
+              {data.off}%
+            </span>
+          ) : (
+            ''
+          )}
+          <p className="font-VazirMedium pt-1 text-[19px] !leading-5 xl:text-[20px]">
+            {data.price.toLocaleString()} <span className="text-sm">تومان</span>
+          </p>
         </div>
       </div>
-      {cartProduct ? <QuantityControls endFunctionHandler={() => setCartProduct(null)} showBtn className="!flex-row w-full" data={cartProduct} /> : <Button onClick={(() => mutation.mutate({ color: String(activeColor?.code), code: data.code }, {
-        onSuccess: (data) => {
-          queryClinet.invalidateQueries({ queryKey: ['me'] })
-          setCartProduct(data.product)
-        }
-      }))} className='w-full h-12' variant={"main"}>{mutation.isPending ? <LoaderCircleIcon className='mx-auto size-5 animate-spin' /> : <>افزودن به سبد خرید <ShoppingBag /></>} </Button>
-      }
-    </div >
-  )
-}
-export default Order
+      {cartProduct ? (
+        <QuantityControls
+          endFunctionHandler={() => setCartProduct(null)}
+          showBtn
+          className="w-full !flex-row"
+          data={cartProduct}
+        />
+      ) : (
+        <Button
+          onClick={() =>
+            mutation.mutate(
+              { color: String(activeColor?.code), code: data.code },
+              {
+                onSuccess: (data) => {
+                  queryClinet.invalidateQueries({ queryKey: ['me'] });
+                  setCartProduct(data.product);
+                },
+              },
+            )
+          }
+          className="h-12 w-full"
+          variant={'main'}
+        >
+          {mutation.isPending ? (
+            <LoaderCircleIcon className="mx-auto size-5 animate-spin" />
+          ) : (
+            <>
+              افزودن به سبد خرید <ShoppingBag />
+            </>
+          )}{' '}
+        </Button>
+      )}
+    </div>
+  );
+};
+export default Order;

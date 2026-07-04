@@ -4,7 +4,7 @@ import { Product } from '../../types/product.types';
 import { Button } from '../ui/button';
 import { localAssetsUrl } from '../../utils/constants';
 import ShareModal from './share-modal';
-import useOrder from '../../endpoints/useOrder';
+import useCart from '../../endpoints/useCart';
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -26,7 +26,7 @@ const ProductCard = ({
   data: Product;
   isPanel?: boolean;
 }) => {
-  const { mutation } = useOrder();
+  const { mutation } = useCart();
   const [isInCartStatus, setIsInCartStatus] = useState(isInCart);
   const queryClinet = useQueryClient();
   return (

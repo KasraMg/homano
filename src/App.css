@@ -1,103 +1,103 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:is(.dark *));
 
 @font-face {
-  font-family: "Inter Regular";
+  font-family: 'Inter Regular';
   src:
-    local("Inter Regular"),
-    local("Inter-Regular"),
-    url("/src/fonts/Inter_18pt-Regular.ttf") format("truetype");
+    local('Inter Regular'),
+    local('Inter-Regular'),
+    url('/src/fonts/Inter_18pt-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Inter Medium";
+  font-family: 'Inter Medium';
   src:
-    local("Inter Medium"),
-    local("Inter-Medium"),
-    url("/src/fonts/Inter_18pt-Medium.ttf") format("truetype");
+    local('Inter Medium'),
+    local('Inter-Medium'),
+    url('/src/fonts/Inter_18pt-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Inter SemiBold";
+  font-family: 'Inter SemiBold';
   src:
-    local("Inter SemiBold"),
-    local("Inter-SemiBold"),
-    url("/src/fonts/Inter_18pt-SemiBold.ttf") format("truetype");
+    local('Inter SemiBold'),
+    local('Inter-SemiBold'),
+    url('/src/fonts/Inter_18pt-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Inter Bold";
+  font-family: 'Inter Bold';
   src:
-    local("Inter Bold"),
-    local("Inter-Bold"),
-    url("/src/fonts/Inter_18pt-Bold.ttf") format("truetype");
+    local('Inter Bold'),
+    local('Inter-Bold'),
+    url('/src/fonts/Inter_18pt-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Inter Italic";
+  font-family: 'Inter Italic';
   src:
-    local("Inter Italic"),
-    local("Inter-Italic"),
-    url("/src/fonts/Inter_18pt-Italic.ttf") format("truetype");
+    local('Inter Italic'),
+    local('Inter-Italic'),
+    url('/src/fonts/Inter_18pt-Italic.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Poppins Medium";
+  font-family: 'Poppins Medium';
   src:
-    local("Poppins Medium"),
-    local("Poppins-Medium"),
-    url("/src/fonts/Poppins-Medium.ttf") format("truetype");
+    local('Poppins Medium'),
+    local('Poppins-Medium'),
+    url('/src/fonts/Poppins-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Vazir Regular";
+  font-family: 'Vazir Regular';
   src:
-    local("Vazir Regular"),
-    local("Vazir-Regular"),
-    url("/src/fonts/Vazir.woff2") format("woff2");
+    local('Vazir Regular'),
+    local('Vazir-Regular'),
+    url('/src/fonts/Vazir.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Vazir Medium";
+  font-family: 'Vazir Medium';
   src:
-    local("Vazir Medium"),
-    local("Vazir-Medium"),
-    url("/src/fonts/Vazir-Medium.woff2") format("woff2");
+    local('Vazir Medium'),
+    local('Vazir-Medium'),
+    url('/src/fonts/Vazir-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Vazir Bold";
+  font-family: 'Vazir Bold';
   src:
-    local("Vazir Bold"),
-    local("Vazir-Bold"),
-    url("/src/fonts/Vazir-Bold.woff2") format("woff2");
+    local('Vazir Bold'),
+    local('Vazir-Bold'),
+    url('/src/fonts/Vazir-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -118,16 +118,17 @@
   --color-neutral-07: #141718;
   --color-black-900: #121212;
   --color-main: #2d397e;
-  --color-clay : #ca9b77;
-  --font-InterRegular: "Inter Regular";
-  --font-InterMedium: "Inter Medium";
-  --font-InterSemiBold: "Inter SemiBold";
-  --font-InterBold: "Inter Bold";
-  --font-InterItalic: "Inter Italic";
-  --font-PoppinsMedium: "Poppins Medium";
-  --font-VazirRegular: "Vazir Regular";
-  --font-VazirMedium: "Vazir Medium";
-  --font-VazirBold: "Vazir Bold";
+  --color-light-blue: #2d397e14;
+  --color-clay: #ca9b77;
+  --font-InterRegular: 'Inter Regular';
+  --font-InterMedium: 'Inter Medium';
+  --font-InterSemiBold: 'Inter SemiBold';
+  --font-InterBold: 'Inter Bold';
+  --font-InterItalic: 'Inter Italic';
+  --font-PoppinsMedium: 'Poppins Medium';
+  --font-VazirRegular: 'Vazir Regular';
+  --font-VazirMedium: 'Vazir Medium';
+  --font-VazirBold: 'Vazir Bold';
 
   --text-headline-5: 34px;
   --text-4.5xl: 40px;
@@ -142,8 +143,8 @@
   --tracking-headline-7: -0.01em;
   --tracking-button-m: -0.02222em;
   --tracking-button-s: -0.025em;
- 
-  --shadow-m: 0px 4px 24px 0px #0000000d !important;  
+
+  --shadow-m: 0px 4px 24px 0px #0000000d !important;
 }
 @custom-variant xs (@media (min-width: 480px));
 

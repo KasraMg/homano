@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { localBackendUrl } from '../utils/constants';
 import Cookies from 'js-cookie';
 import { toast } from 'sonner';
+import { User } from '../types/user.types';
 
 export const fetchMe = async () => {
   const response = await fetch(`${localBackendUrl}/getMe`, {
@@ -152,12 +153,17 @@ export const useUser = () => {
     },
   });
 
-  const { data, isPending, isLoading } = useQuery({
-    queryKey: ['me'],
-    queryFn: fetchMe,
-    enabled: true,
-    retry: false,
-  });
+  const {
+    data,
+    isPending,
+    isLoading,
+  }: { data: User | undefined; isPending: boolean; isLoading: boolean } =
+    useQuery({
+      queryKey: ['me'],
+      queryFn: fetchMe,
+      enabled: true,
+      retry: false,
+    });
   return {
     data,
     isPending,

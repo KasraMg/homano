@@ -1,69 +1,54 @@
-import { useMutation } from '@tanstack/react-query';
-import { toast } from 'sonner';
-import { localBackendUrl } from '../utils/constants';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import Cookies from 'js-cookie';
+import { localBackendUrl } from '../utils/constants';
+import { CheckoutReqBody } from '../types/service.types';
 
-const addToCart = async (args: { color: string; code: number }) => {
-  const response = await fetch(`${localBackendUrl}/addToCart`, {
+const createOrder = async (obj: CheckoutReqBody) => {
+  const response = await fetch(localBackendUrl + `/order`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       authorization: `Bearer ${Cookies.get('token')}`,
     },
-    body: JSON.stringify(args),
+
+    body: JSON.stringify(obj),
   });
-  const data = await response.json();
-  return data;
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message);
+  }
+
+  return result;
 };
 
-const updateItemQuantity = async (args: { id: string; action: string }) => {
-  const response = await fetch(`${localBackendUrl}/updateCartItemQuantity`, {
-    method: 'PUT',
+export const fetchOrder = async (trackingCode: string) => {
+  const response = await fetch(`${localBackendUrl}/order/${trackingCode}`, {
     headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${Cookies.get('token')}`,
-    },
-    body: JSON.stringify(args),
-  });
-  const data = await response.json();
-  return data;
-};
-const removeFromCart = async (id: string) => {
-  const response = await fetch(`${localBackendUrl}/removeFromCart/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${Cookies.get('token')}`,
+      Authorization: `Bearer ${Cookies.get('token')}`,
     },
   });
-  const data = await response.json();
-  return data;
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message);
+  }
+
+  return result;
 };
 
-const useOrder = () => {
-  const removeItemMutation = useMutation({
-    mutationFn: (id: string) => removeFromCart(id),
-    mutationKey: ['remove-order'],
-    onSuccess: (data) => {
-      toast.success(data.message);
-    },
-  });
-  const updateQuantityMutation = useMutation({
-    mutationFn: (data: { id: string; action: string }) =>
-      updateItemQuantity(data),
-    mutationKey: ['update-order'],
-    onSuccess: (data) => {
-      toast.success(data.message);
-    },
-  });
+const useOrder = (trackingCode?: string) => {
   const mutation = useMutation({
-    mutationFn: (data: { color: string; code: number }) => addToCart(data),
+    mutationFn: (data: CheckoutReqBody) => createOrder(data),
     mutationKey: ['create-order'],
-    onSuccess: (data) => {
-      toast.success(data.message);
-    },
   });
-  return { mutation, updateQuantityMutation, removeItemMutation };
+
+  const { data: order, isPending: orderRequestPending } = useQuery({
+    queryKey: ['get-order', trackingCode],
+    queryFn: () => fetchOrder(String(trackingCode)),
+    enabled: !!trackingCode,
+  });
+  return { mutation, order, orderRequestPending };
 };
 
 export default useOrder;
