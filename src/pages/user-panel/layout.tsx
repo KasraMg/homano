@@ -82,7 +82,7 @@ const UserPanelLayout = () => {
               <LogOut
                 onClick={() => {
                   Cookies.remove('token');
-                  queryClient.invalidateQueries({ queryKey: ['me'] });
+                  queryClient.setQueryData(['me'], null);
                   navigate('/');
                 }}
                 className="cursor-pointer"

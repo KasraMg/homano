@@ -97,7 +97,7 @@ const Sidebar = ({ className }: { className: string }) => {
         <Button
           onClick={() => {
             Cookies.remove('token');
-            queryClient.invalidateQueries({ queryKey: ['me'] });
+            queryClient.setQueryData(['me'], null);
             navigate('/');
           }}
           variant={'ghost'}
