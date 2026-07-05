@@ -11,7 +11,7 @@ const BlogCard = ({
   createdAt,
 }: BlogItem) => (
   <Link
-    to={`/blog/${slug}`}
+    to={`/blogs/${slug}/${String(name).replaceAll(' ', '-')}`}
     className="bg-neutral-02 hover:bg-neutral-03 flex cursor-pointer flex-col gap-4 rounded-xl shadow transition-colors"
   >
     <img

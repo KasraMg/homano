@@ -6,4 +6,5 @@ export type BlogItem = {
   slug: string;
   createdAt: string;
   image: string;
+  _id: string;
 };

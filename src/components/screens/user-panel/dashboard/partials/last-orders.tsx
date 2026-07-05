@@ -36,7 +36,7 @@ const LastOrders = ({ data }: { data: User | undefined }) => {
                 />
                 <div className="flex flex-1 items-center justify-between">
                   <div className="mb-1 flex flex-col gap-2">
-                    <span className="font-VazirBold text-neutral-07 block">
+                    <span className="font-VazirBold text-sm text-neutral-07 block">
                       سفارش #{order.trackingCode}
                     </span>
                     <span className="font-VazirRegular text-neutral-04 block">

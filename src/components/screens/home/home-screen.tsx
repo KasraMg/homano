@@ -17,9 +17,7 @@ const HomeScreen = () => {
       <Search />
       <div className="space-y-20 pb-20 pt-12">
         <Products data={data?.products} />
-        <Banners
-          data={data?.banner}
-        />
+        
         <Categories data={data?.categories} />
         <ServicesSection />
         <SaleBanner
@@ -30,6 +28,9 @@ const HomeScreen = () => {
             </>
           }
           description="حالا بیش از هر زمان دیگری مقرون‌به‌صرفه است که به هر اتاق خانه‌تان ظاهری شیک و تازه بدهید."
+        />
+        <Banners
+          data={data?.banner}
         />
         <Blogs data={data?.articles} />
       </div>
