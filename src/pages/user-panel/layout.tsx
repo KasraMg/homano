@@ -1,14 +1,18 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { Bell, Menu, LogOut, ShoppingCartIcon } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '../../components/ui/sheet';
 import { useUser } from '../../endpoints/useUser';
 import { useEffect, useState } from 'react';
 import Badge from '../../components/ui/badge';
 import Sidebar from '../../components/screens/user-panel/sidebar';
+import { useQueryClient } from '@tanstack/react-query';
+import Cookies from 'js-cookie';
 
 const UserPanelLayout = () => {
   const { data } = useUser();
   const [count, setCount] = useState<null | number>(null);
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   console.log(data);
   useEffect(() => {
     if (data) {
@@ -75,7 +79,15 @@ const UserPanelLayout = () => {
               />
               <div className="bg-neutral-03 mx-1 hidden h-6 w-[1px] sm:block"></div>
 
-              <LogOut size={20} />
+              <LogOut
+                onClick={() => {
+                  Cookies.remove('token');
+                  queryClient.invalidateQueries({ queryKey: ['me'] });
+                  navigate('/');
+                }}
+                className="cursor-pointer"
+                size={20}
+              />
             </div>
           </div>
 

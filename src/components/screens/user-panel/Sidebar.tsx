@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
   Handbag,
@@ -11,6 +11,7 @@ import {
 import { LucideIcon } from 'lucide-react';
 import { Button } from '../../ui/button';
 import Cookies from 'js-cookie';
+import { useQueryClient } from '@tanstack/react-query';
 
 type SidebarItem = {
   id: string;
@@ -54,7 +55,8 @@ const items: SidebarItem[] = [
 
 const Sidebar = ({ className }: { className: string }) => {
   const { pathname } = useLocation();
-
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   return (
     <aside
       className={`${className} scrollbar-minimal hide-scrollbar border-neutral-02 z-50 hidden h-screen min-w-[280px] shrink-0 flex-col overflow-y-auto border-r bg-white p-5 lg:sticky lg:top-0 lg:flex lg:w-[18%]`}
@@ -94,7 +96,9 @@ const Sidebar = ({ className }: { className: string }) => {
         })}
         <Button
           onClick={() => {
-            Cookies;
+            Cookies.remove('token');
+            queryClient.invalidateQueries({ queryKey: ['me'] });
+            navigate('/');
           }}
           variant={'ghost'}
           className={`font-VazirMedium mr-1 w-full justify-start gap-4 text-right`}
