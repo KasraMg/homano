@@ -14,6 +14,7 @@ export interface User {
   createdAt: string; //
   updatedAt: string;
   addresses: Address[];
+  orders: Orders[];
 }
 
 export interface CartItem {
@@ -42,4 +43,29 @@ export interface Address {
     provinceId: string;
     provinceName: string;
   };
+}
+export interface Orders {
+  _id: number;
+  information: {
+    postalCode: string;
+    address: string;
+    city: {
+      cityName: string;
+      cityId: string;
+      provinceId: string;
+    };
+    province: {
+      provinceId: string;
+      provinceName: string;
+    };
+    firstName: string;
+    lastName: string;
+    method: string;
+  };
+  products: CartItem[];
+  status: string;
+  totalPrice: 44000000;
+  trackingCode: string;
+  user: string;
+  createdAt: string;
 }

@@ -1,9 +1,7 @@
-import OrdersScreen from '../../../components/screens/user-panel/orders/orders-screen'
+import OrdersScreen from '../../../components/screens/user-panel/orders/orders-screen';
 
 const Orders = () => {
-    return (
-        <OrdersScreen />
-    )
-}
+  return <OrdersScreen />;
+};
 
-export default Orders
+export default Orders;

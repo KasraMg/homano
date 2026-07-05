@@ -48,7 +48,7 @@ const AccountScreen = () => {
   }, [data, reset]);
 
   return (
-    <section className="my-10 w-full rounded-md border bg-white p-6 shadow-lg transition-all">
+    <section className="my-10 w-full rounded-md border bg-white p-4 xs:!p-6 shadow-lg transition-all">
       <div className="mb-8">
         <div className="flex items-center justify-start gap-3">
           <div className="bg-neutral-01 flex size-9 items-center justify-center rounded-md">

@@ -24,7 +24,7 @@ const routes = [
   { path: '/checkout', element: <Checkout /> },
   { path: '/order-complete/:trackingCode', element: <OrderComplete /> },
   { path: '/blogs', element: <Blogs /> },
-  { path: '/blogs/:id', element: <Blog /> },
+  { path: '/blogs/:slug/:name', element: <Blog /> },
   {
     path: '/user-panel',
     element: <UserPanelLayout />,

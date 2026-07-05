@@ -1,4 +1,3 @@
-import React from 'react';
 import Container from '../../modules/container';
 import { Link, useParams } from 'react-router-dom';
 import Stepper from '../../modules/stepper';
@@ -8,6 +7,7 @@ import useOrder from '../../../endpoints/useOrder';
 import { localAssetsUrl } from '../../../utils/constants';
 import { CartItem } from '../../../types/user.types';
 import { Skeleton } from '../../modules/skeleton';
+import { toJalaliDate } from '../../../utils/helpers';
 
 const OrderComplateScreen = () => {
   const { trackingCode } = useParams();
@@ -79,7 +79,7 @@ const OrderComplateScreen = () => {
                 {orderRequestPending ? (
                   <Skeleton className="h-7 w-20" />
                 ) : (
-                  order?.createdAt
+                  toJalaliDate(order.createdAt)
                 )}
               </p>
             </div>

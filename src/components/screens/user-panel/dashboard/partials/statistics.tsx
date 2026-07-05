@@ -1,28 +1,45 @@
 import { Handbag, Heart, MapPin, MessageCircle } from 'lucide-react';
-import React from 'react';
+import { User } from '../../../../../types/user.types';
+import { Skeleton } from '../../../../modules/skeleton';
+import { Link } from 'react-router-dom';
 
 type DashboardItem = {
   title: string;
-  count: number;
+  count?: number;
   icon: React.ReactNode;
-  desc: string;
+  desription: string;
+  route: string;
 };
-const Statistics = () => {
+const Statistics = ({ data }: { data: User | undefined }) => {
   const items: DashboardItem[] = [
     {
       title: 'آدرس‌های من',
-      count: 3,
+      count: data?.addresses.length,
       icon: <MapPin />,
-      desc: 'مدیریت آدرس ها',
+      route: 'account',
+      desription: 'مدیریت آدرس ها',
     },
     {
       title: 'پیام های من',
       count: 2,
       icon: <MessageCircle />,
-      desc: 'مشاهده پیام ها',
+      route: 'tickets',
+      desription: 'مشاهده پیام ها',
     },
-    { title: 'سفارش‌های من', count: 12, icon: <Handbag />, desc: 'مشاهده همه' },
-    { title: 'علاقه‌مندی‌ها', count: 8, icon: <Heart />, desc: 'مشاهده همه' },
+    {
+      title: 'سفارش‌های من',
+      count: data?.orders.length,
+      icon: <Handbag />,
+      route: 'orders',
+      desription: 'مشاهده سفارشات',
+    },
+    {
+      title: 'علاقه‌مندی‌ها',
+      count: data?.wishlist.length,
+      icon: <Heart />,
+      route: 'favorites',
+      desription: 'مشاهده علاقه مندی ها',
+    },
   ];
   return (
     <div
@@ -30,9 +47,10 @@ const Statistics = () => {
       dir="rtl"
     >
       {items.map((box, i) => (
-        <div
+        <Link
+          to={`/user-panel/${box.route}`}
           key={i}
-          className="  flex items-start gap-4 rounded-md border bg-white px-6 py-4 shadow-sm transition-all"
+          className="flex items-start gap-4 rounded-md border bg-white px-6 py-4 shadow-sm transition-all"
         >
           <div className="bg-neutral-01 text-secondary-color-blue flex size-14 items-center justify-center rounded-full">
             {box.icon}
@@ -42,13 +60,17 @@ const Statistics = () => {
               {box.title}
             </span>
             <span className="text-neutral-07 font-VazirBold text-2xl">
-              {box.count.toLocaleString('fa-ir')}
+              {data ? (
+                box.count?.toLocaleString('fa-ir')
+              ) : (
+                <Skeleton className="h-8 w-8" />
+              )}
             </span>
             <span className="text-neutral-04 font-VazirMedium text-xs">
-              {box.desc}
+              {box.desription}
             </span>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

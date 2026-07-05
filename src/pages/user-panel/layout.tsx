@@ -1,14 +1,18 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { Bell, Menu, LogOut, ShoppingCartIcon } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '../../components/ui/sheet';
 import { useUser } from '../../endpoints/useUser';
 import { useEffect, useState } from 'react';
 import Badge from '../../components/ui/badge';
 import Sidebar from '../../components/screens/user-panel/sidebar';
+import { useQueryClient } from '@tanstack/react-query';
+import Cookies from 'js-cookie';
 
 const UserPanelLayout = () => {
   const { data } = useUser();
   const [count, setCount] = useState<null | number>(null);
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   console.log(data);
   useEffect(() => {
     if (data) {
@@ -21,12 +25,12 @@ const UserPanelLayout = () => {
       <Sidebar className="hidden lg:!block" />
 
       <section className="w-full p-2">
-        <div className="border-neutral-02 rounded-md border bg-white p-4 shadow-sm sm:p-6">
+        <div className="border-neutral-02 h-full rounded-md border bg-white p-4 shadow-sm sm:p-6">
           <div className="flex flex-wrap items-center justify-between gap-4 lg:flex-nowrap">
             <div className="flex items-center gap-3">
               <div className="hidden lg:!block">
                 <h2 className="font-VazirBold text-neutral-07 text-lg sm:text-xl">
-                   درود {data?.name} عزیز 👋
+                  درود {data?.name} عزیز 👋
                 </h2>
                 <p className="font-VazirMedium text-neutral-04 mt-2 text-xs sm:text-sm">
                   به پنل کاربری خود در گالری هومانو خوش آمدید.
@@ -75,7 +79,15 @@ const UserPanelLayout = () => {
               />
               <div className="bg-neutral-03 mx-1 hidden h-6 w-[1px] sm:block"></div>
 
-              <LogOut size={20} />
+              <LogOut
+                onClick={() => {
+                  Cookies.remove('token');
+                  queryClient.setQueryData(['me'], null);
+                  navigate('/');
+                }}
+                className="cursor-pointer"
+                size={20}
+              />
             </div>
           </div>
 

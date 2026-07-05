@@ -5,7 +5,7 @@ import { localBackendUrl } from '../utils/constants';
 const useBlogs = () => {
   const { getParam } = useQueryParams();
 
-  const fetchShopData = async () => {
+  const fetchData = async () => {
     const params = new URLSearchParams();
 
     if (getParam('page') as string) {
@@ -34,7 +34,7 @@ const useBlogs = () => {
       getParam('page') as string,
       getParam('sortBy') as string,
     ],
-    queryFn: fetchShopData,
+    queryFn: fetchData,
   });
 
   return { data, isPending };

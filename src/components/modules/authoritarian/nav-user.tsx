@@ -12,7 +12,7 @@ const NavUser = ({ user, isLoading }: { user: User; isLoading: boolean }) => {
         <Skeleton className="h-9 w-11 rounded-lg sm:!w-20" />
       ) : user ? (
         <Link to={'/user-panel/dashboard'}>
-          <Button variant={'mainShaded'}>
+          <Button className='!text-black' variant={'mainShaded'}>
             پنل کاربری <UserIcon />
           </Button>
         </Link>
