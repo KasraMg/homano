@@ -8,7 +8,7 @@ const DashboardScreen = () => {
   
   return (
     <>
-      <Statistics />
+      <Statistics data={data}/>
       <div className="mb-5 flex w-full flex-col gap-4 xl:flex-row" dir="rtl">
         <LastOrders data={data} />
         <FavoriteProducts data={data}/>

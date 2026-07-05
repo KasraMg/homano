@@ -21,12 +21,12 @@ const UserPanelLayout = () => {
       <Sidebar className="hidden lg:!block" />
 
       <section className="w-full p-2">
-        <div className="border-neutral-02 rounded-md border bg-white p-4 shadow-sm sm:p-6">
+        <div className="border-neutral-02 h-full rounded-md border bg-white p-4 shadow-sm sm:p-6">
           <div className="flex flex-wrap items-center justify-between gap-4 lg:flex-nowrap">
             <div className="flex items-center gap-3">
               <div className="hidden lg:!block">
                 <h2 className="font-VazirBold text-neutral-07 text-lg sm:text-xl">
-                   درود {data?.name} عزیز 👋
+                  درود {data?.name} عزیز 👋
                 </h2>
                 <p className="font-VazirMedium text-neutral-04 mt-2 text-xs sm:text-sm">
                   به پنل کاربری خود در گالری هومانو خوش آمدید.
