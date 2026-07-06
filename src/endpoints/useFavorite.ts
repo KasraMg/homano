@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 
 const toggleFavorite = async (code: number) => {
-  const response = await fetch(localBackendUrl + `/toggleWishlist/${code}`, {
+  const response = await fetch(localBackendUrl + `/toggle/wishlist/${code}`, {
     method: 'POST',
     headers: {
       authorization: `Bearer ${Cookies.get('token')}`,

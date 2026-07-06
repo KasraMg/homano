@@ -7,18 +7,15 @@ const createFeedback = async (
   productCode: number,
   body: { comment: string; rating: number },
 ) => {
-  const response = await fetch(
-    localBackendUrl + `/createFeedback/${productCode}`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${Cookies.get('token')}`,
-      },
-
-      body: JSON.stringify(body),
+  const response = await fetch(localBackendUrl + `/feedback/${productCode}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${Cookies.get('token')}`,
     },
-  );
+
+    body: JSON.stringify(body),
+  });
   const data = await response.json();
   return data;
 };
@@ -26,7 +23,7 @@ const createFeedback = async (
 const fetchData = async (productCode: number, page: number) => {
   const response = await fetch(
     localBackendUrl +
-      `/getProductFeedbacks/${productCode}${page ? `?page=${page}` : ''}`,
+      `/product/feedbacks/${productCode}${page ? `?page=${page}` : ''}`,
   );
   const data = await response.json();
   return data;

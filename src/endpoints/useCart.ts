@@ -4,7 +4,7 @@ import { localBackendUrl } from '../utils/constants';
 import Cookies from 'js-cookie';
 
 const addToCart = async (args: { color: string; code: number }) => {
-  const response = await fetch(`${localBackendUrl}/addToCart`, {
+  const response = await fetch(`${localBackendUrl}/cart`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ const addToCart = async (args: { color: string; code: number }) => {
 };
 
 const updateItemQuantity = async (args: { id: string; action: string }) => {
-  const response = await fetch(`${localBackendUrl}/updateCartItemQuantity`, {
+  const response = await fetch(`${localBackendUrl}/cart`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ const updateItemQuantity = async (args: { id: string; action: string }) => {
   return data;
 };
 const removeFromCart = async (id: string) => {
-  const response = await fetch(`${localBackendUrl}/removeFromCart/${id}`, {
+  const response = await fetch(`${localBackendUrl}/cart/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
