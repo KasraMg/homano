@@ -4,22 +4,32 @@ import Cookies from 'js-cookie';
 
 const fetchData = async (productId: number) => {
   const headers: { authorization?: string } = {};
-  if (Cookies.get('token')) {
-    headers.authorization = `Bearer ${Cookies.get('token')}`;
+
+  const token = Cookies.get('token');
+
+  if (token) {
+    headers.authorization = `Bearer ${token}`;
   }
+
   const res = await fetch(`${localBackendUrl}/product/${productId}`, {
     headers,
   });
+
   const data = await res.json();
+
+  if (!res.ok) {
+    throw data;
+  }
+
   return data;
 };
 
 const useProduct = (productId: number) => {
-  const { data, isPending } = useQuery({
+  return useQuery({
     queryKey: ['product', productId],
     queryFn: () => fetchData(productId),
+    retry: false,
   });
-  return { data, isPending };
 };
 
 export default useProduct;

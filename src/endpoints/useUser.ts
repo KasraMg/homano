@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 import { User } from '../types/user.types';
 
 export const fetchMe = async () => {
-  const response = await fetch(`${localBackendUrl}/getMe`, {
+  const response = await fetch(`${localBackendUrl}/me`, {
     headers: {
       Authorization: `Bearer ${Cookies.get('token')}`,
     },
@@ -28,7 +28,7 @@ const editUser = async (data: {
   name?: string;
   nationalCode?: string;
 }) => {
-  const response = await fetch(`${localBackendUrl}/editUser`, {
+  const response = await fetch(`${localBackendUrl}/me`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
