@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useUser } from '../../../../endpoints/useUser';
-import { CartItem } from '../../../../types/user.types';
 import { Skeleton } from '../../../modules/skeleton';
+import { getCartTotalPrice } from '../../../../utils/helpers';
 
 export const OrderSummary = () => {
   const { data } = useUser();
@@ -11,11 +11,7 @@ export const OrderSummary = () => {
 
   useEffect(() => {
     if (data?.cart) {
-      const prices = data.cart.map(
-        (item: CartItem) => item.quantity * item.product.price,
-      );
-      const total = prices.reduce((a: number, b: number) => a + b, 0);
-      setTotalPrice(total);
+      setTotalPrice(getCartTotalPrice(data.cart));
     }
     if (localStorage.getItem('order-type')) {
       setOrderType(localStorage.getItem('order-type'));
