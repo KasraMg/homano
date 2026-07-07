@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react"; 
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 type TopbarProps = {
   onClose?: () => void;
@@ -13,36 +14,26 @@ const Topbar = ({ onClose, forceHide = false }: TopbarProps) => {
     if (forceHide) setVisible(false);
   }, [forceHide]);
 
-  const handleClose = () => {
-    setVisible(false);
-    if (onClose) onClose();
-  };
-
   if (!visible) return null;
 
   return (
     <>
       {showBanner && (
-        <div className="relative flex items-center justify-center gap-4 w-full h-10 bg-main px-3 sm:px-0">
-          <div className="inline-flex items-center justify-center gap-3 relative">
+        <Link
+          to={'/shop'}
+          className="bg-main relative flex h-10 w-full items-center justify-center gap-4 px-3 sm:px-0"
+        >
+          <div className="relative inline-flex items-center justify-center gap-3">
             <img
-              style={{ filter: "invert(1)" }}
+              style={{ filter: 'invert(1)' }}
               src="/Images/ticket-percent.svg"
-              className="relative size-6   transition-all"
+              className="relative size-6 transition-all"
             />
-            <p className="font-bold text-white leading-[22px] text-sm text-center">
+            <p className="text-center text-sm leading-[22px] font-bold text-white">
               ۳۰٪ تخفیف روی تمام محصولات — مدت محدود!
             </p>
           </div>
-          {/* <div className="hidden sm:inline-flex">
-            <ArrowLink
-              title="مشاهده فروشگاه"
-              textColor="text-secondary-color-blue"
-              borderColor="border-secondary-color-blue"
-              to="/Shop"
-            />
-          </div> */}
-        </div>
+        </Link>
       )}
     </>
   );

@@ -21,7 +21,7 @@ const Statistics = ({ data }: { data: User | undefined }) => {
     },
     {
       title: 'پیام های من',
-      count: 2,
+      count: data?.ticketsCount,
       icon: <MessageCircle />,
       route: 'tickets',
       desription: 'مشاهده پیام ها',

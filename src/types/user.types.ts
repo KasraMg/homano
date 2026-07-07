@@ -3,6 +3,7 @@ import { Product } from './product.types';
 export interface User {
   _id: string;
   name: string;
+  ticketsCount: number;
   email: string;
   phone: string;
   role: 'admin' | 'user' | 'moderator';
