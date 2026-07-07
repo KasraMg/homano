@@ -11,7 +11,7 @@ import Dashboard from './pages/user-panel/dashboard/dashboard';
 import Orders from './pages/user-panel/orders/orders';
 import Favorites from './pages/user-panel/favorites/favorties';
 import Tickets from './pages/user-panel/tickets/tickets';
-import Account from './pages/user-panel/acount/account';
+import Account from './pages/user-panel/account/account';
 import { Navigate } from 'react-router-dom';
 import UserPanelLayout from './pages/user-panel/layout';
 import Ticket from './pages/user-panel/tickets/ticket/ticket';

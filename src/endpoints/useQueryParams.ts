@@ -23,36 +23,38 @@ export function useQueryParams() {
   };
 
   const setParams = (newParams: QueryParams, replace: boolean = false) => {
-    const currentParams = getParams();
+    const current = getParams();
 
-    const merged = { ...currentParams, ...newParams };
+    const merged = {
+      ...current,
+      ...newParams,
+    };
 
     Object.keys(merged).forEach((key) => {
-      if (merged[key] === null || merged[key] === undefined) {
+      if (merged[key] == null) {
         delete merged[key];
       }
     });
 
-    const urlParams = new URLSearchParams();
+    const url = new URLSearchParams();
+
     Object.entries(merged).forEach(([key, value]) => {
-      if (value !== null && value !== undefined) {
-        urlParams.set(key, String(value));
+      url.set(key, String(value));
+    });
+
+    setSearchParams(url, { replace });
+  };
+
+  const replaceParams = (newParams: QueryParams, replace = false) => {
+    const url = new URLSearchParams();
+
+    Object.entries(newParams).forEach(([key, value]) => {
+      if (value != null) {
+        url.set(key, String(value));
       }
     });
 
-    setSearchParams(urlParams, { replace });
-  };
-
-  const removeParams = (keys: string | string[]) => {
-    const keysArray = Array.isArray(keys) ? keys : [keys];
-    const params = new URLSearchParams(window.location.search);
-
-    keysArray.forEach((key) => params.delete(key));
-
-    const newQuery = params.toString();
-    const newUrl = newQuery ? `?${newQuery}` : window.location.pathname;
-
-    window.history.replaceState({}, '', newUrl);
+    setSearchParams(url, { replace });
   };
 
   const clearParams = (replace: boolean = false) => {
@@ -61,10 +63,10 @@ export function useQueryParams() {
 
   return {
     searchParams,
+    replaceParams,
     getParams,
     getParam,
     setParams,
-    removeParams,
     clearParams,
   };
 }

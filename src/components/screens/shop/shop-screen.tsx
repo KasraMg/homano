@@ -3,55 +3,62 @@ import Container from '../../../components/modules/container';
 import Card from '../../modules/product-card';
 import { Product } from '../../../types/product.types';
 import useShop from '../../../endpoints/useShop';
-import { useEffect, useState } from 'react';
-import { ProductFilters } from './partials/product-filters';
+import { useEffect } from 'react';
+import ProductFiltersWrapper from './partials/product-filters-wrapper';
 import ProductSkeleton from './partials/product-skeleton';
-import { Filters } from './partials/filters';
 import PaginationWrapper from '../../modules/pagination-wrapper';
 import { useNavigate } from 'react-router-dom';
+import { useProductFilters } from '../../../store/product-filter';
 
 const ShopScreen = () => {
-  const [activeFilters, setActiveFilters] = useState<Filters | undefined>(undefined);
-
-  const { data, isPending, filtersData } = useShop(activeFilters)
-  const handleFilterChange = (filters: any) => {
-    setActiveFilters(filters);
-  };
   const navigate = useNavigate();
+  const filters = useProductFilters((state) => state.filters);
+  const { data, isPending, filtersData } = useShop(filters);
 
   useEffect(() => {
-    if (data) {
-      if (data.page > 1) {
-        if (data.totalPages < data.page) {
-          navigate('/shop', { replace: true });
-        }
-      }
+    if (!data) return;
+    if (data.page > 1 && data.page > data.totalPages) {
+      navigate('/shop', { replace: true });
     }
-  }, [data])
+  }, [data]);
 
   return (
     <Container>
       <Breadcrumb className="pt-5" title="فروشگاه" />
-      <div className="flex md:!flex-row flex-col gap-4 pt-5 pb-10">
-        <ProductFilters
-          onFilterChange={handleFilterChange}
-          filtersData={filtersData}
-        />
 
-        {!isPending || data?.products.length == 0 ? (
-          data?.products.length > 0 ?
-            <div className='space-y-5 w-full'>
-              <div className="grid grid-cols-1 xs:grid-cols-2 lg:!grid-cols-3 gap-6 w-full">
-                {data.products.map((pr: Product) => (
-                  <Card data={pr} />
+      <div className="flex flex-col gap-4 pt-5 pb-10 md:flex-row">
+        <ProductFiltersWrapper filtersData={filtersData} />
+
+        {!isPending || data?.products.length === 0 ? (
+          data?.products.length ? (
+            <div className="w-full space-y-5">
+              <div className="xs:grid-cols-2 grid grid-cols-1 gap-6 lg:!grid-cols-3">
+                {data.products.map((product: Product) => (
+                  <Card key={product._id} data={product} />
                 ))}
               </div>
-              <PaginationWrapper limit={5} key={'shop'} page={data.page} totalItems={data.total} />
-            </div>
 
-            : <p className='text-center pt-20 w-full text-3xl'>کالایی یافت نشد</p>
+              <PaginationWrapper
+                key="shop"
+                page={data.page}
+                limit={5}
+                totalItems={data.total}
+              />
+            </div>
+          ) : (
+            <div className="w-full pt-20 text-center">
+              <img className="mx-auto" src="/Images/notfound.png" alt="" />
+
+              <p className="py-2 text-2xl">متاسفانه کالایی یافت نشد</p>
+
+              <p>
+                برای رسیدن به نتیجه بهتر، ترکیب‌های مختلفی از فیلترها را امتحان
+                کنید.
+              </p>
+            </div>
+          )
         ) : (
-          <div className="grid grid-cols-1 xs:grid-cols-2 lg:!grid-cols-3 gap-6 w-full">
+          <div className="xs:grid-cols-2 grid w-full grid-cols-1 gap-6 lg:!grid-cols-3">
             <ProductSkeleton />
             <ProductSkeleton />
             <ProductSkeleton />
@@ -60,7 +67,6 @@ const ShopScreen = () => {
             <ProductSkeleton />
           </div>
         )}
-        { }
       </div>
     </Container>
   );
