@@ -11,3 +11,8 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+td {
+  padding: 10px;
+  white-space: nowrap;
+}
