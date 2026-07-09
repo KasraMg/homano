@@ -7,6 +7,7 @@ import ShareModal from './share-modal';
 import useCart from '../../endpoints/useCart';
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import useFavorite from '../../endpoints/useFavorite';
 
 const ProductCard = ({
   data: {
@@ -27,6 +28,7 @@ const ProductCard = ({
   isPanel?: boolean;
 }) => {
   const { mutation } = useCart();
+  const { mutation: removeFromFavorites } = useFavorite();
   const [isInCartStatus, setIsInCartStatus] = useState(isInCart);
   const queryClinet = useQueryClient();
   return (
@@ -120,7 +122,17 @@ const ProductCard = ({
       </Link>
       {isPanel ? (
         <div className="p-4 pt-1">
-          <Button className="w-full" variant={'danger'}>
+          <Button
+            onClick={() => {
+              removeFromFavorites.mutate(code, {
+                onSuccess() {
+                  queryClinet.invalidateQueries({ queryKey: ['me'] });
+                },
+              });
+            }}
+            className="w-full"
+            variant={'danger'}
+          >
             حذف از علاقه مندی ها
             <Trash />{' '}
           </Button>

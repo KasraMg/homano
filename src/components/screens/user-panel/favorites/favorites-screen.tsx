@@ -19,7 +19,7 @@ const FavoritesScreen = () => {
       </div>
 
       {!isPending || (data as any)?.wishlist.length == 0 ? (
-        data?.wishlist.length > 0 ? (
+        data && data?.wishlist.length > 0 ? (
           <div className="w-full space-y-5 pt-10">
             <div className="grid w-full grid-cols-1 gap-6 sm:!grid-cols-2 lg:!grid-cols-3 xl:!grid-cols-4">
               {data.wishlist.map((pr: WishlistItem) => (
@@ -31,7 +31,7 @@ const FavoritesScreen = () => {
           <p className="w-full py-20 text-center text-2xl">کالایی یافت نشد</p>
         )
       ) : (
-        <div className="xs:grid-cols-2 grid w-full grid-cols-1 gap-6 lg:!grid-cols-3">
+        <div className="xs:grid-cols-2 grid w-full grid-cols-1 gap-6 pt-10 lg:!grid-cols-3">
           <ProductSkeleton />
           <ProductSkeleton />
           <ProductSkeleton />

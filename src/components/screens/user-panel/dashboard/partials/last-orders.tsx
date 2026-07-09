@@ -1,11 +1,14 @@
 import { ChevronLeft } from 'lucide-react';
-import { User } from '../../../../../types/user.types';
+import { Orders, User } from '../../../../../types/user.types';
 import { localAssetsUrl } from '../../../../../utils/constants';
 import { Link } from 'react-router-dom';
 import { toJalaliDate } from '../../../../../utils/helpers';
 import { Skeleton } from '../../../../modules/skeleton';
+import useOrder from '../../../../../endpoints/useOrder';
 
-const LastOrders = ({ data }: { data: User | undefined }) => {
+const LastOrders = () => {
+  const { orders } = useOrder();
+
   return (
     <div className="w-full rounded-md border bg-white px-6 py-6 shadow-sm transition-all xl:w-[40%]">
       <div className="mb-4 flex items-center justify-between">
@@ -22,9 +25,9 @@ const LastOrders = ({ data }: { data: User | undefined }) => {
       </div>
 
       <div className="text-neutral-04 space-y-3 text-xs">
-        {data ? (
-          data.orders.length > 0 ? (
-            data?.orders.slice(0, 3).map((order) => (
+        {orders ? (
+          orders.length > 0 ? (
+            orders.slice(0, 3).map((order: Orders) => (
               <Link
                 to={'/user-panel/orders'}
                 className="border-neutral-02 flex items-center gap-4 border-b pb-3"
@@ -36,7 +39,7 @@ const LastOrders = ({ data }: { data: User | undefined }) => {
                 />
                 <div className="flex flex-1 items-center justify-between">
                   <div className="mb-1 flex flex-col gap-2">
-                    <span className="font-VazirBold text-sm text-neutral-07 block">
+                    <span className="font-VazirBold text-neutral-07 block text-sm">
                       سفارش #{order.trackingCode}
                     </span>
                     <span className="font-VazirRegular text-neutral-04 block">

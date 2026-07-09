@@ -80,7 +80,7 @@ const CheckoutSidebar = () => {
                 <label htmlFor="shop"> مراجعه حضوری</label>
               </div>
               <div className="font-VazirRegular text-neutral-07 text-base">
-                ۰ تومان
+                رایگان
               </div>
             </div>
           </div>

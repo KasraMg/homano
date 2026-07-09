@@ -22,7 +22,7 @@ const ProductScreen = () => {
   console.log('product', data);
 
   useEffect(() => {
-    if (data?.colors[0].code) {
+    if (data?.colors[0]?.code) {
       setActiveColor(data?.colors[0]);
     }
   }, [data]);

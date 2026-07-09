@@ -16,8 +16,8 @@ const Reviews = ({ data }: { data: Product }) => {
   const [commentsData, setCommentsData] = useState<Review[]>([])
 
   useEffect(() => {
-    if (comments) {
-      setCommentsData((prev) => [...prev, ...comments.feedbacks])
+    if (comments && comments.feedbacks) {
+      setCommentsData((prev) => [...prev, ...comments?.feedbacks])
       setTotalPage(comments.pages || 1)
     }
   }, [comments])

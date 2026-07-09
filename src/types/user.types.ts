@@ -4,6 +4,7 @@ export interface User {
   _id: string;
   name: string;
   ticketsCount: number;
+  ordersCount: number;
   email: string;
   phone: string;
   role: 'admin' | 'user' | 'moderator';

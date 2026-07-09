@@ -28,7 +28,7 @@ const Statistics = ({ data }: { data: User | undefined }) => {
     },
     {
       title: 'سفارش‌های من',
-      count: data?.orders.length,
+      count: data?.ordersCount,
       icon: <Handbag />,
       route: 'orders',
       desription: 'مشاهده سفارشات',
