@@ -6,20 +6,21 @@ import { Button } from '../../../ui/button';
 import OrdersNav from './partials/orders-nav';
 import OrdersInformation from './partials/orders-information';
 import OrdersSkeleton from './partials/orders-skeleton';
+import useOrder from '../../../../endpoints/useOrder';
 
 const OrdersScreen = () => {
   const [filter, setFilter] = useState<string>('all');
-  const { data } = useUser();
   const [orders, setOrders] = useState<Orders[] | null>(null);
+  const { orders: data } = useOrder();
 
   useEffect(() => {
     if (data) {
       if (filter !== 'all') {
-        const filteredOrders = data.orders.filter(
-          (order) => order.status == filter,
+        const filteredOrders = data.filter(
+          (order: Orders) => order.status == filter,
         );
         setOrders(filteredOrders);
-      } else setOrders(data.orders);
+      } else setOrders(data);
     }
   }, [data, filter]);
 

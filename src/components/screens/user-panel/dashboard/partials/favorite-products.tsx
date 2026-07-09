@@ -12,7 +12,7 @@ const FavoriteProducts = ({ data }: { data: User | undefined }) => {
           محصولات محبوب شما
         </h2>
         <Link
-          to="/user-panel/wishlist"
+          to="/user-panel/favorites"
           className="font-VazirMedium text-secondary-color-blue flex cursor-pointer items-center gap-2 text-xs"
         >
           مشاهده همه

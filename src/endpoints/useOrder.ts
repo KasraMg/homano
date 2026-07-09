@@ -36,6 +36,20 @@ export const fetchOrder = async (trackingCode: string) => {
 
   return result;
 };
+export const fetchOrders = async () => {
+  const response = await fetch(`${localBackendUrl}/orders`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get('token')}`,
+    },
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message);
+  }
+
+  return result;
+};
 
 const useOrder = (trackingCode?: string) => {
   const mutation = useMutation({
@@ -48,7 +62,11 @@ const useOrder = (trackingCode?: string) => {
     queryFn: () => fetchOrder(String(trackingCode)),
     enabled: !!trackingCode,
   });
-  return { mutation, order, orderRequestPending };
+  const { data: orders, isPending: ordersRequestPending } = useQuery({
+    queryKey: ['get-orders'],
+    queryFn: fetchOrders,
+  });
+  return { mutation, order, orderRequestPending, orders, ordersRequestPending };
 };
 
 export default useOrder;

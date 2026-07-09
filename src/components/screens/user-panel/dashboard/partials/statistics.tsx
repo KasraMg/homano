@@ -21,14 +21,14 @@ const Statistics = ({ data }: { data: User | undefined }) => {
     },
     {
       title: 'پیام های من',
-      count: 2,
+      count: data?.ticketsCount,
       icon: <MessageCircle />,
       route: 'tickets',
       desription: 'مشاهده پیام ها',
     },
     {
       title: 'سفارش‌های من',
-      count: data?.orders.length,
+      count: data?.ordersCount,
       icon: <Handbag />,
       route: 'orders',
       desription: 'مشاهده سفارشات',

@@ -200,7 +200,7 @@ const AddressModal = () => {
           <div className="w-full space-y-4">
             {userData && userData?.addresses.length > 0 ? (
               userData?.addresses.map((address: Address) => (
-                <div className="border-neutral-03 bg-main relative w-full rounded-md border p-3 text-sm">
+                <div className="border-neutral-03 bg-light-blue relative w-full rounded-md border p-3 text-sm">
                   <p>
                     {address.province.provinceName} / {address.city.cityName} -{' '}
                     <span className="text-gray-500">{address.postalCode}</span>

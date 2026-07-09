@@ -1,24 +1,18 @@
 import { Button } from '../../../ui/button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { CartItem } from '../../../../types/user.types';
 import useCheckout from './hook';
+import { getCartTotalPrice } from '../../../../utils/helpers';
 
 const CheckoutSidebar = () => {
   const [type, setType] = useState('post');
   const [totalPrice, setTotalPrice] = useState<number | null>(null);
 
-  const { user, isSubmitting } = useCheckout();
-
-  const navigate = useNavigate();
+  const { user } = useCheckout();
 
   useEffect(() => {
     if (user?.cart) {
-      const prices = user.cart.map(
-        (item: CartItem) => item.quantity * item.product.price,
-      );
-      const total = prices.reduce((a: number, b: number) => a + b, 0);
-      setTotalPrice(total);
+      setTotalPrice(getCartTotalPrice(user.cart));
     }
   }, [user]);
 
@@ -86,28 +80,32 @@ const CheckoutSidebar = () => {
                 <label htmlFor="shop"> مراجعه حضوری</label>
               </div>
               <div className="font-VazirRegular text-neutral-07 text-base">
-                ۰ تومان
+                رایگان
               </div>
             </div>
           </div>
           <hr className="border-neutral-03 w-full border" />
           {/* Total */}
-          <div className="flex w-full items-center justify-between py-3">
-            <div className="text-neutral-07 text-xl font-bold transition-all">
-              مجموع
+          {user?.cart.length !== 0 ? (
+            <div className="flex w-full items-center justify-between py-3">
+              <div className="text-neutral-07 text-xl font-bold transition-all">
+                مجموع
+              </div>
+              <div className="text-neutral-07 text-xl font-bold transition-all">
+                {user?.cart.length !== 0
+                  ? (
+                      Number(totalPrice) +
+                      (type == 'post' ? 50000 : type == 'tipax' ? 120000 : 0)
+                    )?.toLocaleString()
+                  : '-'}{' '}
+                تومان
+              </div>
             </div>
-            <div className="text-neutral-07 text-xl font-bold transition-all">
-              {user?.cart.length !== 0
-                ? (
-                    Number(totalPrice) +
-                    (type == 'post' ? 50000 : type == 'tipax' ? 120000 : 0)
-                  )?.toLocaleString()
-                : 0}{' '}
-              تومان
-            </div>
-          </div>
+          ) : (
+            ''
+          )}
         </div>
-        <Link to={'/checkout'} className='w-full'>
+        <Link to={'/checkout'} className="w-full">
           <Button className="h-10 w-full" variant={'main'}>
             ادامه فرایند خرید
           </Button>
