@@ -10,7 +10,7 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from '../../ui/carousel';
-import useBlog from '../../../endpoints/useBlog';
+import useBlog from '../../../api/useBlog';
 import { toJalaliDate } from '../../../utils/helpers';
 import { localAssetsUrl } from '../../../utils/constants';
 import { Skeleton } from '../../modules/skeleton';

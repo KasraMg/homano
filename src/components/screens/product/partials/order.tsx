@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import useCart from '../../../../endpoints/useCart';
-import { useUser } from '../../../../endpoints/useUser';
+import useCart from '../../../../api/useCart';
+import { useUser } from '../../../../api/useUser';
 import { Product } from '../../../../types/product.types';
 import { Button } from '../../../ui/button';
 import { LoaderCircleIcon, ShoppingBag } from 'lucide-react';
 import { CartItem } from '../../../../types/user.types';
 import QuantityControls from './quantity-controls';
 import { useQueryClient } from '@tanstack/react-query';
+import AuthoritarianSteps from '../../../modules/authoritarian/authoritarian-steps';
 
 const Order = ({
   data,
@@ -18,6 +19,7 @@ const Order = ({
   const { mutation } = useCart();
   const { data: user } = useUser();
   const [cartProduct, setCartProduct] = useState<null | CartItem>(null);
+  const [showLoginForm, setShowLoginForm] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -81,17 +83,21 @@ const Order = ({
         />
       ) : (
         <Button
-          onClick={() =>
-            mutation.mutate(
-              { color: String(activeColor?.code), code: data.code },
-              {
-                onSuccess: (data) => {
-                  queryClinet.invalidateQueries({ queryKey: ['me'] });
-                  setCartProduct(data.product);
+          onClick={() => {
+            if (!user) {
+              setShowLoginForm(true);
+            } else
+              mutation.mutate(
+                { color: String(activeColor?.code), code: data.code },
+                {
+                  onSuccess: (data) => {
+                    setCartProduct(data.product);
+                    queryClinet.invalidateQueries({ queryKey: ['me'] });
+
+                  },
                 },
-              },
-            )
-          }
+              );
+          }}
           className="h-12 w-full"
           variant={'main'}
         >
@@ -103,6 +109,27 @@ const Order = ({
             </>
           )}{' '}
         </Button>
+      )}
+
+      {showLoginForm ? (
+        <AuthoritarianSteps
+          setIsOpen={setShowLoginForm}
+          endFunction={() => {
+            mutation.mutate(
+              { color: String(activeColor?.code), code: data.code },
+              {
+                onSuccess: (data) => {
+                  queryClinet.invalidateQueries({ queryKey: ['me'] });
+                  setCartProduct(data.product);
+                },
+              },
+            );
+            setShowLoginForm(false);
+          }}
+          isOpen={true}
+        />
+      ) : (
+        ''
       )}
     </div>
   );

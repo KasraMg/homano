@@ -5,7 +5,7 @@ import persian_fa from 'react-date-object/locales/persian_fa';
 import { User } from 'lucide-react';
 import { Button } from '../../../ui/button';
 import { useEffect } from 'react';
-import { useUser } from '../../../../endpoints/useUser';
+import { useUser } from '../../../../api/useUser';
 import ChangePasswordModal from './partials/change-password/change-password-modal';
 import AddressModal from './partials/address/address-modal';
 

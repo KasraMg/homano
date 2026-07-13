@@ -4,10 +4,12 @@ import { Product } from '../../types/product.types';
 import { Button } from '../ui/button';
 import { localAssetsUrl } from '../../utils/constants';
 import ShareModal from './share-modal';
-import useCart from '../../endpoints/useCart';
+import useCart from '../../api/useCart';
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import useFavorite from '../../endpoints/useFavorite';
+import useFavorite from '../../api/useFavorite';
+import { useUser } from '../../api/useUser';
+import AuthoritarianSteps from './authoritarian/authoritarian-steps';
 
 const ProductCard = ({
   data: {
@@ -31,6 +33,9 @@ const ProductCard = ({
   const { mutation: removeFromFavorites } = useFavorite();
   const [isInCartStatus, setIsInCartStatus] = useState(isInCart);
   const queryClinet = useQueryClient();
+  const [showLoginForm, setShowLoginForm] = useState(false);
+  const { data: user } = useUser();
+
   return (
     <div
       key={code}
@@ -53,17 +58,20 @@ const ProductCard = ({
         <div className="absolute top-1/2 left-1/2 flex -translate-x-1/2 items-center justify-end gap-2 pt-0 opacity-0 group-hover:opacity-100">
           {!isInCartStatus ? (
             <Button
-              onClick={() =>
-                mutation.mutate(
-                  { color: String(colors[0]?.code), code: code },
-                  {
-                    onSuccess() {
-                      setIsInCartStatus(true);
-                      queryClinet.invalidateQueries({ queryKey: ['me'] });
+              onClick={() => {
+                if (!user) {
+                  setShowLoginForm(true);
+                } else
+                  mutation.mutate(
+                    { color: String(colors[0]?.code), code: code },
+                    {
+                      onSuccess() {
+                        setIsInCartStatus(true);
+                        queryClinet.invalidateQueries({ queryKey: ['me'] });
+                      },
                     },
-                  },
-                )
-              }
+                  );
+              }}
               className="tracking-button-s shadow-shadow-01 flex h-[40px] transform cursor-pointer items-center justify-center gap-2 rounded-lg border border-black bg-white px-2 py-3 text-sm text-black transition-all hover:bg-white hover:opacity-70"
             >
               افزودن به سبد خرید
@@ -137,6 +145,27 @@ const ProductCard = ({
             <Trash />{' '}
           </Button>
         </div>
+      ) : (
+        ''
+      )}
+
+      {showLoginForm ? (
+        <AuthoritarianSteps
+          setIsOpen={setShowLoginForm}
+          endFunction={() => {
+            mutation.mutate(
+              { color: String(colors[0]?.code), code: code },
+              {
+                onSuccess() {
+                  setIsInCartStatus(true);
+                  queryClinet.invalidateQueries({ queryKey: ['me'] });
+                },
+              },
+            );
+            setShowLoginForm(false);
+          }}
+          isOpen={true}
+        />
       ) : (
         ''
       )}

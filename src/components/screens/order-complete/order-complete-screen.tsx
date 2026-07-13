@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import Stepper from '../../modules/stepper';
 import { Button } from '../../ui/button';
 import Badge from '../../ui/badge';
-import useOrder from '../../../endpoints/useOrder';
+import useOrder from '../../../api/useOrder';
 import { localAssetsUrl } from '../../../utils/constants';
 import { CartItem } from '../../../types/user.types';
 import { Skeleton } from '../../modules/skeleton';

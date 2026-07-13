@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
-import useLocation from '../../../../endpoints/useLocation';
-import { useUser } from '../../../../endpoints/useUser';
+import useLocation from '../../../../api/useLocation';
+import { useUser } from '../../../../api/useUser';
 import { useForm } from 'react-hook-form';
 
 const schema = z.object({

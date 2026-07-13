@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from '../../../../components/ui/select';
 import CreateTicketModal from './partials/create-ticket-modal';
-import useTicket from '../../../../endpoints/useTicket';
+import useTicket from '../../../../api/useTicket';
 import { Ticket as TicketType } from '../../../../types/ticket.types';
 import Ticket from './partials/ticket';
 import { Skeleton } from '../../../modules/skeleton';

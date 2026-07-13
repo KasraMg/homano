@@ -3,8 +3,8 @@ import Stepper from '../../modules/stepper';
 import CheckoutForm from './partials/checkout-form';
 import { OrderSummary } from './partials/order-summary';
 import { Button } from '../../ui/button';
-import useLocation from '../../../endpoints/useLocation';
-import useOrder from '../../../endpoints/useOrder';
+import useLocation from '../../../api/useLocation';
+import useOrder from '../../../api/useOrder';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 

@@ -16,7 +16,7 @@ import {
 } from '../../../../../components/ui/select';
 import { Button } from '../../../../ui/button';
 import { toast } from 'sonner';
-import useTicket from '../../../../../endpoints/useTicket';
+import useTicket from '../../../../../api/useTicket';
 
 const CreateTicketModal = () => {
   const [open, setOpen] = useState(false);

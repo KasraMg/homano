@@ -4,7 +4,7 @@ import { localAssetsUrl } from '../../../../../utils/constants';
 import { Link } from 'react-router-dom';
 import { toJalaliDate } from '../../../../../utils/helpers';
 import { Skeleton } from '../../../../modules/skeleton';
-import useOrder from '../../../../../endpoints/useOrder';
+import useOrder from '../../../../../api/useOrder';
 
 const LastOrders = () => {
   const { orders } = useOrder();

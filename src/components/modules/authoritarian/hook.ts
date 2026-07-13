@@ -1,8 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useRegister as useRegisterEndpoint } from '../../../endpoints/useRegister';
+import { useRegister as useRegisterEndpoint } from '../../../api/useRegister';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { useLogin as useLoginEndpoint } from '../../../endpoints/useLogin';
+import { useLogin as useLoginEndpoint } from '../../../api/useLogin';
 
 const registerSchema = yup.object({
   name: yup

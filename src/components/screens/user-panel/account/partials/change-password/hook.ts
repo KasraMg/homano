@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { useUser } from '../../../../../../endpoints/useUser';
+import { useUser } from '../../../../../../api/useUser';
 import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 

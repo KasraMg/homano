@@ -3,7 +3,7 @@ import Order from './partials/order';
 import Main from './partials/main';
 import Reviews from './partials/reviews';
 import { Link, useParams } from 'react-router-dom';
-import useProduct from '../../../endpoints/useProduct';
+import useProduct from '../../../api/useProduct';
 import ProductScreenSkeleton from './partials/product-screen-skeleton';
 import { useEffect, useState } from 'react';
 import { Button } from '../../ui/button';

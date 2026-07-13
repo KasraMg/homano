@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import useFeedback from '../../../../endpoints/useFeedback';
+import useFeedback from '../../../../api/useFeedback';
 import StarRating from './star-rating';
-import { useUser } from '../../../../endpoints/useUser';
+import { useUser } from '../../../../api/useUser';
 import { Button } from '../../../ui/button';
 import AuthoritarianSteps from '../../../modules/authoritarian/authoritarian-steps';
 import { toast } from 'sonner';

@@ -1,6 +1,6 @@
 import { TicketCheck } from 'lucide-react';
 import React, { useState } from 'react';
-import useTicket from '../../../../endpoints/useTicket';
+import useTicket from '../../../../api/useTicket';
 import { Button } from '../../../ui/button';
 import { toJalaliDate } from '../../../../utils/helpers';
 import { toast } from 'sonner';
