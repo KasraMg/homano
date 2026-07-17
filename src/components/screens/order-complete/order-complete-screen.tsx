@@ -1,5 +1,5 @@
 import Container from '../../modules/container';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Stepper from '../../modules/stepper';
 import { Button } from '../../ui/button';
 import Badge from '../../ui/badge';
@@ -8,11 +8,19 @@ import { localAssetsUrl } from '../../../utils/constants';
 import { CartItem } from '../../../types/user.types';
 import { Skeleton } from '../../modules/skeleton';
 import { toJalaliDate } from '../../../utils/helpers';
+import { useEffect } from 'react';
+import Cookies from 'js-cookie'
 
 const OrderComplateScreen = () => {
   const { trackingCode } = useParams();
   const { order, orderRequestPending } = useOrder(trackingCode);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!Cookies.get('token')) {
+      navigate('/');
+    }
+  }, []);
   return (
     <Container>
       <div className="flex flex-col items-center bg-white py-10">
