@@ -54,21 +54,21 @@ const Footer = () => (
 
       <div className="flex flex-col md:flex-row lg:flex-row justify-between items-center gap-6 pt-4 pb-5 lg:pt-6 lg:pb-6 border-t border-neutral-04">
         <div className="flex gap-6 order-1 md:order-2">
-          <Link to="" aria-label="Instagram">
+          <Link to="/" aria-label="Instagram">
             <img
               className="size-6 lg:size-7"
               src="/Images/instagram.svg"
               alt="Instagram"
             />
           </Link>
-          <Link to="" aria-label="Facebook">
+          <Link to="/" aria-label="Facebook">
             <img
               className="size-6 lg:size-7"
               src="/Images/facebook.svg"
               alt="Facebook"
             />
           </Link>
-          <Link to="" aria-label="YouTube">
+          <Link to="/" aria-label="YouTube">
             <img
               className="size-6 lg:size-7"
               src="/Images/youtube.svg"
