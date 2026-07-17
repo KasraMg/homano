@@ -5,7 +5,7 @@ import './index.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from './components/modules/sonner';
 import ScrollToUp from './utils/scroll-to-up';
-import App from './App';
+import App from './app';
 
 const container = document.getElementById('root');
 
