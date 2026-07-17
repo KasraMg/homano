@@ -19,7 +19,7 @@ const Search = () => {
   };
   return (
     <div className="pt-10">
-      <h2 className="xs:w-[57.5] tracking-hero text-center text-xl transition-all md:text-3xl">
+      <h2 className="tracking-hero text-center text-xl transition-all md:text-3xl">
         بهترین قیمت و تنوع لوازم خانگی در هومانو
       </h2>
       <div className="relative mx-auto mt-4 w-full md:!w-max">

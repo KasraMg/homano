@@ -42,7 +42,7 @@ const UserPanelLayout = () => {
                 </p>
               </div>
               <Sheet>
-                <SheetTrigger asChild>
+                <SheetTrigger>
                   <button className="lg:hidden">
                     <Menu />
                   </button>

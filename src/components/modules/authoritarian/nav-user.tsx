@@ -5,7 +5,7 @@ import { Button } from '../../ui/button';
 import { Link } from 'react-router-dom';
 import { User as UserIcon } from 'lucide-react';
 
-const NavUser = ({ user, isLoading }: { user: User; isLoading: boolean }) => {
+const NavUser = ({ user, isLoading }: { user: User | undefined; isLoading: boolean }) => {
   return (
     <div>
       {isLoading ? (

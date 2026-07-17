@@ -32,7 +32,7 @@ const ServicesSection = ({}: ServicesSectionProps) => {
   );
 
   return (
-    <section className={`w-full bg-white transition-all`}>
+    <section className={`w-full transition-all`}>
       <h2 className=" sm:text-4.5xl tracking-headline-7   pb-15 text-xl leading-none text-black transition-all">
         {' '}
         چرا هومانو رو انتخاب کنیم؟

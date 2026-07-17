@@ -16,7 +16,7 @@ import ProductsSkeleton from "./products-skeleton";
 const Products = ({ data }: { data?: Product[] }) => {
 
   return (
-    <section className="w-full bg-white">
+    <section className="w-full">
       <SectionTitle
         title="محصولات جدید"
         linkText="سایر محصولات"

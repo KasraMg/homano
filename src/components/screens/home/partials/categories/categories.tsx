@@ -12,7 +12,7 @@ const Categories = ({ data }: {
 }) => (
   data?.length > 0 && data[0] ?
     <>
-      <section className="w-full bg-white flex flex-nowrap flex-col md:flex-row gap-6">
+      <section className="w-full flex flex-nowrap flex-col md:flex-row gap-6">
         <div className="md:w-1/2 md:!block hidden">
           <CategoryCard
             data={data[0]}
