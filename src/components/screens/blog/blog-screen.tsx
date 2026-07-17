@@ -35,7 +35,7 @@ const BlogScreen = () => {
   }
   return (
     <Container>
-      <div className="mx-auto flex flex-col gap-y-8 bg-white px-4 pt-4 pb-20">
+      <div className="mx-auto flex flex-col gap-y-8 bg-white px-1 sm:px-4 pt-4 pb-20">
         <div className="flex w-full flex-col gap-6 pt-6">
           <h1 className="text-xl font-semibold sm:!text-3xl md:!text-4xl">
             {isPending ? (

@@ -11,9 +11,6 @@ const useBlogs = () => {
     if (getParam('page') as string) {
       params.append('page', getParam('page') as string);
     }
-    if (true) {
-      params.append('limit', '2');
-    }
     if (getParam('name') as string) {
       params.append('name', getParam('name') as string);
     }

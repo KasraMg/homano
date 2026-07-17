@@ -47,7 +47,13 @@ export const useRegister = (endFunction?: () => void) => {
     });
   };
 
-  return { register, errors, handleSubmit, onSubmit };
+  return {
+    register,
+    errors,
+    handleSubmit,
+    isPending: mutation.isPending,
+    onSubmit,
+  };
 };
 
 const loginSchema = yup.object({
@@ -79,5 +85,11 @@ export const useLogin = (endFunction?: () => void) => {
       },
     });
   };
-  return { register, errors, handleSubmit, onSubmit };
+  return {
+    register,
+    errors,
+    isPending: mutation.isPending,
+    handleSubmit,
+    onSubmit,
+  };
 };

@@ -2,7 +2,7 @@ import { Controller, useForm } from 'react-hook-form';
 import DatePicker from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
-import { User } from 'lucide-react';
+import { Loader, User } from 'lucide-react';
 import { Button } from '../../../ui/button';
 import { useEffect } from 'react';
 import { useUser } from '../../../../api/useUser';
@@ -19,7 +19,7 @@ type FormValues = {
 };
 
 const AccountScreen = () => {
-  const { data, editUsermutation } = useUser();
+  const { data, editUsermutation, editUserMutationPending } = useUser();
 
   const {
     register,
@@ -48,7 +48,7 @@ const AccountScreen = () => {
   }, [data, reset]);
 
   return (
-    <section className="my-10 w-full rounded-md border bg-white p-4 xs:!p-6 shadow-lg transition-all">
+    <section className="xs:!p-6 my-10 w-full rounded-md border bg-white p-4 shadow-lg transition-all">
       <div className="mb-8">
         <div className="flex items-center justify-start gap-3">
           <div className="bg-neutral-01 flex size-9 items-center justify-center rounded-md">
@@ -202,7 +202,11 @@ const AccountScreen = () => {
             </div>
 
             <Button type="submit" variant={'main'} className="mt-6 w-full">
-              ثبت
+              {editUserMutationPending ? (
+                <Loader className="mx-auto animate-spin" />
+              ) : (
+                'ثبت'
+              )}
             </Button>
           </form>
         </div>

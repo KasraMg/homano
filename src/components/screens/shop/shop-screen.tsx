@@ -41,7 +41,7 @@ const ShopScreen = () => {
               <PaginationWrapper
                 key="shop"
                 page={data.page}
-                limit={5}
+                limit={10}
                 totalItems={data.total}
               />
             </div>

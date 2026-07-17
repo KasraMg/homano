@@ -58,7 +58,7 @@ const LastOrders = () => {
               </Link>
             ))
           ) : (
-            <p className="pt-4 text-center xl:!pt-20">محصولی یافت نشد</p>
+            <p className="pt-4 text-center text-base">سفارشی یافت نشد</p>
           )
         ) : (
           <div className="flex items-center gap-4 border-b pb-3">

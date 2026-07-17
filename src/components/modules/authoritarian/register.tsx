@@ -1,3 +1,4 @@
+import { Loader } from 'lucide-react';
 import { Button } from '../../ui/button';
 import { DialogDescription, DialogHeader, DialogTitle } from '../../ui/dialog';
 import { useRegister } from './hook';
@@ -9,7 +10,7 @@ const Register = ({
   setStep: (val: string) => void;
   endFunction?: () => void;
 }) => {
-  const { register, errors, handleSubmit, onSubmit } = useRegister(endFunction);
+  const { register, errors, handleSubmit,isPending, onSubmit } = useRegister(endFunction);
 
   return (
     <>
@@ -73,7 +74,7 @@ const Register = ({
             variant={'main'}
             type="submit"
           >
-            ثبت‌نام
+            {isPending ? <Loader className="mx-auto animate-spin" /> : 'ثبت‌نام'}
           </Button>
           <p
             onClick={() => setStep('login')}

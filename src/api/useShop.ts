@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { localBackendUrl } from '../utils/constants';
-import { Filters } from '../components/screens/shop/partials/filters';
 import { useQueryParams } from './useQueryParams';
 import Cookies from 'js-cookie';
+import { Filters } from '../store/product-filter';
 
 const useShop = (filters?: Filters) => {
   const { getParam } = useQueryParams();
@@ -28,9 +28,7 @@ const useShop = (filters?: Filters) => {
       if (filters.inStock) {
         params.append('inStock', 'true');
       }
-      if (true) {
-        params.append('limit', '5');
-      }
+      params.append('limit', '9');
       if (getParam('page') as string) {
         params.append('page', getParam('page') as string);
       }
