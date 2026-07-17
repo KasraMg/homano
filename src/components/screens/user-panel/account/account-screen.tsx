@@ -54,7 +54,7 @@ const AccountScreen = () => {
           <div className="bg-neutral-01 flex size-9 items-center justify-center rounded-md">
             <User className="text-secondary-color-blue" />
           </div>
-          <h2 className="font-VazirBold text-neutral-07 flex items-center text-xl sm:!text-2xl">
+          <h2 className="text-neutral-07 flex items-center text-xl font-bold sm:!text-2xl">
             اطلاعات حساب کاربری
           </h2>
         </div>

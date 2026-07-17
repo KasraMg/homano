@@ -45,13 +45,16 @@ const CreateTicketModal = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className='sm:!w-max w-full' variant={'main'}>
+        <Button className="w-full sm:!w-max" variant={'main'}>
           <Plus size={18} />
           ایجاد تیکت جدید
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="font-VazirRegular sm:max-w-[450px]" dir="rtl">
+      <DialogContent
+        className="font-VazirRegular rounded-xl z-[9999] sm:max-w-[450px]"
+        dir="rtl"
+      >
         <form>
           <DialogHeader>
             <DialogTitle className="font-VazirBold mb-4 text-center">
@@ -99,7 +102,12 @@ const CreateTicketModal = () => {
             </div>
           </div>
 
-          <Button onClick={createTicketHandler} className='w-full mt-3' type="submit" variant={'main'}>
+          <Button
+            onClick={createTicketHandler}
+            className="mt-3 w-full"
+            type="submit"
+            variant={'main'}
+          >
             <Send size={16} />
             ارسال
           </Button>

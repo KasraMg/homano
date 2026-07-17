@@ -2,10 +2,10 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import App from './App.js';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from './components/modules/sonner';
 import ScrollToUp from './utils/scroll-to-up';
+import App from './App';
 
 const container = document.getElementById('root');
 

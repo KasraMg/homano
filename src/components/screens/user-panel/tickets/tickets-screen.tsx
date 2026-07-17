@@ -46,7 +46,7 @@ const TicketsScreen = () => {
             <div className="bg-neutral-01 flex size-9 items-center justify-center rounded-md">
               <TicketCheck className="text-secondary-color-blue" />
             </div>
-            <h2 className="font-VazirBold text-neutral-07 flex items-center text-2xl">
+            <h2 className="text-neutral-07 flex items-center text-xl font-bold sm:!text-2xl">
               تیکت های من
             </h2>
           </div>
@@ -95,36 +95,35 @@ const TicketsScreen = () => {
             </tr>
           </thead>
           <tbody>
-            {!ticketsPending && tickets && tickets.length > 0 ? (
-              tickets?.map((ticket: TicketType) => <Ticket data={ticket} />)
+            {!ticketsPending ? (
+              tickets && tickets.length > 0 ? (
+                tickets?.map((ticket: TicketType) => <Ticket data={ticket} />)
+              ) : (
+                <p className="w-full py-6 text-center sm:!py-30 sm:!text-2xl">
+                  تیکتی یافت نشد
+                </p>
+              )
             ) : (
               <tr>
                 <td>
-                  <Skeleton className="h-7 w-28 mx-auto" />
+                  <Skeleton className="mx-auto h-7 w-28" />
                 </td>
                 <td>
-                  <Skeleton className="h-7 w-28 mx-auto" />
+                  <Skeleton className="mx-auto h-7 w-28" />
                 </td>
                 <td>
-                  <Skeleton className="h-7 w-28 mx-auto" />
+                  <Skeleton className="mx-auto h-7 w-28" />
                 </td>
                 <td>
-                  <Skeleton className="h-7 w-40 mx-auto" />
+                  <Skeleton className="mx-auto h-7 w-40" />
                 </td>
                 <td>
-                  <Skeleton className="h-7 w-40 mx-auto" />
+                  <Skeleton className="mx-auto h-7 w-40" />
                 </td>
               </tr>
             )}
           </tbody>
         </table>
-        {!ticketsPending && tickets.length == 0 ? (
-          <p className="w-full py-6 text-center sm:!py-30 sm:!text-2xl">
-            تیکتی یافت نشد
-          </p>
-        ) : (
-          ''
-        )}
       </div>
     </section>
   );

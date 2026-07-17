@@ -19,7 +19,7 @@ const OrdersNav = ({
         <div className="bg-neutral-01 flex size-9 items-center justify-center rounded-md">
           <Handbag className="text-secondary-color-blue" />
         </div>
-        <h2 className="font-VazirBold text-neutral-07 text-2xl">
+        <h2 className="font-bold text-neutral-07 text-xl sm:!text-2xl">
           سفارش‌های من
         </h2>
       </div>

@@ -15,6 +15,7 @@ const UserPanelLayout = () => {
   const [count, setCount] = useState<null | number>(null);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (!Cookies.get('token')) navigate('/');
@@ -41,7 +42,7 @@ const UserPanelLayout = () => {
                   به پنل کاربری خود در گالری هومانو خوش آمدید.
                 </p>
               </div>
-              <Sheet>
+              <Sheet onOpenChange={setOpen} open={open}>
                 <SheetTrigger>
                   <button className="lg:hidden">
                     <Menu />
@@ -49,9 +50,12 @@ const UserPanelLayout = () => {
                 </SheetTrigger>
                 <SheetContent
                   side="right"
-                  className="w-[280px] border-none bg-transparent p-0 shadow-none"
+                  className="z-[9999] w-[280px] border-none bg-transparent p-0 shadow-none"
                 >
-                  <Sidebar className="!block !rounded-l-2xl lg:!hidden" />
+                  <Sidebar
+                    onClose={() => setOpen(false)}
+                    className="!block !rounded-l-2xl lg:!hidden"
+                  />
                 </SheetContent>
               </Sheet>
               <Link to="/" className="flex justify-center lg:!hidden">

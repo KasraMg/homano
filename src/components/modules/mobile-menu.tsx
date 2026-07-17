@@ -48,25 +48,37 @@ const MobileMenu = () => {
           ) : (
             <AuthoritarianSteps endFunction={() => setOpen(false)} isMenu />
           )}
-          <li className="flex items-center gap-2">
+          <li
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2"
+          >
             <Home size={22} />
             <Link className="block text-[17px] font-thin" to={'/'}>
               خانه
             </Link>
           </li>
-          <li className="flex items-center gap-2">
+          <li
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2"
+          >
             <ShoppingBag size={22} />
             <Link className="block text-[17px] font-thin" to={'/shop'}>
               فروشگاه
             </Link>
           </li>
-          <li className="flex items-center gap-2">
+          <li
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2"
+          >
             <Book size={22} />
             <Link className="block text-[17px] font-thin" to={'/blogs'}>
               مقالات
             </Link>
           </li>
-          <li className="flex items-center gap-2">
+          <li
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2"
+          >
             <Phone size={22} />
             <Link className="block text-[17px] font-thin" to={'/contact-us'}>
               تماس با ما
