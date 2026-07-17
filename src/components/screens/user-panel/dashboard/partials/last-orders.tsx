@@ -4,7 +4,7 @@ import { localAssetsUrl } from '../../../../../utils/constants';
 import { Link } from 'react-router-dom';
 import { toJalaliDate } from '../../../../../utils/helpers';
 import { Skeleton } from '../../../../modules/skeleton';
-import useOrder from '../../../../../endpoints/useOrder';
+import useOrder from '../../../../../api/useOrder';
 
 const LastOrders = () => {
   const { orders } = useOrder();
@@ -58,7 +58,7 @@ const LastOrders = () => {
               </Link>
             ))
           ) : (
-            <p className="pt-4 text-center xl:!pt-20">محصولی یافت نشد</p>
+            <p className="pt-4 text-center text-base">سفارشی یافت نشد</p>
           )
         ) : (
           <div className="flex items-center gap-4 border-b pb-3">

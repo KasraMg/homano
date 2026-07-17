@@ -1,7 +1,7 @@
 import Statistics from './partials/statistics';
 import LastOrders from './partials/last-orders';
 import FavoriteProducts from './partials/favorite-products';
-import { useUser } from '../../../../endpoints/useUser';
+import { useUser } from '../../../../api/useUser';
 
 const DashboardScreen = () => {
     const { data } = useUser();

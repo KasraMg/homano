@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from '../../../../../ui/select';
 import { Controller } from 'react-hook-form';
-import { useUser } from '../../../../../../endpoints/useUser';
+import { useUser } from '../../../../../../api/useUser';
 import { Address } from '../../../../../../types/user.types';
 import { useQueryClient } from '@tanstack/react-query';
 

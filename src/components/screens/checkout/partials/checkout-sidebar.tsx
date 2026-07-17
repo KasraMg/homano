@@ -86,7 +86,7 @@ const CheckoutSidebar = () => {
           </div>
           <hr className="border-neutral-03 w-full border" />
           {/* Total */}
-          {user?.cart.length !== 0 ? (
+          {user && user?.cart.length !== 0 ? (
             <div className="flex w-full items-center justify-between py-3">
               <div className="text-neutral-07 text-xl font-bold transition-all">
                 مجموع

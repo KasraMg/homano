@@ -74,7 +74,7 @@ const Products = ({ data }: { data?: Product[] }) => {
         />
       </div> */}
 
-      <div className="flex justify-start mt-6 md:hidden">
+      {/* <div className="flex justify-start mt-6 md:hidden">
         <Link
           to=""
           className="flex items-center gap-1 pb-1 mt-4 md:mt-0 transition-all hover:shadow-[0_4px_4px_rgba(0, 0, 0, 0.25)]"
@@ -84,7 +84,7 @@ const Products = ({ data }: { data?: Product[] }) => {
           </span>
           <GoArrowLeft className="size-5" />
         </Link>
-      </div>
+      </div> */}
     </section>
   );
 };

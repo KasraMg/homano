@@ -5,7 +5,7 @@ import ServicesSection from "../../../components/modules/services-section/servic
 import SaleBanner from "../../modules/sale-banner";
 import Container from "../../modules/container";
 import Blogs from "./partials/blogs/blogs";
-import useLanding from "../../../endpoints/useLanding";
+import useLanding from "../../../api/useLanding";
 import Banners from "./partials/banners/banners";
 import Search from "./partials/search";
 

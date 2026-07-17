@@ -1,6 +1,7 @@
 import { DialogDescription, DialogHeader, DialogTitle } from '../../ui/dialog';
 import { Button } from '../../ui/button';
 import { useLogin } from './hook';
+import { Loader } from 'lucide-react';
 
 const Login = ({
   setStep,
@@ -9,7 +10,8 @@ const Login = ({
   setStep: (val: string) => void;
   endFunction?: () => void;
 }) => {
-  const { register, errors, handleSubmit, onSubmit } = useLogin(endFunction);
+  const { register, errors, handleSubmit, onSubmit, isPending } =
+    useLogin(endFunction);
 
   return (
     <>
@@ -57,7 +59,7 @@ const Login = ({
             variant={'main'}
             type="submit"
           >
-            ورود
+            {isPending ? <Loader className="mx-auto animate-spin" /> : 'ورود'}
           </Button>
           <p
             onClick={() => setStep('register')}

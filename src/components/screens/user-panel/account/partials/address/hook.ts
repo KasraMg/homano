@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import useLocation from '../../../../../../endpoints/useLocation';
+import useLocation from '../../../../../../api/useLocation';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useUser } from '../../../../../../endpoints/useUser';
+import { useUser } from '../../../../../../api/useUser';
 import { useQueryClient } from '@tanstack/react-query';
 
 const schema = z.object({

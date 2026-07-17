@@ -7,7 +7,7 @@ export interface User {
   ordersCount: number;
   email: string;
   phone: string;
-  role: 'admin' | 'user' | 'moderator';
+  role: 'admin' | 'user';
   cart: CartItem[];
   wishlist: WishlistItem[];
   nationalCode: string | null;

@@ -1,7 +1,7 @@
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { Bell, Menu, LogOut, ShoppingCartIcon } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '../../components/ui/sheet';
-import { useUser } from '../../endpoints/useUser';
+import { useUser } from '../../api/useUser';
 import { useEffect, useState } from 'react';
 import Badge from '../../components/ui/badge';
 import Sidebar from '../../components/screens/user-panel/sidebar';
@@ -15,8 +15,9 @@ const UserPanelLayout = () => {
   const [count, setCount] = useState<null | number>(null);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  console.log(data);
+
   useEffect(() => {
+    if (!Cookies.get('token')) navigate('/');
     if (data) {
       setCount(data.cart.length);
     } else if (!isPending) navigate('/');
@@ -77,7 +78,10 @@ const UserPanelLayout = () => {
                   ''
                 )}
               </Link>
-              <div onClick={()=>toast.warning('اعلانی یافت نشد')} className="relative flex cursor-pointer items-center justify-center gap-2">
+              <div
+                onClick={() => toast.warning('اعلانی یافت نشد')}
+                className="relative flex cursor-pointer items-center justify-center gap-2"
+              >
                 <Bell
                   size={20}
                   className="hover:text-main cursor-pointer transition-all"

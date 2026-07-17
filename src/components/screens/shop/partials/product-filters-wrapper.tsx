@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Filter } from 'lucide-react';
-import { useMediaQuery } from '../../../../endpoints/useMediaQuery';
+import { useMediaQuery } from '../../../../api/useMediaQuery';
 import { Button } from '../../../ui/button';
 import {
   Drawer,

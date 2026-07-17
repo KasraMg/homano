@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useUser } from '../../../../endpoints/useUser';
+import { useUser } from '../../../../api/useUser';
 import { Skeleton } from '../../../modules/skeleton';
 import { getCartTotalPrice } from '../../../../utils/helpers';
 

@@ -1,4 +1,4 @@
-import { useQueryParams } from "../../endpoints/useQueryParams";
+import { useQueryParams } from "../../api/useQueryParams";
 import { Button } from "../ui/button";
 import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationEllipsis, PaginationNext } from "../ui/pagination";
 

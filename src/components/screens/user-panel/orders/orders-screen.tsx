@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { CheckCircle, XCircle } from 'lucide-react';
-import { useUser } from '../../../../endpoints/useUser';
+import { useUser } from '../../../../api/useUser';
 import { Orders } from '../../../../types/user.types';
 import { Button } from '../../../ui/button';
 import OrdersNav from './partials/orders-nav';
 import OrdersInformation from './partials/orders-information';
 import OrdersSkeleton from './partials/orders-skeleton';
-import useOrder from '../../../../endpoints/useOrder';
+import useOrder from '../../../../api/useOrder';
 
 const OrdersScreen = () => {
   const [filter, setFilter] = useState<string>('all');

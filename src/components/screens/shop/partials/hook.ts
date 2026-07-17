@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useQueryParams } from '../../../../endpoints/useQueryParams';
+import { useQueryParams } from '../../../../api/useQueryParams';
 import { useProductFilters } from '../../../../store/product-filter';
 import { filterToQuery } from '../../../../utils/filter-to-query';
 import { ShopFiltersData } from '../../../../types/shop';

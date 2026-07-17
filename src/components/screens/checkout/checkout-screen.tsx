@@ -3,14 +3,17 @@ import Stepper from '../../modules/stepper';
 import CheckoutForm from './partials/checkout-form';
 import { OrderSummary } from './partials/order-summary';
 import { Button } from '../../ui/button';
-import useLocation from '../../../endpoints/useLocation';
-import useOrder from '../../../endpoints/useOrder';
+import useLocation from '../../../api/useLocation';
+import useOrder from '../../../api/useOrder';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import Cookies from 'js-cookie'
 
 const CheckoutScreen = () => {
   const { mutation } = useOrder();
   const { data } = useLocation();
+
   const navigate = useNavigate();
   const handleCheckout = (values: any) => {
     const province = (data as any).provinces.find(
@@ -41,6 +44,13 @@ const CheckoutScreen = () => {
       },
     });
   };
+
+  useEffect(() => {
+    if (!Cookies.get('token')) {
+      navigate('/');
+    }
+  }, []);
+
   return (
     <Container>
       <div className="relative flex flex-col items-center py-10">

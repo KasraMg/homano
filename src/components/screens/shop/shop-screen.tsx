@@ -2,7 +2,7 @@ import Breadcrumb from '../../../components/modules/breadcrumb';
 import Container from '../../../components/modules/container';
 import Card from '../../modules/product-card';
 import { Product } from '../../../types/product.types';
-import useShop from '../../../endpoints/useShop';
+import useShop from '../../../api/useShop';
 import { useEffect } from 'react';
 import ProductFiltersWrapper from './partials/product-filters-wrapper';
 import ProductSkeleton from './partials/product-skeleton';
@@ -41,7 +41,7 @@ const ShopScreen = () => {
               <PaginationWrapper
                 key="shop"
                 page={data.page}
-                limit={5}
+                limit={10}
                 totalItems={data.total}
               />
             </div>
