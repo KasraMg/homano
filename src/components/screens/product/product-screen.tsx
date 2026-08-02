@@ -19,7 +19,6 @@ const ProductScreen = () => {
     name: string;
   } | null>(null);
 
-  console.log('product', data);
 
   useEffect(() => {
     if (data?.colors[0]?.code) {

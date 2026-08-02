@@ -53,7 +53,13 @@ const items: SidebarItem[] = [
   },
 ];
 
-const Sidebar = ({ className }: { className: string }) => {
+const Sidebar = ({
+  className,
+  onClose,
+}: {
+  className: string;
+  onClose?: () => void;
+}) => {
   const { pathname } = useLocation();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -72,6 +78,9 @@ const Sidebar = ({ className }: { className: string }) => {
 
           return (
             <Link
+              onClick={() => {
+                onClose?.();
+              }}
               key={item.id}
               to={item.to}
               className={`${isActive ? 'text-secondary-color-blue bg-[#EAF1FF]' : 'text-neutral-07 hover:bg-[#F3F6FC]'} flex cursor-pointer items-center gap-4 rounded-xl px-4 py-3 transition-all`}

@@ -9,8 +9,8 @@ type SectionTitleProps = {
 
 const SectionTitle = ({ title, linkText, to }: SectionTitleProps) => {
   return (
-    <div className={`flex flex-wrap items-center justify-between pb-4 sm:!pb-12`}>
-      <h2 className="sm:text-4.5xl tracking-headline-7 text-2xl leading-none text-black">
+    <div className={`flex flex-wrap items-center justify-between pb-4 md:!pb-12`}>
+      <h2 className="md:text-4.5xl tracking-headline-7 text-2xl leading-none text-black">
         {title}
       </h2>
 

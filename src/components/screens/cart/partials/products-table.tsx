@@ -27,7 +27,7 @@ const ProductsTable = () => {
           </div>
 
           {!isPending ? (
-            data?.cart.length > 0 ? (
+            data?.cart && data?.cart.length > 0 ? (
               data?.cart.map((item: CartItem) => (
                 <DesktopProductCard {...item} />
               ))
@@ -48,9 +48,8 @@ const ProductsTable = () => {
           </div>
 
           <div className="space-y-6">
-
             {!isPending ? (
-              data?.cart.length > 0 ? (
+              data?.cart && data?.cart.length > 0 ? (
                 data?.cart.map((item: CartItem) => (
                   <MobileProductCard isCartPage item={item} />
                 ))
@@ -60,7 +59,6 @@ const ProductsTable = () => {
             ) : (
               <MobileProductSkeleton />
             )}
-
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import { Skeleton } from '../../../../modules/skeleton'
 
 const BlogsSkeleton = () => {
     return (
-        <div className="grid grid-cols-1 sm:!grid-cols-2 md:!grid-cols-3 lg:!grid-cols-4 gap-x-[25px] gap-y-[40px]">
+        <div className="grid grid-cols-1 sm:!grid-cols-2 md:pt-0 pt-6 md:!grid-cols-3 lg:!grid-cols-4 gap-x-[25px] gap-y-[40px]">
             <Skeleton className='min-[384px] rounded-xl'>
                 <div className='h-[180px] w-full'></div>
                 <div className='px-3 pb-4'>

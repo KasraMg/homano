@@ -1,59 +1,46 @@
-import { Link } from "react-router-dom";
-import Newsletter from "./news-letter";
+import { Link } from 'react-router-dom';
+import Newsletter from './news-letter';
 
 const Footer = () => (
   <footer>
     <Newsletter />
-    <div className="w-full bg-neutral-07 px-8 md:px-40 pt-12 lg:px-40 pb-7">
-      <div className="flex flex-col md:!gap-10 gap-6 justify-between items-center mb-16">
-        <div className="flex flex-col md:flex-row lg:flex-row items-center gap-4 md:gap-8 lg:gap-12 mb-6 md:mb-0 text-center md:text-left">
+    <div className="bg-neutral-07 w-full px-8 pt-12 pb-7 md:px-40 lg:px-40">
+      <div className="mb-16 flex flex-col items-center justify-between gap-6 md:!gap-10">
+        <div className="mb-6 flex flex-col items-center gap-4 text-center md:mb-0 md:flex-row md:gap-8 md:text-left lg:flex-row lg:gap-12">
           <Link to={'/'}>
             <img
-              className='h-24 mix-blend-exclusion grayscale-100' src="/Images/logo-black.jpg" alt="" />
+              className="h-24 mix-blend-exclusion grayscale-100"
+              src="/Images/logo-black.jpg"
+              alt=""
+            />
           </Link>
-          <div className="w-6 h-px md:w-px md:h-6 bg-neutral-04 my-2 md:my-0"></div>
-          <p className="font-VazirRegular text-base text-right text-neutral-03">
+          <div className="bg-neutral-04 my-2 h-px w-6 md:my-0 md:h-6 md:w-px"></div>
+          <p className="text-neutral-03 text-right text-base">
             فروشگاه هدیه و دکوراسیون
           </p>
         </div>
 
-        <nav className="flex flex-col md:flex-row lg:flex-row items-center gap-4 md:gap-10 lg:gap-12">
-
-          <Link
-            to="/"
-            className="font-VazirRegular text-base text-neutral-01"
-          >
+        <nav className="flex flex-col items-center gap-4 md:flex-row md:gap-10 lg:flex-row lg:gap-12">
+          <Link to="/" className="text-neutral-01 text-base">
             خانه
           </Link>
-          <Link
-            to="/shop"
-            className="font-VazirRegular text-base text-neutral-01"
-          >
+          <Link to="/shop" className="text-neutral-01 text-base">
             فروشگاه
           </Link>
-          <Link
-            to="/blogs"
-            className="font-VazirRegular text-base text-neutral-01"
-          >
+          <Link to="/blogs" className="text-neutral-01 text-base">
             مقالات
           </Link>
-          <Link
-            to="/rules"
-            className="font-VazirRegular text-base text-neutral-01"
-          >
+          <Link to="/rules" className="text-neutral-01 text-base">
             قوانین
           </Link>
-          <Link
-            to="/contact-us"
-            className="font-VazirRegular text-base text-neutral-01"
-          >
+          <Link to="/contact-us" className="text-neutral-01 text-base">
             تماس با ما
           </Link>
         </nav>
       </div>
 
-      <div className="flex flex-col md:flex-row lg:flex-row justify-between items-center gap-6 pt-4 pb-5 lg:pt-6 lg:pb-6 border-t border-neutral-04">
-        <div className="flex gap-6 order-1 md:order-2">
+      <div className="border-neutral-04 flex flex-col items-center justify-between gap-6 border-t pt-4 pb-5 md:flex-row lg:flex-row lg:pt-6 lg:pb-6">
+        <div className="order-1 flex gap-6 md:order-2">
           <Link to="/" aria-label="Instagram">
             <img
               className="size-6 lg:size-7"
@@ -77,8 +64,8 @@ const Footer = () => (
           </Link>
         </div>
 
-        <div className="flex flex-col md:flex-row lg:flex-row items-center gap-3 md:gap-7 lg:gap-10 order-2 md:order-1 text-center md:text-left">
-          <p className="font-VazirRegular text-xs lg:text-sm text-neutral-03 order-2 md:order-1">
+        <div className="order-2 flex flex-col items-center gap-3 text-center md:order-1 md:flex-row md:gap-7 md:text-left lg:flex-row lg:gap-10">
+          <p className="text-neutral-03 order-2 text-xs md:order-1 lg:text-sm">
             © 2026 هومانو. تمامی حقوق محفوظ است
           </p>
         </div>

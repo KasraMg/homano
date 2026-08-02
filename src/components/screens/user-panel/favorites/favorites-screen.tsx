@@ -13,7 +13,7 @@ const FavoritesScreen = () => {
         <div className="bg-neutral-01 flex size-9 items-center justify-center rounded-md">
           <Heart className="text-secondary-color-blue" />
         </div>
-        <h2 className="font-VazirBold text-neutral-07 flex items-center text-2xl">
+        <h2 className="font-bold text-neutral-07 flex items-center text-xl sm:!text-2xl">
           علاقه مندی های من
         </h2>
       </div>
