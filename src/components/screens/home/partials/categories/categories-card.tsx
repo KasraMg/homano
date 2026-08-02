@@ -2,14 +2,13 @@
 
 import { Link } from 'react-router-dom'
 import { localAssetsUrl } from '../../../../../utils/constants'
-import { CategoriesProps } from '../../../../../types/category.types'
 import { ChevronLeft } from 'lucide-react'
 
-const CategoriesCard = ({ isTop, imageClass, data }: CategoriesProps) => {
+const CategoriesCard = ({ isTop, imageClass, data }: any) => {
   const { image, name } = data
 
   return (
-    <Link to={`/shop/${data.slug}`}
+    <Link to={`/shop?category=${data.slug}`}
       className={`${isTop ? "bg-main" : "bg-neutral-02"} block group relative rounded-xl h-full hover:-translate-0.5 transition-transform`}
     >
       {isTop ? (

@@ -1,24 +1,22 @@
-import Hero from "./partials/hero";
-import Categories from "./partials/categories/categories";
-import Products from "./partials/products/products";
-import ServicesSection from "../../../components/modules/services-section/services-section";
-import SaleBanner from "../../modules/sale-banner";
-import Container from "../../modules/container";
-import Blogs from "./partials/blogs/blogs";
-import useLanding from "../../../api/useLanding";
-import Banners from "./partials/banners/banners";
-import Search from "./partials/search";
+import Categories from './partials/categories/categories';
+import Products from './partials/products/products';
+import ServicesSection from '../../../components/modules/services-section/services-section';
+import SaleBanner from '../../modules/sale-banner';
+import Container from '../../modules/container';
+import Blogs from './partials/blogs/blogs';
+import useLanding from '../../../api/useLanding';
+import Banners from './partials/banners/banners';
+import Search from './partials/search';
 
 const HomeScreen = () => {
-  const { data } = useLanding()
-
+  const { data } = useLanding();
   return (
     <Container>
       <Search />
-      <div className="space-y-20 pb-20 pt-12">
+      <div className="space-y-20 pt-12 pb-20">
         <Products data={data?.products} />
-        
-        <Categories data={data?.categories} />
+
+        {data ? <Categories data={[...data.categories].reverse()} /> : ''}
         <ServicesSection />
         <SaleBanner
           showSaleText
@@ -29,9 +27,7 @@ const HomeScreen = () => {
           }
           description="حالا بیش از هر زمان دیگری مقرون‌به‌صرفه است که به هر اتاق خانه‌تان ظاهری شیک و تازه بدهید."
         />
-        <Banners
-          data={data?.banner}
-        />
+        <Banners data={data?.banner} />
         <Blogs data={data?.articles} />
       </div>
     </Container>
