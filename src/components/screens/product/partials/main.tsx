@@ -2,7 +2,7 @@ import Breadcrumb from '../../../modules/breadcrumb'
 import { Link } from 'react-router-dom'
 import { Button } from '../../../ui/button'
 import { ChevronLeft } from 'lucide-react'
-import Gallery from './Gallery'
+import Gallery from './gallery'
 import { Product } from '../../../../types/product.types'
 import MainIcons from './main-icons'
 interface Props {
