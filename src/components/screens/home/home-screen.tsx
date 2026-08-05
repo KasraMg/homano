@@ -10,13 +10,14 @@ import Search from './partials/search';
 
 const HomeScreen = () => {
   const { data } = useLanding();
+
   return (
     <Container>
       <Search />
       <div className="space-y-20 pt-12 pb-20">
         <Products data={data?.products} />
 
-        {data ? <Categories data={[...data.categories].reverse()} /> : ''}
+        <Categories data={data?.categories} />
         <ServicesSection />
         <SaleBanner
           showSaleText
