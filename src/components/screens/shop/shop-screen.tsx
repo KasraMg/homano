@@ -3,25 +3,63 @@ import Container from '../../../components/modules/container';
 import Card from '../../modules/product-card';
 import { Product } from '../../../types/product.types';
 import useShop from '../../../api/useShop';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ProductFiltersWrapper from './partials/product-filters-wrapper';
 import ProductSkeleton from './partials/product-skeleton';
 import PaginationWrapper from '../../modules/pagination-wrapper';
 import { useNavigate } from 'react-router-dom';
 import { useProductFilters } from '../../../store/product-filter';
+import { useQueryParams } from '../../../api/useQueryParams';
 
 const ShopScreen = () => {
   const navigate = useNavigate();
+
+  const { getParams } = useQueryParams();
+
   const filters = useProductFilters((state) => state.filters);
-  
-  const { data, isPending, filtersData } = useShop(filters);
+  const setFilter = useProductFilters((state) => state.setFilter);
+
+  const [filtersInitialized, setFiltersInitialized] = useState(false);
+
+  const { data, isPending, filtersData } = useShop(
+    filtersInitialized ? filters : undefined,
+  );
+
+  const params = getParams();
+
+  useEffect(() => {
+    if (!filtersData) return;
+
+    setFilter({
+      category: (params.category as string) || 'all',
+      sortBy: (params.sortBy as string) || 'all',
+      color: (params.color as string) || 'all',
+      priceRange: [
+        Number(params.minPrice) || filtersData.minPrice,
+        Number(params.maxPrice) || filtersData.maxPrice,
+      ],
+      inStock: Boolean(params.inStock),
+    });
+
+    setFiltersInitialized(true);
+  }, [
+    filtersData,
+    params.category,
+    params.sortBy,
+    params.color,
+    params.minPrice,
+    params.maxPrice,
+    params.inStock,
+    setFilter,
+  ]);
 
   useEffect(() => {
     if (!data) return;
+
     if (data.page > 1 && data.page > data.totalPages) {
       navigate('/shop', { replace: true });
     }
-  }, [data]);
+  }, [data, navigate]);
 
   return (
     <Container>

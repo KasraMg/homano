@@ -18,12 +18,12 @@ export function useFilterActions(
 
   const setPriceRange = useProductFilters((s) => s.setPriceRange);
 
+  const params = getParams();
+
   useEffect(() => {
     if (!filtersData) return;
 
     setPriceRange(filtersData.minPrice, filtersData.maxPrice);
-
-    const params = getParams();
 
     setFilter({
       category: (params.category as string) || 'all',
@@ -35,7 +35,15 @@ export function useFilterActions(
       ],
       inStock: Boolean(params.inStock),
     });
-  }, [filtersData]);
+  }, [
+    filtersData,
+    params.category,
+    params.sortBy,
+    params.color,
+    params.minPrice,
+    params.maxPrice,
+    params.inStock,
+  ]);
 
   const update = (values: Partial<typeof filters>) => {
     const updated = {
