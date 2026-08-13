@@ -1,4 +1,3 @@
-import { CategoriesProps } from '../../../../../types/category.types';
 import CategoryCard from './categories-card';
 import CategoriesSkeleton from './categories-skeleton';
 

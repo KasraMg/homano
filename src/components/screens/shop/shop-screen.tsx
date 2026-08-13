@@ -13,6 +13,7 @@ import { useProductFilters } from '../../../store/product-filter';
 const ShopScreen = () => {
   const navigate = useNavigate();
   const filters = useProductFilters((state) => state.filters);
+  
   const { data, isPending, filtersData } = useShop(filters);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const ShopScreen = () => {
         <ProductFiltersWrapper filtersData={filtersData} />
 
         {!isPending || data?.products.length === 0 ? (
-          data?.products.length ? (
+          data?.products?.length ? (
             <div className="w-full space-y-5">
               <div className="xs:grid-cols-2 grid grid-cols-1 gap-6 lg:!grid-cols-3">
                 {data.products.map((product: Product) => (
