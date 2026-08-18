@@ -21,7 +21,7 @@ const CategoriesCard = ({ isTop, imageClass, data }: any) => {
           <img
             src={localAssetsUrl + image}
             alt={name}
-            className={`relative mx-auto w-3/4 object-contain mix-blend-multiply ${imageClass || ''}`}
+            className={`relative mx-auto w-3/4 object-contain ${imageClass || ''}`}
           />
         </div>
       ) : (

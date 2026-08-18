@@ -13,7 +13,7 @@ const ContactUsScreen = () => {
           <div className="flex w-full lg:!p-2">
             <Map
               position={[29.87739213881141, 52.806453926799264]}
-              className="!h-[200px] !w-full sm:!h-[300px] lg:!h-auto lg:!w-[83%]"
+              className="!h-[200px] !w-full !z-10 sm:!h-[300px] lg:!h-auto lg:!w-[83%]"
             />
           </div>
           <div className="mx-auto w-full max-w-[500px]">
