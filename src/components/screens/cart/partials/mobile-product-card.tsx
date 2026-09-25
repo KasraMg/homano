@@ -1,5 +1,4 @@
 import { CartItem } from '../../../../types/user.types';
-import { localAssetsUrl } from '../../../../utils/constants';
 import QuantityControls from '../../product/partials/quantity-controls';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -20,7 +19,7 @@ const MobileProductCard = ({
       <div key={item.product.code} className="flex items-center gap-4">
         <div className="bg-neutral-02">
           <img
-            src={`${localAssetsUrl}${item.product.images[0] ?? ''}`}
+            src={item.product.images[0] ?? ''}
             alt={item.product.name}
             className="h-24 w-20 rounded-md object-cover mix-blend-multiply"
           />

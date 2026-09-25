@@ -1,6 +1,5 @@
 import { ChevronLeft } from 'lucide-react';
-import { Orders, User } from '../../../../../types/user.types';
-import { localAssetsUrl } from '../../../../../utils/constants';
+import { Orders } from '../../../../../types/user.types';
 import { Link } from 'react-router-dom';
 import { toJalaliDate } from '../../../../../utils/helpers';
 import { Skeleton } from '../../../../modules/skeleton';
@@ -33,7 +32,7 @@ const LastOrders = () => {
                 className="border-neutral-02 flex items-center gap-4 border-b pb-3"
               >
                 <img
-                  src={`${localAssetsUrl + order.products[0]?.product.images[0]}`}
+                  src={order.products[0]?.product.images[0]}
                   alt={`سفارش ${order.trackingCode}`}
                   className="xs:!w-30 h-15 w-15 rounded-md object-cover"
                 />

@@ -4,7 +4,6 @@ import Stepper from '../../modules/stepper';
 import { Button } from '../../ui/button';
 import Badge from '../../ui/badge';
 import useOrder from '../../../api/useOrder';
-import { localAssetsUrl } from '../../../utils/constants';
 import { CartItem } from '../../../types/user.types';
 import { Skeleton } from '../../modules/skeleton';
 import { toJalaliDate } from '../../../utils/helpers';
@@ -48,7 +47,7 @@ const OrderComplateScreen = () => {
                 >
                   <img
                     className="h-14 w-14 rounded-md object-cover mix-blend-multiply sm:h-20 sm:w-32"
-                    src={localAssetsUrl + product.product.images[0]}
+                    src={product.product.images[0]}
                     alt="product"
                   />
 

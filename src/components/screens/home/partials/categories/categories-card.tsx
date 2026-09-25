@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { localAssetsUrl } from '../../../../../utils/constants';
 import { ChevronLeft } from 'lucide-react';
 
 const CategoriesCard = ({ isTop, imageClass, data }: any) => {
@@ -19,7 +18,7 @@ const CategoriesCard = ({ isTop, imageClass, data }: any) => {
             </p>
           </div>
           <img
-            src={localAssetsUrl + image}
+            src={image}
             alt={name}
             className={`relative mx-auto w-3/4 object-contain ${imageClass || ''}`}
           />
@@ -27,7 +26,7 @@ const CategoriesCard = ({ isTop, imageClass, data }: any) => {
       ) : (
         <div className="flex h-full items-center justify-center gap-3 py-5 sm:justify-evenly">
           <img
-            src={localAssetsUrl + image}
+            src={image}
             alt={name}
             className={`relative h-[120px] w-[170px] object-contain mix-blend-darken sm:!h-[150px] sm:w-1/2 lg:!h-[200px] ${imageClass || ''}`}
           />

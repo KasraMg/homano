@@ -5,7 +5,6 @@ import {
   CarouselItem,
   type CarouselApi,
 } from '../../../../ui/carousel';
-import { localAssetsUrl } from '../../../../../utils/constants';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import BannersSkeleton from './banners-skeleton';
 import { useNavigate } from 'react-router-dom';
@@ -38,7 +37,7 @@ const Banners = ({ data }: { data: { url: string; image: string }[] }) => {
           <CarouselItem key={i} className="basis-full">
             <img
               onClick={() => navigate(s.url)}
-              src={localAssetsUrl + s.image}
+              src={s.image}
               className="h-[200px] w-full cursor-pointer rounded-md object-cover md:!h-[280px] lg:!h-[380px]"
               alt="بنر"
             />

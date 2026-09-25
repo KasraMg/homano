@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { BlogItem } from '../../types/blog.types';
-import { localAssetsUrl } from '../../utils/constants';
 import { toJalaliDate } from '../../utils/helpers';
 
 const BlogCard = ({
@@ -16,7 +15,7 @@ const BlogCard = ({
   >
     <img
       className="h-[200px] w-full rounded-t-xl bg-cover bg-center object-cover"
-      src={localAssetsUrl + image}
+      src={image}
       alt={name}
     />
     <div className="px-3 pb-4">

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "../../../ui/carousel";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { localAssetsUrl } from "../../../../utils/constants";
 
 const Gallery = ({
   images
@@ -37,7 +36,7 @@ const Gallery = ({
               <div className="relative w-full overflow-hidden rounded-lg transition-all">
                 <div className="w-full h-full">
                   <img
-                    src={localAssetsUrl + src}
+                    src={src}
                     alt={`product-${i}`}
                     className="rounded-md h-[240px] md:!h-max xl:!h-[300px] object-cover w-full mx-auto"
                   />
@@ -78,7 +77,7 @@ const Gallery = ({
             className={`flex-1 cursor-pointer aspect-square max-w-[56px] size-[56px] bg-cover bg-center rounded-md transition-all 
                     ${activeIndex === i ? "ring-2 ring-neutral-07" : ""}  
                 `}
-            style={{ backgroundImage: `url(${localAssetsUrl + img})` }}
+            style={{ backgroundImage: `url(${img})` }}
           />
         ))}
       </div>

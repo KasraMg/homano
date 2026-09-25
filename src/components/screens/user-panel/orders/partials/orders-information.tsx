@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { toJalaliDate } from '../../../../../utils/helpers';
-import { localAssetsUrl } from '../../../../../utils/constants';
 import { Orders } from '../../../../../types/user.types';
 import Badge from '../../../../ui/badge';
 
@@ -60,7 +59,7 @@ const OrdersInformation = ({ order }: { order: Orders }) => {
           >
             <img
               className="h-14 w-14 rounded-md object-cover mix-blend-multiply sm:h-16 sm:w-28"
-              src={localAssetsUrl + product.product.images[0]}
+              src={product.product.images[0]}
               alt="product"
             />
 

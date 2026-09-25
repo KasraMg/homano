@@ -2,7 +2,6 @@ import { ShoppingBag, StarIcon, Trash } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Product } from '../../types/product.types';
 import { Button } from '../ui/button';
-import { localAssetsUrl } from '../../utils/constants';
 import ShareModal from './share-modal';
 import useCart from '../../api/useCart';
 import { useState } from 'react';
@@ -49,7 +48,7 @@ const ProductCard = ({
       >
         <div className="bg-neutral-02 absolute inset-0 z-0 rounded-t-xl"></div>
         <img
-          src={localAssetsUrl + images[0]}
+          src={images[0]}
           alt={name}
           className="h-[200px] w-full rounded-t-xl object-cover mix-blend-multiply"
         />

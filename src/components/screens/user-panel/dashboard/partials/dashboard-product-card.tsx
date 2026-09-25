@@ -1,6 +1,5 @@
 import { Product } from '../../../../../types/product.types';
 import { Link } from 'react-router-dom';
-import { localAssetsUrl } from '../../../../../utils/constants';
 import { StarIcon } from 'lucide-react';
 
 const DashboardProductCard = ({ images, name, code, slug, star }: Product) => {
@@ -11,7 +10,7 @@ const DashboardProductCard = ({ images, name, code, slug, star }: Product) => {
       className="relative flex w-full items-center gap-3 rounded-lg bg-cover bg-center p-1.5 shadow hover:shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
     >
       <img
-        src={localAssetsUrl + images[0]}
+        src={images[0]}
         alt={name}
         className="h-[70px] w-[70px] rounded-md object-cover mix-blend-multiply"
       />

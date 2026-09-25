@@ -12,7 +12,6 @@ import {
 } from '../../ui/carousel';
 import useBlog from '../../../api/useBlog';
 import { toJalaliDate } from '../../../utils/helpers';
-import { localAssetsUrl } from '../../../utils/constants';
 import { Skeleton } from '../../modules/skeleton';
 import { Button } from '../../ui/button';
 import { Link } from 'react-router-dom';
@@ -77,7 +76,7 @@ const BlogScreen = () => {
           ) : (
             <img
               className="xs:h-[300px] h-[200px] w-full max-w-full rounded-xl object-cover md:!h-[400px]"
-              src={localAssetsUrl + data?.article.image}
+              src={data?.article.image}
               alt="Modern bathroom"
             />
           )}
