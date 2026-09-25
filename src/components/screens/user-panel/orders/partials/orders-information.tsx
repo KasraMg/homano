@@ -6,7 +6,7 @@ import Badge from '../../../../ui/badge';
 const OrdersInformation = ({ order }: { order: Orders }) => {
   return (
     <>
-      <div className="flex flex-wrap gap-x-16 gap-y-4 py-4 sm:!gap-x-8">
+      <div className='flex flex-wrap gap-x-16 gap-y-4 py-4 sm:!gap-x-8'>
         <div className="flex items-center justify-center gap-1.5">
           <p className="text-sm sm:!text-base">تاریخ سفارش:</p>
           <p className="text-sm text-gray-500">
